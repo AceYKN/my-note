@@ -1,0 +1,64 @@
+# 构建并部署 VitePress 站点到 GitHub Pages
+name: Deploy VitePress site to Pages
+
+on:
+  # 当推送到 main 或 master 分支时触发
+  push:
+    branches: [main, master]
+
+  # 允许你手动触发
+  workflow_dispatch:
+
+# 设置权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 只允许同时进行一次部署
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # 构建工作
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build with VitePress
+        # 这里会运行 package.json 里的 docs:build 命令
+        run: npm run docs:build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 关键点：告诉 GitHub 构建好的网页在哪里
+          # 因为你的源文件在 docs，VitePress 默认会输出到 docs/.vitepress/dist
+          path: docs/.vitepress/dist
+
+  # 部署工作
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
