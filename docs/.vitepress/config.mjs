@@ -26,24 +26,16 @@ export default defineConfig({
     sidebar: {
       // 当进入 /math/ 目录时显示
       '/math/': [
+        { text: '抽象代数', link: '/math/algebra' } ,
         {
-          text: '基础课程',
-          collapsed: false,
+          text: '常微分方程',
+          collapsed: true, // 這門課暫時不看，預設折疊
           items: [
-            { text: '微积分', link: '/math/calculus' },
-            // 如果以后有文件了，解开下面这行的注释
-            // { text: '线性代数', link: '/math/linear-algebra' }
-          ]
-        },
-        {
-          text: '专业进阶',
-          collapsed: false,
-          items: [
-            // 预留给你感兴趣的科目
-            { text: '常微分方程 (ODE)', link: '/math/ode' },
-            { text: '抽象代数', link: '/math/algebra' } 
+            { text: '3-2 4-1 作业', link: '/math/ode/3-2&4-1 HW' },
+            { text: '4-2 作业', link: '/math/ode/02-det' }
           ]
         }
+          
       ],
 
       // 当进入 /code/ 目录时显示
@@ -76,7 +68,7 @@ export default defineConfig({
 
     // 页脚
     footer: {
-      message: '学而不思则罔，思而不学则殆',
+      message: 'I laid my burdens down, now I\'m traveling light.',
       copyright: 'Copyright © 2025 AceYKN'
     }
   },
