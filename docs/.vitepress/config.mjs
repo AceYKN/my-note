@@ -32,7 +32,7 @@ export default defineConfig({
           collapsed: true, // 這門課暫時不看，預設折疊
           items: [
             { text: '3-2 4-1 作业', link: '/math/ode/3-2&4-1 HW' },
-            { text: '4-2 作业', link: '/math/ode/02-det' }
+            { text: '4-2 作业', link: '/math/ode/4-2HW' }
           ]
         }
           
