@@ -1,0 +1,31 @@
+{
+  "name": "my-note",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev docs --port 8888",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AceYKN/my-note.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AceYKN/my-note/issues"
+  },
+  "homepage": "https://github.com/AceYKN/my-note#readme",
+  "devDependencies": {
+    "markdown-it-katex": "^2.0.3",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.25"
+  },
+  "dependencies": {
+    "markdown-it-mathjax3": "^4.3.2"
+  }
+}
