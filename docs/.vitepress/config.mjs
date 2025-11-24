@@ -1,63 +1,90 @@
 import { defineConfig } from 'vitepress'
-import markdownItMathjax3 from 'markdown-it-mathjax3' // 1. 改引入
+import markdownItMathjax3 from 'markdown-it-mathjax3'
 
 export default defineConfig({
-  title: "我的学习笔记",
-  description: "分类整理的 Markdown 笔记库",
+  // ==========================================
+  // 1. 核心部署配置 (解决样式不显示的关键)
+  // ==========================================
+  base: '/my-note/', 
 
-  // 2. 注意：这里不需要 head 引入 CSS 了
+  // 2. 网站基本元数据
+  title: "我的知识库",
+  description: "AceYKN 的学习笔记整理",
+  lang: 'zh-CN', // 设置语言为中文
+  lastUpdated: true, // 显示最后更新时间
 
-  // ... 前面的代码不变
-    themeConfig: {
-      // 1. 顶部导航栏 (一级分类)
-      nav: [
-        { text: '🏠 首页', link: '/' },
-        { text: '➗ 数学笔记', link: '/math/calculus' },
-        { text: '💻 编程笔记', link: '/code/cpp-start' } // 新增这一行
+  // 3. 主题配置
+  themeConfig: {
+    // 顶部导航栏
+    nav: [
+      { text: '🏠 首页', link: '/' },
+      { text: 'Σ 数学笔记', link: '/math/calculus' },
+      { text: '💻 编程开发', link: '/code/cpp-start' }
+    ],
+
+    // 侧边栏 (分级目录)
+    sidebar: {
+      // 当进入 /math/ 目录时显示
+      '/math/': [
+        {
+          text: '基础课程',
+          collapsed: false,
+          items: [
+            { text: '微积分', link: '/math/calculus' },
+            // 如果以后有文件了，解开下面这行的注释
+            // { text: '线性代数', link: '/math/linear-algebra' }
+          ]
+        },
+        {
+          text: '专业进阶',
+          collapsed: false,
+          items: [
+            // 预留给你感兴趣的科目
+            { text: '常微分方程 (ODE)', link: '/math/ode' },
+            { text: '抽象代数', link: '/math/algebra' } 
+          ]
+        }
       ],
 
-      // 2. 左侧侧边栏 (二级/三级目录)
-      sidebar: {
-        // 当用户在 /math/ 目录下时，显示这个侧边栏
-        '/math/': [
-          {
-            text: '高等数学',
-            collapsed: false, // 是否默认展开
-            items: [
-              { text: '微积分基础', link: '/math/calculus' },
-              { text: '线性代数', link: '/math/linear-algebra' } // 如果文件不存在，点击会404，记得创建文件
-            ]
-          }
-        ],
-
-        // 当用户在 /code/ 目录下时，显示这个侧边栏
-        '/code/': [
-          {
-            text: 'C/C++ 语言',
-            items: [
-              { text: '入门基础', link: '/code/cpp-start' }
-            ]
-          },
-          {
-            text: '其他语言',
-            collapsed: true, // 默认折叠起来
-            items: [
-              { text: 'Go 语言笔记', link: '/code/go-notes' }
-            ]
-          }
-        ]
-      },
-
-      // 3. 社交链接
-      socialLinks: [
-        { icon: 'github', link: 'https://github.com/AceYKN/my-note' }
+      // 当进入 /code/ 目录时显示
+      '/code/': [
+        {
+          text: 'C/C++ 语言',
+          items: [
+            { text: '入门基础', link: '/code/cpp-start' }
+          ]
+        },
+        {
+          text: '其他技术',
+          items: [
+            { text: 'Go 语言', link: '/code/go-notes' },
+            { text: '前端开发', link: '/code/vue-notes' }
+          ]
+        }
       ]
     },
-    // ... 后面的代码不变
 
+    // 开启本地搜索 (非常实用！)
+    search: {
+      provider: 'local'
+    },
+
+    // 社交链接
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/AceYKN/my-note' }
+    ],
+
+    // 页脚
+    footer: {
+      message: '学而不思则罔，思而不学则殆',
+      copyright: 'Copyright © 2025 AceYKN'
+    }
+  },
+
+  // 4. Markdown 配置 (支持 LaTeX 公式)
   markdown: {
     config: (md) => {
-      md.use(markdownItMathjax3) // 3. 改用 Mathjax3
+      md.use(markdownItMathjax3)
     }
   }
 })
