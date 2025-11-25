@@ -1,143 +1,252 @@
-<% if (defaultTheme) { %>/**
- * Customize default theme styling by overriding CSS variables:
- * https://github.com/vuejs/vitepress/blob/main/src/client/theme-default/styles/vars.css
+/**
+ * 核心样式重写 - 打造极致阅读体验
  */
 
-/**
- * Colors
- *
- * Each colors have exact same color scale system with 3 levels of solid
- * colors with different brightness, and 1 soft color.
- *
- * - `XXX-1`: The most solid color used mainly for colored text. It must
- *   satisfy the contrast ratio against when used on top of `XXX-soft`.
- *
- * - `XXX-2`: The color used mainly for hover state of the button.
- *
- * - `XXX-3`: The color for solid background, such as bg color of the button.
- *   It must satisfy the contrast ratio with pure white (#ffffff) text on
- *   top of it.
- *
- * - `XXX-soft`: The color used for subtle background such as custom container
- *   or badges. It must satisfy the contrast ratio when putting `XXX-1` colors
- *   on top of it.
- *
- *   The soft color must be semi transparent alpha channel. This is crucial
- *   because it allows adding multiple "soft" colors on top of each other
- *   to create a accent, such as when having inline code block inside
- *   custom containers.
- *
- * - `default`: The color used purely for subtle indication without any
- *   special meanings attached to it such as bg color for menu hover state.
- *
- * - `brand`: Used for primary brand colors, such as link text, button with
- *   brand theme, etc.
- *
- * - `tip`: Used to indicate useful information. The default theme uses the
- *   brand color for this by default.
- *
- * - `warning`: Used to indicate warning to the users. Used in custom
- *   container, badges, etc.
- *
- * - `danger`: Used to show error, or dangerous message to the users. Used
- *   in custom container, badges, etc.
- * -------------------------------------------------------------------------- */
-
 :root {
-  --vp-c-default-1: var(--vp-c-gray-1);
-  --vp-c-default-2: var(--vp-c-gray-2);
-  --vp-c-default-3: var(--vp-c-gray-3);
-  --vp-c-default-soft: var(--vp-c-gray-soft);
+  /* --- 字体优化 --- */
+  --vp-font-family-base: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
 
-  --vp-c-brand-1: var(--vp-c-indigo-1);
-  --vp-c-brand-2: var(--vp-c-indigo-2);
-  --vp-c-brand-3: var(--vp-c-indigo-3);
-  --vp-c-brand-soft: var(--vp-c-indigo-soft);
+  /* --- 品牌色系 (靛蓝/紫色渐变) --- */
+  --vp-c-brand-1: #646cff;
+  --vp-c-brand-2: #747bff;
+  --vp-c-brand-3: #535bf2;
+  --vp-c-brand-soft: rgba(100, 108, 255, 0.14);
 
+  /* --- 语义化颜色 --- */
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
   --vp-c-tip-3: var(--vp-c-brand-3);
   --vp-c-tip-soft: var(--vp-c-brand-soft);
 
-  --vp-c-warning-1: var(--vp-c-yellow-1);
-  --vp-c-warning-2: var(--vp-c-yellow-2);
-  --vp-c-warning-3: var(--vp-c-yellow-3);
-  --vp-c-warning-soft: var(--vp-c-yellow-soft);
-
-  --vp-c-danger-1: var(--vp-c-red-1);
-  --vp-c-danger-2: var(--vp-c-red-2);
-  --vp-c-danger-3: var(--vp-c-red-3);
-  --vp-c-danger-soft: var(--vp-c-red-soft);
-}
-
-/**
- * Component: Button
- * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-button-brand-border: transparent;
-  --vp-button-brand-text: var(--vp-c-white);
-  --vp-button-brand-bg: var(--vp-c-brand-3);
-  --vp-button-brand-hover-border: transparent;
-  --vp-button-brand-hover-text: var(--vp-c-white);
-  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
-  --vp-button-brand-active-border: transparent;
-  --vp-button-brand-active-text: var(--vp-c-white);
-  --vp-button-brand-active-bg: var(--vp-c-brand-1);
-}
-
-/**
- * Component: Home
- * -------------------------------------------------------------------------- */
-
-:root {
+  /* --- 首页 Hero 标题特效 --- */
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    #bd34fe 30%,
-    #41d1ff
-  );
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
 
-  --vp-home-hero-image-background-image: linear-gradient(
-    -45deg,
-    #bd34fe 50%,
-    #47caff 50%
-  );
-  --vp-home-hero-image-filter: blur(44px);
+  /* --- 布局尺寸微调 --- */
+  --vp-layout-max-width: 1440px; /* 更宽的视野 */
+  --vp-sidebar-width: 280px;     /* 稍宽的侧边栏 */
 }
 
-@media (min-width: 640px) {
-  :root {
-    --vp-home-hero-image-filter: blur(56px);
-  }
+/* ==========================================================================
+   全局滚动条美化
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--vp-c-gray-3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-gray-2);
 }
 
-@media (min-width: 960px) {
-  :root {
-    --vp-home-hero-image-filter: blur(68px);
-  }
+/* ==========================================================================
+   Markdown 内容深度定制 (.vp-doc)
+   ========================================================================== */
+
+/* --- 1. 标题排版 --- */
+.vp-doc h1 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 48px;
+  text-align: center; /* 标题居中更有仪式感 */
+  background: linear-gradient(to right, var(--vp-c-brand-1), #bd34fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  width: 100%;
 }
 
-/**
- * Component: Custom Block
- * -------------------------------------------------------------------------- */
-
-:root {
-  --vp-custom-block-tip-border: transparent;
-  --vp-custom-block-tip-text: var(--vp-c-text-1);
-  --vp-custom-block-tip-bg: var(--vp-c-brand-soft);
-  --vp-custom-block-tip-code-bg: var(--vp-c-brand-soft);
+.vp-doc h2 {
+  margin-top: 56px;
+  margin-bottom: 24px;
+  border-bottom: none; /* 去掉默认下划线 */
+  padding-left: 16px;
+  border-left: 6px solid var(--vp-c-brand-1); /* 左侧强调线 */
+  background: var(--vp-c-bg-alt); /* 轻微背景色 */
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 1.6em;
 }
 
-/**
- * Component: Algolia
- * -------------------------------------------------------------------------- */
+.vp-doc h3 {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-size: 1.35em;
+  position: relative;
+  padding-bottom: 8px;
+}
+.vp-doc h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--vp-c-brand-2);
+  border-radius: 2px;
+}
 
-.DocSearch {
-  --docsearch-primary-color: var(--vp-c-brand-1) !important;
+.vp-doc h4 {
+  margin-top: 32px;
+  font-size: 1.2em;
+  color: var(--vp-c-text-1);
 }
-<% } else { %>
-html {
-  font-family: Arial, Helvetica;
+
+/* --- 隐藏默认的导航栏主题切换按钮 --- */
+.VPNavBarAppearance {
+  display: none !important;
 }
-<% } %>
+
+/* --- 2. 正文阅读体验 --- */
+.vp-doc p {
+  line-height: 1.8; /* 增加行高 */
+  margin-bottom: 20px;
+  text-align: justify; /* 两端对齐 */
+}
+
+.vp-doc strong {
+  font-weight: 600;
+}
+
+/* --- 3. 引用块 (Blockquote) --- */
+.vp-doc blockquote {
+  background-color: var(--vp-c-bg-soft);
+  border-left: 4px solid var(--vp-c-brand-2);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 24px 0;
+  color: var(--vp-c-text-2);
+  font-style: normal; /* 去掉斜体 */
+}
+.vp-doc blockquote p {
+  margin: 0;
+}
+
+/* --- 4. 列表 (List) --- */
+.vp-doc ul, .vp-doc ol {
+  padding-left: 1.5em;
+  margin-bottom: 20px;
+}
+.vp-doc li {
+  margin: 8px 0;
+  line-height: 1.7;
+}
+/* 自定义无序列表图标 */
+.vp-doc ul > li {
+  list-style: none;
+  position: relative;
+}
+.vp-doc ul > li::before {
+  content: "•";
+  color: var(--vp-c-brand-1);
+  font-weight: bold;
+  position: absolute;
+  left: -1em;
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+
+/* --- 5. 表格 (Table) --- */
+.vp-doc table {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin: 32px 0;
+}
+.vp-doc th {
+  background-color: var(--vp-c-brand-soft);
+  color: var(--vp-c-text-1);
+  padding: 12px 16px;
+  text-align: left;
+  border: none;
+}
+.vp-doc td {
+  padding: 12px 16px;
+  border-top: 1px solid var(--vp-c-divider);
+  border-left: none;
+  border-right: none;
+}
+.vp-doc tr:nth-child(even) {
+  background-color: var(--vp-c-bg-soft);
+}
+.vp-doc tr:hover {
+  background-color: var(--vp-c-bg-alt);
+}
+
+/* --- 6. 图片 (Image) --- */
+.vp-doc img {
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease;
+  display: block;
+  margin: 32px auto; /* 居中 */
+}
+.vp-doc img:hover {
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+/* --- 7. 分割线 (HR) --- */
+.vp-doc hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--vp-c-divider), transparent);
+  margin: 48px 0;
+}
+
+/* --- 8. 数学公式 (MathJax) --- */
+.MathJax {
+  font-size: 1.1em !important;
+  color: var(--vp-c-text-1);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+/* 独立公式块增加间距 */
+mjx-container[display="true"] {
+  margin: 24px 0 !important;
+  padding: 16px;
+  background: var(--vp-c-bg-alt);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+/* ==========================================================================
+   自定义容器增强 (Tip, Warning, Danger)
+   ========================================================================== */
+.custom-block {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: none !important; /* 去掉默认边框 */
+  padding: 20px 24px !important;
+}
+
+.custom-block.tip {
+  background-color: rgba(100, 108, 255, 0.08) !important;
+  border-left: 6px solid var(--vp-c-brand-1) !important;
+}
+.custom-block.warning {
+  background-color: rgba(255, 197, 23, 0.08) !important;
+  border-left: 6px solid var(--vp-c-yellow-1) !important;
+}
+.custom-block.danger {
+  background-color: rgba(214, 0, 0, 0.08) !important;
+  border-left: 6px solid var(--vp-c-red-1) !important;
+}
+
+.custom-block .custom-block-title {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+

@@ -66,6 +66,24 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/AceYKN/my-note' }
     ],
 
+    // 文章大纲 (右侧目录)
+    outline: {
+      level: 'deep', // 显示 h2-h6
+      label: '页面导航'
+    },
+
+    // 编辑链接
+    editLink: {
+      pattern: 'https://github.com/AceYKN/my-note/edit/main/docs/:path',
+      text: '在 GitHub 上编辑此页'
+    },
+
+    // 文档页脚 (上一篇/下一篇)
+    docFooter: {
+      prev: '上一篇',
+      next: '下一篇'
+    },
+
     // 页脚
     footer: {
       message: 'I laid my burdens down, now I\'m traveling light.',
@@ -75,6 +93,7 @@ export default defineConfig({
 
   // 4. Markdown 配置 (支持 LaTeX 公式)
   markdown: {
+    lineNumbers: true, // 开启代码行号
     config: (md) => {
       md.use(markdownItMathjax3)
     }
