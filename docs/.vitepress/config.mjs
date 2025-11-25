@@ -26,11 +26,18 @@ export default defineConfig({
     sidebar: {
       // 当进入 /math/ 目录时显示
       '/math/': [
-        { text: '抽象代数', link: '/math/algebra' } ,
+        {
+          text: '抽象代数',
+          collapsed: true, // 默认折叠
+          items: [
+            { text: '特殊类型的群 问题详解', link: '/math/abstract_algebra/groupproblem' }
+          ]
+        },
         {
           text: '常微分方程',
           collapsed: true, // 這門課暫時不看，預設折疊
           items: [
+            { text: '题目内容', link: '/math/ode/prob' },
             { text: '3-2 4-1 作业', link: '/math/ode/3-2&4-1 HW' },
             { text: '4-2 作业', link: '/math/ode/4-2HW' }
           ]
