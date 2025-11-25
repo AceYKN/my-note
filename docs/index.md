@@ -7,7 +7,7 @@ hero:
   actions:
     - theme: brand
       text: "数学笔记"
-      link: /math/calculus
+      link: /math/math
     - theme: alt
       text: "编程开发"
       link: /code/cpp-start
@@ -15,7 +15,7 @@ hero:
 features:
   - title: Σ 数学
     details: 微积分 / 线性代数 / 常微分方程
-    link: /math/calculus
+    link: /math/math
   - title: 💻 编程
     details: C++ / Go / Vue.js / 前端开发
     link: /code/cpp-start
