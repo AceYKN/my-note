@@ -18,7 +18,7 @@ export default defineConfig({
     // 顶部导航栏
     nav: [
       { text: '🏠 首页', link: '/' },
-      { text: 'Σ 数学笔记', link: '/math/calculus' },
+      { text: 'Σ 数学笔记', link: '/math/math' },
       { text: '💻 编程开发', link: '/code/cpp-start' }
     ],
 
@@ -35,7 +35,7 @@ export default defineConfig({
         },
         {
           text: '常微分方程',
-          collapsed: true, // 這門課暫時不看，預設折疊
+          collapsed: true, 
           items: [
             { text: '题目内容', link: '/math/ode/prob' },
             { text: '3-2 4-1 作业', link: '/math/ode/3-2&4-1 HW' },
@@ -56,8 +56,8 @@ export default defineConfig({
         {
           text: '其他技术',
           items: [
-            { text: 'Go 语言', link: '/code/go-notes' },
-            { text: '前端开发', link: '/code/vue-notes' }
+            { text: 'Golang', link: '/code/go-notes' },
+            { text: 'vue', link: '/code/vue-notes' }
           ]
         }
       ]
