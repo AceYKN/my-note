@@ -152,22 +152,12 @@ export default defineConfig({
     }
   },
 
-  // 5. Vite 配置（代码高亮主题 + 字体优化）
+  // 5. Vite 配置（代码高亮主题）
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
           additionalData: `@import "@/styles/variables.scss";`
-        }
-      }
-    },
-    // 字体子集化优化
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            'font-inter': ['virtual:fonts/inter']
-          }
         }
       }
     }
