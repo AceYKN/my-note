@@ -23,3 +23,5 @@ features:
     details: 学习计划 / 进度追踪 / 灵感记录
     link: /math/ode/4-2HW
 ---
+
+<StatsDisplay />

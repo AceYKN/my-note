@@ -39,6 +39,13 @@ export default defineConfig({
           ]
         },
         {
+          text: '数学分析',
+          collapsed: true,
+          items: [
+            { text: 'Week 13 作业', link: '/math/math_analysis/Week13HW' }
+          ]
+        },
+        {
           text: '常微分方程',
           collapsed: true,
           items: [
@@ -47,7 +54,6 @@ export default defineConfig({
             { text: '4-2 作业', link: '/math/ode/4-2HW' }
           ]
         }
-
       ],
 
       // 当进入 /code/ 目录时显示
@@ -68,9 +74,40 @@ export default defineConfig({
       ]
     },
 
-    // 开启本地搜索 (非常实用！)
+    // 开启本地搜索 (增强预览功能)
     search: {
-      provider: 'local'
+      provider: 'local',
+      options: {
+        detailedView: true,
+        miniSearch: {
+          searchOptions: {
+            fuzzy: 0.2,
+            prefix: true,
+            boost: {
+              title: 4,
+              text: 2,
+              titles: 1
+            }
+          }
+        },
+        translations: {
+          button: {
+            buttonText: '搜索',
+            buttonAriaLabel: '搜索文档'
+          },
+          modal: {
+            displayDetails: '显示详细列表',
+            resetButtonTitle: '清除查询',
+            backButtonTitle: '返回',
+            noResultsText: '无法找到相关结果',
+            footer: {
+              selectText: '选择',
+              navigateText: '切换',
+              closeText: '关闭'
+            }
+          }
+        }
+      }
     },
 
     // 社交链接
@@ -81,19 +118,19 @@ export default defineConfig({
     // 文章大纲 (右侧目录)
     outline: {
       level: 'deep', // 显示 h2-h6
-      label: '页面导航'
+      label: 'On this page'
     },
 
     // 编辑链接
     editLink: {
       pattern: 'https://github.com/AceYKN/my-note/edit/main/docs/:path',
-      text: '在 GitHub 上编辑此页'
+      text: 'Edit this page on GitHub'
     },
 
     // 文档页脚 (上一篇/下一篇)
     docFooter: {
-      prev: '上一篇',
-      next: '下一篇'
+      prev: 'Previous',
+      next: 'Next'
     },
 
     // 页脚
@@ -108,6 +145,56 @@ export default defineConfig({
     lineNumbers: true, // 开启代码行号
     config: (md) => {
       md.use(markdownItMathjax3)
+    },
+    // 启用代码块复制按钮
+    code: {
+      lineNumbers: true
     }
-  }
+  },
+
+  // 5. Vite 配置（代码高亮主题 + 字体优化）
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "@/styles/variables.scss";`
+        }
+      }
+    },
+    // 字体子集化优化
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'font-inter': ['virtual:fonts/inter']
+          }
+        }
+      }
+    }
+  },
+
+  // 6. Head 配置 - 字体预加载和子集化
+  head: [
+    // 预加载关键字体（仅加载拉丁字符集）
+    ['link', {
+      rel: 'preconnect',
+      href: 'https://fonts.googleapis.com'
+    }],
+    ['link', {
+      rel: 'preconnect',
+      href: 'https://fonts.gstatic.com',
+      crossorigin: ''
+    }],
+    ['link', {
+      rel: 'stylesheet',
+      href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&subset=latin'
+    }],
+    // Favicon
+    ['link', { rel: 'icon', href: '/my-note/favicon.ico' }],
+    // Meta tags
+    ['meta', { name: 'theme-color', content: '#646cff' }],
+    ['meta', { name: 'og:type', content: 'website' }],
+    ['meta', { name: 'og:locale', content: 'zh_CN' }],
+    ['meta', { name: 'og:site_name', content: '我的知识库' }]
+  ]
 })

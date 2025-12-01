@@ -3,28 +3,53 @@
  */
 
 :root {
-  /* --- 字体优化 --- */
+  /* ==================== 字体系统 ==================== */
   --vp-font-family-base: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 
-  /* --- 品牌色系 (靛蓝/紫色渐变) --- */
+  /* ==================== 品牌色系 ==================== */
   --vp-c-brand-1: #646cff;
   --vp-c-brand-2: #747bff;
   --vp-c-brand-3: #535bf2;
   --vp-c-brand-soft: rgba(100, 108, 255, 0.14);
+  --vp-c-brand-lighter: rgba(100, 108, 255, 0.08);
 
-  /* --- 语义化颜色 --- */
+  /* ==================== 语义化颜色 ==================== */
   --vp-c-tip-1: var(--vp-c-brand-1);
   --vp-c-tip-2: var(--vp-c-brand-2);
   --vp-c-tip-3: var(--vp-c-brand-3);
   --vp-c-tip-soft: var(--vp-c-brand-soft);
 
-  /* --- 首页 Hero 标题特效 --- */
+  /* ==================== 首页特效 ==================== */
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
 
-  /* --- 布局尺寸微调 --- */
-  --vp-layout-max-width: 1440px; /* 更宽的视野 */
-  --vp-sidebar-width: 280px;     /* 稍宽的侧边栏 */
+  /* ==================== 布局尺寸 ==================== */
+  --vp-layout-max-width: 1440px;
+  --vp-sidebar-width: 280px;
+  
+  /* ==================== 间距系统 ==================== */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  
+  /* ==================== 圆角系统 ==================== */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  /* ==================== 阴影系统 ==================== */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  
+  /* ==================== 过渡动画 ==================== */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
 }
 
 /* ==========================================================================
@@ -54,32 +79,36 @@
   font-weight: 800;
   letter-spacing: -0.02em;
   margin-bottom: 48px;
-  text-align: center; /* 标题居中更有仪式感 */
+  text-align: center;
   background: linear-gradient(to right, var(--vp-c-brand-1), #bd34fe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
   width: 100%;
+  position: relative;
+  padding-top: 24px;
 }
 
 .vp-doc h2 {
   margin-top: 56px;
   margin-bottom: 24px;
-  border-bottom: none; /* 去掉默认下划线 */
-  padding-left: 16px;
-  border-left: 6px solid var(--vp-c-brand-1); /* 左侧强调线 */
-  background: var(--vp-c-bg-alt); /* 轻微背景色 */
-  padding: 12px 16px;
+  border-bottom: none;
+  padding-left: 20px; /* 修复：减小左侧间距 */
+  border-left: 6px solid var(--vp-c-brand-1);
+  background: var(--vp-c-bg-alt);
+  padding: 12px 16px 12px 20px;
   border-radius: 0 8px 8px 0;
   font-size: 1.6em;
+  position: relative;
 }
-
 .vp-doc h3 {
   margin-top: 40px;
   margin-bottom: 16px;
   font-size: 1.35em;
   position: relative;
   padding-bottom: 8px;
+  padding-left: 32px;
+} padding-bottom: 8px;
 }
 .vp-doc h3::after {
   content: '';
@@ -91,11 +120,13 @@
   background: var(--vp-c-brand-2);
   border-radius: 2px;
 }
-
 .vp-doc h4 {
   margin-top: 32px;
   font-size: 1.2em;
   color: var(--vp-c-text-1);
+  padding-left: 24px;
+  position: relative;
+} color: var(--vp-c-text-1);
 }
 
 /* --- 隐藏默认的导航栏主题切换按钮 --- */
@@ -105,13 +136,16 @@
 
 /* --- 2. 正文阅读体验 --- */
 .vp-doc p {
-  line-height: 1.8; /* 增加行高 */
+  line-height: 1.8;
   margin-bottom: 20px;
-  text-align: justify; /* 两端对齐 */
+  text-align: left; /* 改为左对齐，避免中英混排时词间距不均 */
+  hyphens: auto; /* 添加连字符支持 */
+  word-break: break-word; /* 长单词换行 */
 }
 
 .vp-doc strong {
   font-weight: 600;
+  color: var(--vp-c-text-1);
 }
 
 /* --- 3. 引用块 (Blockquote) --- */
@@ -152,35 +186,78 @@
   line-height: 1.5;
 }
 
-/* --- 5. 表格 (Table) --- */
+/* --- 5. 表格 (Table) - 移动端优化 --- */
+.vp-doc .table-container {
+  overflow-x: auto;
+  margin: 32px 0;
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
 .vp-doc table {
   display: table;
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  margin: 32px 0;
+  margin: 0;
 }
+
 .vp-doc th {
   background-color: var(--vp-c-brand-soft);
   color: var(--vp-c-text-1);
   padding: 12px 16px;
   text-align: left;
   border: none;
+  white-space: nowrap;
 }
+
 .vp-doc td {
   padding: 12px 16px;
   border-top: 1px solid var(--vp-c-divider);
   border-left: none;
   border-right: none;
 }
+
 .vp-doc tr:nth-child(even) {
   background-color: var(--vp-c-bg-soft);
 }
+
 .vp-doc tr:hover {
   background-color: var(--vp-c-bg-alt);
+  transition: background-color var(--transition-fast);
+}
+
+/* 表格滚动提示 */
+.vp-doc .table-container::after {
+  content: '→ 滑动查看更多';
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background: var(--vp-c-brand-1);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+@media (max-width: 768px) {
+  .vp-doc .table-container::after {
+    opacity: 1;
+  }
+  
+  .vp-doc table {
+    font-size: 0.9em;
+  }
+  
+  .vp-doc th,
+  .vp-doc td {
+    padding: 8px 12px;
+  }
 }
 
 /* --- 6. 图片 (Image) --- */
@@ -204,20 +281,61 @@
   margin: 48px 0;
 }
 
-/* --- 8. 数学公式 (MathJax) --- */
+/* --- 8. 数学公式 (MathJax) - 修复横向溢出 --- */
 .MathJax {
   font-size: 1.1em !important;
   color: var(--vp-c-text-1);
+  max-width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
 }
-/* 独立公式块增加间距 */
+
+/* 独立公式块增加间距和滚动提示 */
 mjx-container[display="true"] {
   margin: 24px 0 !important;
   padding: 16px;
   background: var(--vp-c-bg-alt);
   border-radius: 8px;
   overflow-x: auto;
+  max-width: 100%;
+  position: relative;
+}
+
+/* 滚动条样式优化 */
+mjx-container[display="true"]::-webkit-scrollbar {
+  height: 6px;
+}
+
+mjx-container[display="true"]::-webkit-scrollbar-track {
+  background: var(--vp-c-bg-soft);
+  border-radius: 3px;
+}
+
+mjx-container[display="true"]::-webkit-scrollbar-thumb {
+  background: var(--vp-c-brand-soft);
+  border-radius: 3px;
+}
+
+mjx-container[display="true"]::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-brand-1);
+}
+
+/* 溢出提示阴影 */
+mjx-container[display="true"]::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  background: linear-gradient(to left, var(--vp-c-bg-alt), transparent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+mjx-container[display="true"]:hover::after {
+  opacity: 1;
 }
 
 /* ==========================================================================
@@ -246,7 +364,358 @@ mjx-container[display="true"] {
 .custom-block .custom-block-title {
   font-size: 1.1em;
   margin-bottom: 8px;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+/* 仅对英文标题使用大写 */
+.custom-block .custom-block-title:lang(en) {
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   标题图标装饰优化
+   ========================================================================== */
+.vp-doc h1::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(circle, var(--vp-c-brand-1) 0%, var(--vp-c-brand-2) 100%);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  opacity: 0.6;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+}
+
+.vp-doc h2::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 60%;
+  background: linear-gradient(to bottom, var(--vp-c-brand-1), var(--vp-c-brand-2));
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.vp-doc h2:hover::before {
+  opacity: 1;
+}
+
+.vp-doc h3::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid var(--vp-c-brand-1);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.vp-doc h4::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--vp-c-brand-2);
+  border-radius: 50%;
+}
+
+/* ==========================================================================
+   页面加载动画和平滑滚动
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+.VPDoc {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   首页背景装饰动画
+   ========================================================================== */
+.VPHome {
+  position: relative;
+  overflow: hidden;
+}
+
+.VPHome::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 20% 50%, rgba(100, 108, 255, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(189, 52, 254, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 40% 20%, rgba(65, 209, 255, 0.03) 0%, transparent 50%);
+  animation: float 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.VPHome::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(90deg, var(--vp-c-divider) 1px, transparent 1px),
+    linear-gradient(0deg, var(--vp-c-divider) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(30px, -30px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg);
+  }
+}
+
+/* 首页特性卡片悬浮效果增强 */
+.VPFeature {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.VPFeature:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 12px 32px rgba(100, 108, 255, 0.15) !important;
+}
+
+/* ==========================================================================
+   深色模式对比度优化
+   ========================================================================== */
+.dark {
+  --vp-c-text-1: rgba(255, 255, 245, 0.95);
+  --vp-c-text-2: rgba(235, 235, 235, 0.75);
+  --vp-c-text-3: rgba(235, 235, 235, 0.55);
+  
+  /* 深色模式下的背景层次 */
+  --vp-c-bg: #1a1a1a;
+  --vp-c-bg-alt: #242424;
+  --vp-c-bg-soft: #2a2a2a;
+  
+  /* 深色模式下的品牌色调整 */
+  --vp-c-brand-1: #7c84ff;
+  --vp-c-brand-2: #8b92ff;
+  --vp-c-brand-soft: rgba(124, 132, 255, 0.16);
+  
+  /* 深色模式下的分隔线 */
+  --vp-c-divider: rgba(255, 255, 255, 0.12);
+  
+  /* 深色模式下的阴影 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* 深色模式下的表格对比度 */
+.dark .vp-doc tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .vp-doc tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* 深色模式下的自定义容器 */
+.dark .custom-block.tip {
+  background-color: rgba(124, 132, 255, 0.12) !important;
+}
+
+.dark .custom-block.warning {
+  background-color: rgba(255, 197, 23, 0.12) !important;
+}
+
+.dark .custom-block.danger {
+  background-color: rgba(244, 63, 94, 0.12) !important;
+}
+
+/* 深色模式下的代码块 */
+.dark .vp-doc :not(pre) > code {
+  background-color: rgba(124, 132, 255, 0.15);
+  color: #a8b1ff;
+}
+
+/* ==========================================================================
+   移动端优化
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* 数学公式缩放 */
+  .MathJax {
+    font-size: 0.95em !important;
+  }
+  
+  mjx-container[display="true"] {
+    font-size: 0.9em !important;
+    padding: 12px;
+  }
+  
+  /* H1 标题优化 */
+  .vp-doc h1 {
+    font-size: 1.8em;
+    margin-bottom: 32px;
+  }
+  
+  /* H2 标题优化 */
+  .vp-doc h2 {
+    font-size: 1.4em;
+    padding-left: 44px;
+  }
+  
+  .vp-doc h2::before {
+    font-size: 1em;
+    left: 12px;
+  }
+  
+  /* 卡片布局单列 */
+  .card-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* 导航栏简化 */
+  .VPNavBar .title {
+    font-size: 1em;
+  }
+}
+
+/* ==========================================================================
+   代码块优化
+   ========================================================================== */
+/* 行内代码样式 */
+.vp-doc :not(pre) > code {
+  color: var(--vp-c-brand-1);
+  background-color: rgba(100, 108, 255, 0.12);
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+/* 代码块容器 */
+.vp-doc div[class*='language-'] {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin: 24px 0;
+  position: relative;
+  background-color: var(--vp-code-block-bg);
+}
+
+.dark .vp-doc div[class*='language-'] {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* 代码块复制按钮优化 */
+.vp-doc div[class*='language-'] > button.copy {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.vp-doc div[class*='language-']:hover > button.copy {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   搜索框优化
+   ========================================================================== */
+.VPLocalSearchBox {
+  backdrop-filter: blur(12px);
+}
+
+.VPLocalSearchBox .shell {
+  animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   侧边栏活动状态优化
+   ========================================================================== */
+.VPSidebarItem.is-active > .item .link {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 600;
+  position: relative;
+}
+
+.VPSidebarItem.is-active > .item .link::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(to bottom, var(--vp-c-brand-1), var(--vp-c-brand-2));
+  border-radius: 2px;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+.VPSidebarItem.is-active > .item {
+  background: var(--vp-c-brand-soft);
+  border-radius: var(--radius-md);
+}
+
+/* 侧边栏 hover 效果 */
+.VPSidebarItem .item:hover {
+  background: var(--vp-c-bg-soft);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
 }
 

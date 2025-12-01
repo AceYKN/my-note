@@ -1,23 +1,20 @@
 <script setup>
 import DefaultTheme from "vitepress/theme";
-import { useData } from "vitepress";
+import ReadingProgress from "../components/ReadingProgress.vue";
+import BackToTop from "../components/BackToTop.vue";
 
 const { Layout } = DefaultTheme;
-// const { isDark } = useData();
-
-// const toggleTheme = () => {
-//   isDark.value = !isDark.value;
-// };
 </script>
 
 <template>
   <Layout>
-    <!-- <template #layout-bottom>
-      <button class="theme-toggle-float" @click="toggleTheme" title="切换主题">
-        <span v-if="isDark">🌙</span>
-        <span v-else>☀️</span>
-      </button>
-    </template> -->
+    <template #layout-top>
+      <ReadingProgress />
+    </template>
+    
+    <template #layout-bottom>
+      <BackToTop />
+    </template>
   </Layout>
 </template>
 
