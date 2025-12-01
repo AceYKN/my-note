@@ -5,7 +5,7 @@ export default defineConfig({
   // ==========================================
   // 1. 核心部署配置 (解决样式不显示的关键)
   // ==========================================
-  base: '/my-note/', 
+  base: '/my-note/',
 
   // 2. 网站基本元数据
   title: "我的知识库",
@@ -30,19 +30,24 @@ export default defineConfig({
           text: '抽象代数',
           collapsed: true, // 默认折叠
           items: [
-            { text: '特殊类型的群 问题详解', link: '/math/abstract_algebra/groupproblem' }
+            { text: '特殊类型的群 问题详解', link: '/math/abstract_algebra/groupproblem' },
+            {
+              text: '环的基本理论',
+              link: '/math/abstract_algebra/ring'
+            },
+            { text: '环的基本理论 习题详解', link: '/math/abstract_algebra/ringHW' }
           ]
         },
         {
           text: '常微分方程',
-          collapsed: true, 
+          collapsed: true,
           items: [
             { text: '题目内容', link: '/math/ode/prob' },
             { text: '3-2 4-1 作业', link: '/math/ode/3-2&4-1 HW' },
             { text: '4-2 作业', link: '/math/ode/4-2HW' }
           ]
         }
-          
+
       ],
 
       // 当进入 /code/ 目录时显示
