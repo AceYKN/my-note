@@ -99,9 +99,9 @@
 }
 
 /* --- 隐藏默认的导航栏主题切换按钮 --- */
-.VPNavBarAppearance {
+/* .VPNavBarAppearance {
   display: none !important;
-}
+} */
 
 /* --- 2. 正文阅读体验 --- */
 .vp-doc p {

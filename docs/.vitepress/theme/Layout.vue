@@ -3,26 +3,26 @@ import DefaultTheme from "vitepress/theme";
 import { useData } from "vitepress";
 
 const { Layout } = DefaultTheme;
-const { isDark } = useData();
+// const { isDark } = useData();
 
-const toggleTheme = () => {
-  isDark.value = !isDark.value;
-};
+// const toggleTheme = () => {
+//   isDark.value = !isDark.value;
+// };
 </script>
 
 <template>
   <Layout>
-    <template #layout-bottom>
+    <!-- <template #layout-bottom>
       <button class="theme-toggle-float" @click="toggleTheme" title="切换主题">
         <span v-if="isDark">🌙</span>
         <span v-else>☀️</span>
       </button>
-    </template>
+    </template> -->
   </Layout>
 </template>
 
 <style scoped>
-.theme-toggle-float {
+/* .theme-toggle-float {
   position: fixed;
   bottom: 40px;
   right: 40px;
@@ -50,5 +50,5 @@ const toggleTheme = () => {
 
 .theme-toggle-float:active {
   transform: scale(0.95);
-}
+} */
 </style>
