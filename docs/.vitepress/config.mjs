@@ -35,7 +35,8 @@ export default defineConfig({
               text: '环的基本理论',
               link: '/math/abstract_algebra/ring'
             },
-            { text: '环的基本理论 习题详解', link: '/math/abstract_algebra/ringHW' }
+            { text: '环的基本理论 习题详解', link: '/math/abstract_algebra/ringHW' },
+            { text: '子环、理想与商环', link: '/math/abstract_algebra/subringideal' }
           ]
         },
         {
