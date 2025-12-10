@@ -47,7 +47,8 @@ export default defineConfig({
           items: [
             { text: 'Week 13 作业', link: '/math/math_analysis/Week13HW' },
             { text: '11-29 作业', link: '/math/math_analysis/11-29HW' },
-            { text: '12-5 作业', link: '/math/math_analysis/12-5HW' }
+            { text: '12-5 作业', link: '/math/math_analysis/12-5HW' },
+            {text:'12-9 作业', link:'/math/math_analysis/12-9HW'}
           ]
         },
         {
