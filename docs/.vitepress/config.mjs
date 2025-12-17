@@ -42,7 +42,7 @@ export default defineConfig({
             { text: '环同态基本定理 习题详解', link: '/math/abstract_algebra/ringhomomorphismHW' },
             { text: '环的直积与中国剩余定理', link: '/math/abstract_algebra/ringdirectprod' },
             { text: '环的直积与中国剩余定理 习题详解', link: '/math/abstract_algebra/ringdirectprodHW' },
-            { text: '素理想与极大理想 习题详解', link: '/math/abstract_algebra/primeidealmaximalidealHW,md' }
+            { text: '素理想与极大理想 习题详解', link: '/math/abstract_algebra/primeidealmaximalidealHW' }
           ]
         },
         {
