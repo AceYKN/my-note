@@ -42,6 +42,7 @@ export default defineConfig({
             { text: '环同态基本定理 习题详解', link: '/math/abstract_algebra/ringhomomorphismHW' },
             { text: '环的直积与中国剩余定理', link: '/math/abstract_algebra/ringdirectprod' },
             { text: '环的直积与中国剩余定理 习题详解', link: '/math/abstract_algebra/ringdirectprodHW' },
+            { text: '素理想与极大理想', link: '/math/abstract_algebra/primeandmaximalideal' },
             { text: '素理想与极大理想 习题详解', link: '/math/abstract_algebra/primeidealmaximalidealHW' }
           ]
         },
@@ -52,7 +53,7 @@ export default defineConfig({
             { text: 'Week 13 作业', link: '/math/math_analysis/Week13HW' },
             { text: '11-29 作业', link: '/math/math_analysis/11-29HW' },
             { text: '12-5 作业', link: '/math/math_analysis/12-5HW' },
-            {text:'12-9 作业', link:'/math/math_analysis/12-9HW'}
+            { text: '12-9 作业', link: '/math/math_analysis/12-9HW' }
           ]
         },
         {
@@ -146,7 +147,7 @@ export default defineConfig({
     // 页脚
     footer: {
       message: 'I laid my burdens down, now I\'m traveling light.',
-      copyright: 'Copyright © 2025 AceYKN'
+      copyright: 'Copyright © 2026 AceYKN'
     }
   },
 

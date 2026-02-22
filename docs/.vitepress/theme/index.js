@@ -17,20 +17,15 @@ export default {
     app.component('ReadingProgress', ReadingProgress)
     app.component('BackToTop', BackToTop)
     app.component('Breadcrumb', Breadcrumb)
-    
-    // 路由变化时重新包装表格
+
+    // 路由变化时重新包装表格（含首次加载）
     if (typeof window !== 'undefined') {
+      // 首次加载
+      setupTableWrapper()
+      // 路由切换后重新执行
       router.onAfterRouteChanged = () => {
         setTimeout(setupTableWrapper, 100)
       }
-    }
-  },
-  setup() {
-    // 初始化表格包装器
-    if (typeof window !== 'undefined') {
-      import('./tableWrapper.js').then(({ setupTableWrapper }) => {
-        setupTableWrapper()
-      })
     }
   }
 }
