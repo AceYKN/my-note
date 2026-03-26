@@ -34,7 +34,6 @@
     - 如果 $g(x)$ 是三角函数，尝试 $y_p = A\cos(kx) + B\sin(kx)$ 的形式。
 3. 将 $y_p$ 代入原方程，求解系数。
 4. 最终通解为 $y = y_h + y_p$
-//TODO: Add non-homogeneous solution steps
 
 ## 利用皮卡逐步逼近序列求解ODE的近似解
 **形式：** $$\frac{dy}{dx} = f(x, y), \quad y(x_0) = y_0$$
