@@ -7,6 +7,11 @@ export default defineConfig({
   // ==========================================
   base: '/my-note/',
 
+  // sitemap 配置（有助于搜索引擎索引）
+  sitemap: {
+    hostname: 'https://aceykn.github.io/my-note/'
+  },
+
   // 2. 网站基本元数据
   title: "我的知识库",
   description: "AceYKN 的学习笔记整理",
@@ -62,7 +67,8 @@ export default defineConfig({
           items: [
             { text: '题目内容', link: '/math/ode/prob' },
             { text: '3-2 4-1 作业', link: '/math/ode/3-2&4-1 HW' },
-            { text: '4-2 作业', link: '/math/ode/4-2HW' }
+            { text: '4-2 作业', link: '/math/ode/4-2HW' },
+            { text: '复习总结', link: '/math/ode/review' }
           ]
         }
       ],

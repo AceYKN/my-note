@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aceykn.github.io/my-note/sitemap.xml
