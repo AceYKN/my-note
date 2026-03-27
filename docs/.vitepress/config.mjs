@@ -24,7 +24,8 @@ export default defineConfig({
     nav: [
       { text: '🏠 首页', link: '/' },
       { text: 'Σ 数学笔记', link: '/math/math' },
-      { text: '💻 编程开发', link: '/code/cpp-start' }
+      { text: '💻 编程开发', link: '/code/cpp-start' },
+      { text: '🖥️ 操作系统', link: '/cs/os/' }
     ],
 
     // 侧边栏 (分级目录)
@@ -69,6 +70,16 @@ export default defineConfig({
             { text: '3-2 4-1 作业', link: '/math/ode/3-2&4-1 HW' },
             { text: '4-2 作业', link: '/math/ode/4-2HW' },
             { text: '复习总结', link: '/math/ode/review' }
+          ]
+        }
+      ],
+
+      // 当进入 /cs/ 目录时显示
+      '/cs/': [
+        {
+          text: '操作系统',
+          items: [
+            { text: '课程概览', link: '/cs/os/' }
           ]
         }
       ],
