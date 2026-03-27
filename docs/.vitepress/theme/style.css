@@ -574,48 +574,6 @@ html {
 }
 
 /* ==========================================================================
-   响应式布局优先级调整：右侧目录优先显示，左侧菜单优先隐藏
-   在 960px-1279px 区间：隐藏左侧菜单，保留右侧目录
-   ========================================================================== */
-
-/* 960px-1279px：隐藏左侧菜单 */
-@media (min-width: 960px) and (max-width: 1279px) {
-  /* 隐藏左侧固定侧边栏 */
-  .VPSidebar {
-    display: none !important;
-  }
-
-  /* 内容区移除左侧偏移，填满左侧空间 */
-  .VPDoc {
-    padding-left: 0 !important;
-  }
-  .VPContent.has-sidebar {
-    padding-left: 0 !important;
-  }
-  .VPDoc .container {
-    margin-left: 0 !important;
-  }
-
-  /* 强制显示右侧目录 */
-  .VPDoc .aside {
-    display: block !important;
-  }
-  .VPDocAside {
-    display: block !important;
-  }
-  .VPDocAsideOutline {
-    display: block !important;
-  }
-}
-
-/* 小于 960px（手机/平板）：两侧都隐藏，走移动端汉堡菜单 */
-@media (max-width: 959px) {
-  .VPDoc .aside {
-    display: none !important;
-  }
-}
-
-/* ==========================================================================
    移动端优化
    ========================================================================== */
 @media (max-width: 768px) {
