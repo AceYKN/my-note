@@ -53,6 +53,23 @@
 }
 
 /* ==========================================================================
+   导航栏滚动自动隐藏
+   ========================================================================== */
+.VPNav {
+  transition: transform 0.3s ease !important;
+}
+.VPNav.nav-hidden {
+  transform: translateY(-100%) !important;
+}
+.VPLocalNav {
+  transition: transform 0.3s ease, opacity 0.3s ease !important;
+}
+.VPLocalNav.local-nav-hidden {
+  transform: translateY(-100%) !important;
+  opacity: 0 !important;
+}
+
+/* ==========================================================================
    全局滚动条美化
    ========================================================================== */
 ::-webkit-scrollbar {
@@ -576,6 +593,86 @@ html {
 /* ==========================================================================
    移动端优化
    ========================================================================== */
+
+/* ==========================================================================
+   中屏优化 (960-1279px)：优先显示右侧目录，隐藏左侧菜单
+   VitePress 默认：960-1279px 显示左侧菜单，隐藏右侧目录
+   覆盖后：  960-1279px 隐藏左侧菜单，显示右侧目录
+   ========================================================================== */
+@media (min-width: 960px) and (max-width: 1279px) {
+  /* 1. 将左侧侧边栏改为 overlay 模式（恢复 <960px 的滑出行为） */
+  .VPSidebar {
+    z-index: 60 !important; /* 必须高于 backdrop(50)，VitePress 在 960px+ 会降为 25 */
+    padding-top: 32px !important;
+    width: calc(100vw - 64px) !important;
+    max-width: 320px !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    box-shadow: var(--vp-c-shadow-3) !important;
+    transform: translateX(-100%) !important;
+    transition: opacity 0.5s, transform 0.25s ease !important;
+  }
+  .VPSidebar.open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(0) !important;
+    transition: opacity 0.25s, transform 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
+  }
+
+  /* 2. 移除 has-sidebar 带来的左侧留白 */
+  .VPContent.has-sidebar {
+    padding-left: 0 !important;
+    margin: var(--vp-layout-top-height, 0px) 0 0 !important;
+  }
+
+  /* 3. 修复导航栏：取消 has-sidebar 对 title 的绝对定位和 content 的左偏移 */
+  .VPNavBar.has-sidebar .title {
+    position: static !important;
+    width: auto !important;
+    padding: 0 32px !important;
+    background-color: var(--vp-nav-bg-color) !important;
+  }
+  .VPNavBar.has-sidebar .content {
+    padding-left: 0 !important;
+  }
+  .VPNavBar.has-sidebar .container {
+    max-width: calc(var(--vp-layout-max-width) - 64px) !important;
+  }
+  .VPNavBar.has-sidebar .divider {
+    padding-left: 0 !important;
+  }
+
+  /* 4. VPLocalNav：保留 Menu 按钮（可打开侧边栏），隐藏 outline 下拉（右侧 aside 已可见） */
+  .VPLocalNav {
+    padding-left: 0 !important;
+  }
+  .VPLocalNav .menu {
+    display: flex !important;
+  }
+  .VPLocalNav .VPLocalNavOutlineDropdown {
+    display: none !important;
+  }
+
+  /* 5. 让内容容器变为 flex 布局（复制 VitePress 1280px+ 的行为） */
+  .VPDoc .container {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  /* 6. 显示右侧目录栏 */
+  .VPDoc .aside {
+    display: block !important;
+  }
+
+  /* 7. 内容区排序与最小宽度 */
+  .VPDoc .content {
+    order: 1 !important;
+    margin: 0 !important;
+    min-width: 640px !important;
+  }
+}
+
+
 @media (max-width: 768px) {
   /* 数学公式缩放 */
   .MathJax {
