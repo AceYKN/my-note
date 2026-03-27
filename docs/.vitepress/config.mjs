@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitepress'
-import markdownItMathjax3 from 'markdown-it-mathjax3'
+import { katex } from '@mdit/plugin-katex'
 
 export default defineConfig({
   // ==========================================
@@ -172,7 +172,7 @@ export default defineConfig({
   markdown: {
     lineNumbers: true, // 开启代码行号
     config: (md) => {
-      md.use(markdownItMathjax3)
+      md.use(katex)
     },
     // 启用代码块复制按钮
     code: {
@@ -210,6 +210,11 @@ export default defineConfig({
     ['link', {
       rel: 'stylesheet',
       href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&subset=latin'
+    }],
+    // KaTeX 样式
+    ['link', {
+      rel: 'stylesheet',
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.16.44/dist/katex.min.css'
     }],
     // Favicon
     ['link', { rel: 'icon', href: '/my-note/favicon.ico' }],
