@@ -173,6 +173,14 @@ export default defineConfig({
     lineNumbers: true, // 开启代码行号
     config: (md) => {
       md.use(katex)
+
+      // 构建时直接把 <table> 包裹在 <div class="table-container"> 中，零客户端开销
+      md.renderer.rules.table_open = function(tokens, idx, options, env, self) {
+        return '<div class="table-container">' + self.renderToken(tokens, idx, options)
+      }
+      md.renderer.rules.table_close = function(tokens, idx, options, env, self) {
+        return self.renderToken(tokens, idx, options) + '</div>'
+      }
     },
     // 启用代码块复制按钮
     code: {
