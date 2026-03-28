@@ -127,15 +127,29 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  margin: 32px 0;
-  padding: 16px 24px;
-  background: var(--vp-c-bg-soft);
-  border-radius: 8px;
+  margin: 32px auto;
+  padding: 16px 28px;
+  background: var(--lg-glass-bg, rgba(255, 255, 255, 0.38));
+  backdrop-filter: blur(48px) saturate(160%);
+  -webkit-backdrop-filter: blur(48px) saturate(160%);
+  border: 1px solid var(--lg-glass-border, rgba(255, 255, 255, 0.45));
+  border-radius: 999px;
   max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
   font-size: 0.9em;
-  animation: fadeInUp 0.6s ease-out;
+  box-shadow: var(--lg-glass-shadow, 0 8px 32px rgba(0,0,0,0.06)),
+              inset 0 1px 1px rgba(255,255,255,0.6);
+  animation: lg-stats-in 0.6s ease-out;
+}
+
+@keyframes lg-stats-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .stat-item {
@@ -147,8 +161,11 @@ onMounted(async () => {
 
 .stat-value {
   font-size: 1.4em;
-  font-weight: 600;
-  color: var(--vp-c-brand-1);
+  font-weight: 700;
+  background: linear-gradient(135deg, #7bb5f0, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 1;
   transition: transform 0.3s ease;
 }
@@ -160,23 +177,24 @@ onMounted(async () => {
 .stat-value-small {
   font-size: 0.95em;
   font-weight: 600;
-  color: var(--vp-c-brand-1);
+  color: var(--lg-accent, #7b8cff);
   line-height: 1;
 }
 
 .stat-label {
-  font-size: 0.85em;
-  color: var(--vp-c-text-2);
+  font-size: 0.82em;
+  color: var(--lg-text-secondary, rgba(0,0,0,0.55));
   font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .stat-divider {
-  color: var(--vp-c-divider);
-  font-size: 0.8em;
+  color: var(--lg-glass-border, rgba(255,255,255,0.45));
+  font-size: 0.7em;
   opacity: 0.5;
 }
 
-/* 骨架屏样式 */
+/* Skeleton */
 .stat-item.skeleton {
   gap: 4px;
 }
@@ -184,7 +202,7 @@ onMounted(async () => {
 .skeleton-value,
 .skeleton-value-small,
 .skeleton-label {
-  background: linear-gradient(90deg, var(--vp-c-bg-alt) 25%, var(--vp-c-bg-soft) 50%, var(--vp-c-bg-alt) 75%);
+  background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 4px;
@@ -206,32 +224,16 @@ onMounted(async () => {
 }
 
 @keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 @media (max-width: 768px) {
   .stats-container {
     font-size: 0.85em;
     gap: 12px;
-    padding: 12px 16px;
+    padding: 12px 20px;
   }
-  
   .stat-value {
     font-size: 1.2em;
   }

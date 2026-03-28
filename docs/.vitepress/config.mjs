@@ -22,10 +22,10 @@ export default defineConfig({
   themeConfig: {
     // 顶部导航栏
     nav: [
-      { text: '🏠 首页', link: '/' },
-      { text: 'Σ 数学笔记', link: '/math/math' },
-      { text: '💻 编程开发', link: '/code/cpp-start' },
-      { text: '🖥️ 操作系统', link: '/cs/os/' }
+      { text: '首页', link: '/' },
+      { text: '数学笔记', link: '/math/math' },
+      { text: '编程开发', link: '/code/cpp-start' },
+      { text: '操作系统', link: '/cs/os/' }
     ],
 
     // 侧边栏 (分级目录)
@@ -210,7 +210,7 @@ export default defineConfig({
     }],
     ['link', {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&subset=latin'
+      href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap'
     }],
     // KaTeX 样式
     ['link', {

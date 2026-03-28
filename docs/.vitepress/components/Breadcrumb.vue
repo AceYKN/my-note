@@ -93,9 +93,15 @@ const breadcrumbs = computed(() => {
 <style scoped>
 .breadcrumb {
   margin-bottom: 24px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--vp-c-divider);
+  padding: 10px 16px;
+  background: var(--lg-glass-bg, rgba(255,255,255,0.38));
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  border: 1px solid var(--lg-glass-border-subtle, rgba(255,255,255,0.22));
+  border-radius: 999px;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.5);
   animation: fadeInDown 0.4s ease-out;
+  display: inline-flex;
 }
 
 .breadcrumb-list {
@@ -112,41 +118,42 @@ const breadcrumbs = computed(() => {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.9em;
+  font-size: 0.88em;
 }
 
 .breadcrumb-link {
-  color: var(--vp-c-text-2);
+  color: var(--lg-text-secondary, rgba(0,0,0,0.55));
   text-decoration: none;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: all 0.2s ease;
+  font-weight: 500;
 }
 
 .breadcrumb-link:hover {
-  color: var(--vp-c-brand-1);
-  background: var(--vp-c-bg-soft);
+  color: var(--lg-accent, #7b8cff);
+  background: rgba(255,255,255,0.25);
 }
 
 .breadcrumb-text {
-  color: var(--vp-c-text-1);
-  font-weight: 500;
+  color: var(--lg-text-primary, rgba(0,0,0,0.88));
+  font-weight: 600;
   padding: 4px 8px;
 }
 
 .breadcrumb-item.active .breadcrumb-text {
-  color: var(--vp-c-brand-1);
+  color: var(--lg-accent, #7b8cff);
 }
 
 .breadcrumb-separator {
-  color: var(--vp-c-text-3);
+  color: var(--lg-text-tertiary, rgba(0,0,0,0.35));
   opacity: 0.5;
 }
 
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;

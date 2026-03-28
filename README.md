@@ -23,13 +23,6 @@ npm run docs:build
 npm run docs:preview
 ```
 
-## 内容目录
-
-| 分类 | 说明 |
-|------|------|
-| 数学笔记 | 抽象代数、数学分析、常微分方程 |
-| 编程开发 | C/C++ 入门、Golang、Vue |
-
 ## 部署
 
 推送到 `main` 分支后，GitHub Actions 会自动构建并部署到 GitHub Pages。

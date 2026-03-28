@@ -38,6 +38,9 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <!-- Liquid Glass animated iridescent background -->
+  <div class="lg-background" aria-hidden="true"></div>
+
   <Layout>
     <template #layout-top>
       <ReadingProgress />

@@ -1,6 +1,7 @@
 import DefaultTheme from 'vitepress/theme'
 import Layout from './Layout.vue'
 import './style.css'
+import './liquid-glass.css'
 import CategoryIndex from '../components/CategoryIndex.vue'
 import StatsDisplay from '../components/StatsDisplay.vue'
 import ReadingProgress from '../components/ReadingProgress.vue'

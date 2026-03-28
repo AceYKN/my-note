@@ -52,22 +52,7 @@
   --transition-slow: 0.5s ease;
 }
 
-/* ==========================================================================
-   导航栏滚动自动隐藏
-   ========================================================================== */
-.VPNav {
-  transition: transform 0.3s ease !important;
-}
-.VPNav.nav-hidden {
-  transform: translateY(-100%) !important;
-}
-.VPLocalNav {
-  transition: transform 0.3s ease, opacity 0.3s ease !important;
-}
-.VPLocalNav.local-nav-hidden {
-  transform: translateY(-100%) !important;
-  opacity: 0 !important;
-}
+/* 导航栏滚动自动隐藏 — 规则已迁移至 liquid-glass.css */
 
 /* ==========================================================================
    全局滚动条美化
@@ -541,10 +526,10 @@ html {
   --vp-c-text-2: rgba(235, 235, 235, 0.75);
   --vp-c-text-3: rgba(235, 235, 235, 0.55);
   
-  /* 深色模式下的背景层次 */
-  --vp-c-bg: #1a1a1a;
-  --vp-c-bg-alt: #242424;
-  --vp-c-bg-soft: #2a2a2a;
+  /* 深色模式下的背景层次 — liquid-glass.css 已覆盖为 transparent */
+  /* --vp-c-bg: #1a1a1a; */
+  /* --vp-c-bg-alt: #242424; */
+  /* --vp-c-bg-soft: #2a2a2a; */
   
   /* 深色模式下的品牌色调整 */
   --vp-c-brand-1: #7c84ff;
@@ -628,7 +613,7 @@ html {
     position: static !important;
     width: auto !important;
     padding: 0 32px !important;
-    background-color: var(--vp-nav-bg-color) !important;
+    background-color: transparent !important;
   }
   .VPNavBar.has-sidebar .content {
     padding-left: 0 !important;
