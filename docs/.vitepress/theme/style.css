@@ -125,7 +125,6 @@
   position: relative;
   padding-bottom: 8px;
   padding-left: 32px;
-} padding-bottom: 8px;
 }
 .vp-doc h3::after {
   content: '';
@@ -143,7 +142,6 @@
   color: var(--vp-c-text-1);
   padding-left: 24px;
   position: relative;
-} color: var(--vp-c-text-1);
 }
 
 /* --- 隐藏默认的导航栏主题切换按钮 --- */

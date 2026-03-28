@@ -4,14 +4,15 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const scrollProgress = ref(0)
 
 const updateProgress = () => {
-  const winScroll = document.documentElement.scrollTop || document.body.scrollTop
-  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
-  const scrolled = (winScroll / height) * 100
-  scrollProgress.value = scrolled
+  requestAnimationFrame(() => {
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
+    scrollProgress.value = (winScroll / height) * 100
+  })
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', updateProgress)
+  window.addEventListener('scroll', updateProgress, { passive: true })
   updateProgress()
 })
 

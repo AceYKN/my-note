@@ -11,11 +11,13 @@ const scrollToTop = () => {
 }
 
 const handleScroll = () => {
-  isVisible.value = window.scrollY > 300
+  requestAnimationFrame(() => {
+    isVisible.value = window.scrollY > 300
+  })
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
+  window.addEventListener('scroll', handleScroll, { passive: true })
   handleScroll()
 })
 

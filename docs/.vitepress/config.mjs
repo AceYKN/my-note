@@ -194,13 +194,6 @@ export default defineConfig({
       host: '127.0.0.1',
       port: Number(process.env.PORT) || 4173
     },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: `@import "@/styles/variables.scss";`
-        }
-      }
-    }
   },
 
   // 6. Head 配置 - 字体预加载和子集化
