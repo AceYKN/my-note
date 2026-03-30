@@ -11,6 +11,9 @@ hero:
     - theme: alt
       text: "Programming"
       link: /code/cpp-start
+    - theme: alt
+      text: "Computer Science"
+      link: /cs/
 
 features:
   - title: Mathematics
@@ -19,6 +22,9 @@ features:
   - title: Programming
     details: C++ / Go / Vue.js / Frontend
     link: /code/cpp-start
+  - title: Computer Science
+    details: OS / Algorithm Design & Analysis
+    link: /cs/
 ---
 
 <StatsDisplay />

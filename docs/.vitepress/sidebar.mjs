@@ -29,6 +29,9 @@ const DIR_DISPLAY_NAMES = {
   ode: '常微分方程',
   // /cs/ 子目录
   os: '操作系统',
+  algo: '算法设计与分析',
+  pastpapers: '過去問',
+  HW: '宿題',
   // /code/ 子目录（如果以后拆子目录）
 }
 
@@ -116,10 +119,10 @@ function buildSidebarForDir(dirPath, urlPrefix) {
   const subDirs = entries.filter(e => e.isDirectory() && !e.name.startsWith('.'))
   const result = []
 
-  // 子目录 → 折叠分组
+  // 子目录 → 折叠分组（递归支持多层嵌套）
   for (const dir of subDirs) {
     const subPath = path.join(dirPath, dir.name)
-    const items = collectFiles(subPath, `${urlPrefix}${dir.name}/`)
+    const items = buildSidebarForDir(subPath, `${urlPrefix}${dir.name}/`)
     if (items.length === 0) continue
     result.push({
       text: DIR_DISPLAY_NAMES[dir.name] || dir.name,
@@ -149,11 +152,30 @@ export function generateSidebar(docsDir) {
 
   for (const entry of entries) {
     if (!entry.isDirectory() || IGNORED_DIRS.has(entry.name)) continue
-    const dirPath = path.join(docsDir, entry.name)
-    const prefix = `/${entry.name}/`
-    const items = buildSidebarForDir(dirPath, prefix)
-    if (items.length > 0) {
-      sidebar[prefix] = items
+    const topDirPath = path.join(docsDir, entry.name)
+    const topPrefix = `/${entry.name}/`
+
+    // 顶级目录的 sidebar（供直属 .md 文件使用，如 /math/math）
+    const topItems = buildSidebarForDir(topDirPath, topPrefix)
+    if (topItems.length > 0) {
+      sidebar[topPrefix] = topItems
+    }
+
+    // 为每个子目录（课程）单独生成 sidebar key
+    // VitePress 使用最长前缀匹配，/cs/os/ 优先于 /cs/
+    const subEntries = fs.readdirSync(topDirPath, { withFileTypes: true })
+    for (const subEntry of subEntries) {
+      if (!subEntry.isDirectory() || subEntry.name.startsWith('.')) continue
+      const subDirPath = path.join(topDirPath, subEntry.name)
+      const subPrefix = `${topPrefix}${subEntry.name}/`
+      const subItems = buildSidebarForDir(subDirPath, subPrefix)
+      if (subItems.length > 0) {
+        // 用课程名作为 sidebar 顶部分组标题
+        sidebar[subPrefix] = [{
+          text: DIR_DISPLAY_NAMES[subEntry.name] || subEntry.name,
+          items: subItems
+        }]
+      }
     }
   }
 

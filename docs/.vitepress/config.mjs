@@ -19,19 +19,22 @@ export default defineConfig({
   },
 
   // 2. 网站基本元数据
-  title: "我的知识库",
+  title: "Studiorum",
   description: "AceYKN 的学习笔记整理",
   lang: 'zh-CN', // 设置语言为中文
   lastUpdated: true, // 显示最后更新时间
 
   // 3. 主题配置
   themeConfig: {
+    // ロゴと左上タイトル
+    logo: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"><text y="26" font-size="26" font-family="serif">栞</text></svg>' },
+    siteTitle: 'Studiorum',
     // 顶部导航栏
     nav: [
       { text: '首页', link: '/' },
       { text: '数学笔记', link: '/math/math' },
-      { text: '编程开发', link: '/code/cpp-start' },
-      { text: '操作系统', link: '/cs/os/' }
+      { text: '編程開発', link: '/code/cpp-start' },
+      { text: 'Computer Science', link: '/cs/' }
     ],
 
     // 侧边栏 — 从文件系统自动生成，无需手动维护
@@ -55,18 +58,18 @@ export default defineConfig({
         },
         translations: {
           button: {
-            buttonText: '搜索',
-            buttonAriaLabel: '搜索文档'
+            buttonText: '検索',
+            buttonAriaLabel: 'ドキュメントを検索'
           },
           modal: {
-            displayDetails: '显示详细列表',
-            resetButtonTitle: '清除查询',
-            backButtonTitle: '返回',
-            noResultsText: '无法找到相关结果',
+            displayDetails: '詳細リストを表示',
+            resetButtonTitle: 'クエリをクリア',
+            backButtonTitle: '戻る',
+            noResultsText: '該当する結果が見つかりません',
             footer: {
-              selectText: '选择',
-              navigateText: '切换',
-              closeText: '关闭'
+              selectText: '選択',
+              navigateText: '切替',
+              closeText: '閉じる'
             }
           }
         }
@@ -98,8 +101,8 @@ export default defineConfig({
 
     // 页脚
     footer: {
-      message: 'I laid my burdens down, now I\'m traveling light.',
-      copyright: 'Copyright © 2026 AceYKN'
+      message: '本サイトのコンテンツの一部はAIにより生成されています。内容の正確性についてはご自身でご確認ください。',
+      copyright: 'CC0 1.0 パブリックドメイン — AceYKN は著作権を放棄します'
     }
   },
 
@@ -156,8 +159,31 @@ export default defineConfig({
     ['link', { rel: 'icon', href: '/my-note/favicon.ico' }],
     // Meta tags
     ['meta', { name: 'theme-color', content: '#646cff' }],
-    ['meta', { name: 'og:type', content: 'website' }],
-    ['meta', { name: 'og:locale', content: 'zh_CN' }],
-    ['meta', { name: 'og:site_name', content: '我的知识库' }]
-  ]
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:locale', content: 'zh_CN' }],
+    ['meta', { property: 'og:site_name', content: '我的知识库' }]
+  ],
+
+  // 7. 为每页自动注入 OG 标签
+  transformHead({ pageData, siteData }) {
+    const head = []
+    const title = pageData.title || siteData.title
+    const description = pageData.description || siteData.description
+    const baseUrl = 'https://aceykn.github.io/my-note'
+    const pageUrl = `${baseUrl}/${pageData.relativePath.replace(/(\.md)?$/, '.html').replace(/index\.html$/, '')}`
+
+    head.push(['meta', { property: 'og:title', content: title }])
+    head.push(['meta', { property: 'og:url', content: pageUrl }])
+
+    if (description) {
+      head.push(['meta', { name: 'description', content: description }])
+      head.push(['meta', { property: 'og:description', content: description }])
+    }
+
+    // 如需自定义 OG 图片，可在 frontmatter 中设置 ogImage
+    const ogImage = pageData.frontmatter.ogImage || `${baseUrl}/og-default.png`
+    head.push(['meta', { property: 'og:image', content: ogImage }])
+
+    return head
+  }
 })

@@ -2,10 +2,10 @@
 title: 课程概览
 ---
 
-# 操作系统
+# Operating Systems
 
-本模块记录操作系统课程的学习笔记、作业与资料整理。
+Course Textbook: *Operating Systems: Internals and Design Principles* by William Stallings (9th Edition, 2018).
 
-## 内容概览
+## Outline
 
-> 笔记持续更新中，敬请期待
+Homework solutions and notes for the Operating Systems course.
