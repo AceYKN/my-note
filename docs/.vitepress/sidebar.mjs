@@ -30,6 +30,7 @@ const DIR_DISPLAY_NAMES = {
   // /cs/ 子目录
   os: '操作系统',
   algo: '算法设计与分析',
+  db: '数据库系统',
   pastpapers: '過去問',
   HW: '宿題',
   // /code/ 子目录（如果以后拆子目录）
