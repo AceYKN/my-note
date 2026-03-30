@@ -1,3 +1,8 @@
+---
+title: 题目内容
+order: 1
+---
+
 ### 习题3.2
 
 1. 假设函数 $P(x)$ 和 $Q(x)$ 于区间 $[\alpha,\beta]$ 上连续，$y = \varphi(x,x_0,y_0)$ 是方程 $\frac{\mathrm{d}y}{\mathrm{d}x} = P(x)y + Q(x)$ 的解，$y_0 = \varphi(x_0,x_0,y_0)$，试求 $\frac{\partial \varphi}{\partial x_0},\frac{\partial \varphi}{\partial y_0}$ 及 $\frac{\partial \varphi}{\partial x}$.

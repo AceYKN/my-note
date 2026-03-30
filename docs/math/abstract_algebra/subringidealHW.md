@@ -1,3 +1,8 @@
+---
+title: 子环、理想与商环 习题详解
+order: 5
+---
+
 ### **题目 1：生成理想的定义**
 
 **题目：** 设 $S$ 为 $R$ 的子环。证明：$\langle S \rangle = \bigcap \{ I \mid S \subseteq I, \ I \trianglelefteq R \}$

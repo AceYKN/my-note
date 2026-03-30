@@ -1,5 +1,11 @@
 import { defineConfig } from 'vitepress'
 import { katex } from '@mdit/plugin-katex'
+import { generateSidebar } from './sidebar.mjs'
+import { fileURLToPath } from 'node:url'
+import path from 'node:path'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const docsDir = path.resolve(__dirname, '..')
 
 export default defineConfig({
   // ==========================================
@@ -28,79 +34,8 @@ export default defineConfig({
       { text: '操作系统', link: '/cs/os/' }
     ],
 
-    // 侧边栏 (分级目录)
-    sidebar: {
-      // 当进入 /math/ 目录时显示
-      '/math/': [
-        {
-          text: '抽象代数',
-          collapsed: true, // 默认折叠
-          items: [
-            { text: '特殊类型的群 问题详解', link: '/math/abstract_algebra/groupproblem' },
-            {
-              text: '环的基本理论',
-              link: '/math/abstract_algebra/ring'
-            },
-            { text: '环的基本理论 习题详解', link: '/math/abstract_algebra/ringHW' },
-            { text: '子环、理想与商环', link: '/math/abstract_algebra/subringideal' },
-            { text: '子环、理想与商环 习题详解', link: '/math/abstract_algebra/subringidealHW' },
-            { text: '环同态基本定理', link: '/math/abstract_algebra/ringhomomorphism' },
-            { text: '环同态基本定理 习题详解', link: '/math/abstract_algebra/ringhomomorphismHW' },
-            { text: '环的直积与中国剩余定理', link: '/math/abstract_algebra/ringdirectprod' },
-            { text: '环的直积与中国剩余定理 习题详解', link: '/math/abstract_algebra/ringdirectprodHW' },
-            { text: '素理想与极大理想', link: '/math/abstract_algebra/primeandmaximalideal' },
-            { text: '素理想与极大理想 习题详解', link: '/math/abstract_algebra/primeidealmaximalidealHW' }
-          ]
-        },
-        {
-          text: '数学分析',
-          collapsed: true,
-          items: [
-            { text: 'Week 13 作业', link: '/math/math_analysis/Week13HW' },
-            { text: '11-29 作业', link: '/math/math_analysis/11-29HW' },
-            { text: '12-5 作业', link: '/math/math_analysis/12-5HW' },
-            { text: '12-9 作业', link: '/math/math_analysis/12-9HW' }
-          ]
-        },
-        {
-          text: '常微分方程',
-          collapsed: true,
-          items: [
-            { text: '题目内容', link: '/math/ode/prob' },
-            { text: '3-2 4-1 作业', link: '/math/ode/3-2&4-1 HW' },
-            { text: '4-2 作业', link: '/math/ode/4-2HW' },
-            { text: '复习总结', link: '/math/ode/review' }
-          ]
-        }
-      ],
-
-      // 当进入 /cs/ 目录时显示
-      '/cs/': [
-        {
-          text: '操作系统',
-          items: [
-            { text: '课程概览', link: '/cs/os/' }
-          ]
-        }
-      ],
-
-      // 当进入 /code/ 目录时显示
-      '/code/': [
-        {
-          text: 'C/C++ 语言',
-          items: [
-            { text: '入门基础', link: '/code/cpp-start' }
-          ]
-        },
-        {
-          text: '其他技术',
-          items: [
-            { text: 'Golang', link: '/code/go-notes' },
-            { text: 'vue', link: '/code/vue-notes' }
-          ]
-        }
-      ]
-    },
+    // 侧边栏 — 从文件系统自动生成，无需手动维护
+    sidebar: generateSidebar(docsDir),
 
     // 开启本地搜索 (增强预览功能)
     search: {

@@ -1,3 +1,7 @@
+---
+title: 素理想与极大理想
+order: 10
+---
 
 
 # 素理想与极大理想 (Prime & Maximal Ideals)

@@ -1,3 +1,7 @@
+---
+order: 2
+---
+
 # 环的基本理论
 
 ## 1. 开篇总结 (Executive Summary)
