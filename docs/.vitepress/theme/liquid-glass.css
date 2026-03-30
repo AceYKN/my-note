@@ -809,13 +809,14 @@ body {
 .vp-doc :not(pre) > code {
   color: var(--lg-accent);
   background: var(--lg-accent-soft);
-  backdrop-filter: blur(8px);
   padding: 3px 7px;
   border-radius: 6px;
   font-family: var(--lg-font-mono);
   font-size: 0.88em;
   font-weight: 500;
   border: 1px solid rgba(123, 140, 255, 0.12);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* --- Code Blocks — Glass container --- */
