@@ -137,18 +137,7 @@ export default defineConfig({
       port: Number(process.env.PORT) || 4173
     },
     build: {
-      chunkSizeWarningLimit: 1000,
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              if (id.includes('vue')) return 'vendor-vue'
-              if (id.includes('katex')) return 'vendor-katex'
-              return 'vendor'
-            }
-          }
-        }
-      }
+      chunkSizeWarningLimit: 1000
     }
   },
 
