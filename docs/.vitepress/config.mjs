@@ -15,7 +15,13 @@ export default defineConfig({
 
   // sitemap 配置（有助于搜索引擎索引）
   sitemap: {
-    hostname: 'https://aceykn.github.io/my-note/'
+    hostname: 'https://aceykn.github.io/my-note/',
+    lastmod: true,
+    changefreq: 'weekly',
+    priority: 0.8,
+    transformItems: (items) => {
+      return items.filter((item) => !item.url.includes('404'))
+    }
   },
 
   // 2. 网站基本元数据
