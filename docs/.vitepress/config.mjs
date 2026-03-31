@@ -129,6 +129,9 @@ export default defineConfig({
 
   // 5. Vite 配置（代码高亮主题）
   vite: {
+    ssr: {
+      noExternal: ['mark.js']
+    },
     server: {
       host: '127.0.0.1',
       port: Number(process.env.PORT) || 4173
