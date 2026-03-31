@@ -211,8 +211,8 @@ body {
  * Prevents VPNav from creating a stacking context on mobile that traps VPNavScreen.
  */
 
-/* DESKTOP (>= 960px): VPNav gets the glass to fix Chrome bugs */
-@media (min-width: 960px) {
+/* DESKTOP (≥ 768px): VPNav gets the glass — hamburger is hidden by VitePress at ≥768px */
+@media (min-width: 768px) {
   .VPNav {
     background: var(--lg-glass-bg) !important;
     backdrop-filter: blur(var(--lg-blur-heavy)) saturate(180%) !important;
@@ -238,15 +238,15 @@ body {
   }
 }
 
-/* MOBILE (< 960px): VPNavBar gets the glass so VPNav doesn't trap VPNavScreen */
-@media (max-width: 959px) {
+/* MOBILE (< 768px): VPNavBar gets the glass — VPNav must NOT create a stacking context
+   so that VPNavScreen (the fullscreen overlay) can use position:fixed relative to viewport */
+@media (max-width: 767px) {
   .VPNav {
     background: transparent !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     border-bottom: none !important;
     box-shadow: none !important;
-    /* Do NOT use transform or will-change on VPNav to keep VPNavScreen fixed to viewport */
   }
   
   .VPNavBar {
@@ -269,7 +269,8 @@ body {
     border-bottom: none !important;
     box-shadow: none !important;
   }
-}
+
+} /* end @media (max-width: 767px) */
 
 /* Glass refraction highlight on top edge */
 .VPNav::before {
