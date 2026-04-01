@@ -15,7 +15,13 @@ export default defineConfig({
 
   // sitemap 配置（有助于搜索引擎索引）
   sitemap: {
-    hostname: 'https://aceykn.github.io/my-note/'
+    hostname: 'https://aceykn.github.io/my-note/',
+    lastmod: true,
+    changefreq: 'weekly',
+    priority: 0.8,
+    transformItems: (items) => {
+      return items.filter((item) => !item.url.includes('404'))
+    }
   },
 
   // 2. 网站基本元数据
@@ -26,6 +32,7 @@ export default defineConfig({
 
   // 3. 主题配置
   themeConfig: {
+    sidebarMenuLabel: 'Menu',
     // ロゴと左上タイトル
     logo: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"><text y="26" font-size="26" font-family="serif">栞</text></svg>' },
     siteTitle: 'Studiorum',
@@ -128,10 +135,16 @@ export default defineConfig({
 
   // 5. Vite 配置（代码高亮主题）
   vite: {
+    ssr: {
+      noExternal: ['mark.js']
+    },
     server: {
       host: '127.0.0.1',
       port: Number(process.env.PORT) || 4173
     },
+    build: {
+      chunkSizeWarningLimit: 1000
+    }
   },
 
   // 6. Head 配置 - 字体预加载和子集化
@@ -161,7 +174,17 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#646cff' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'zh_CN' }],
-    ['meta', { property: 'og:site_name', content: '我的知识库' }]
+    ['meta', { property: 'og:site_name', content: '我的知识库' }],
+    // Google Analytics
+    [
+      'script',
+      { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-DMLQNKGTNZ' }
+    ],
+    [
+      'script',
+      {},
+      "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-DMLQNKGTNZ');"
+    ]
   ],
 
   // 7. 为每页自动注入 OG 标签
@@ -183,6 +206,22 @@ export default defineConfig({
     // 如需自定义 OG 图片，可在 frontmatter 中设置 ogImage
     const ogImage = pageData.frontmatter.ogImage || `${baseUrl}/og-default.png`
     head.push(['meta', { property: 'og:image', content: ogImage }])
+
+    // 为文章生成 JSON-LD 结构化数据
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": title,
+      "description": description,
+      "url": pageUrl,
+      "author": {
+        "@type": "Person",
+        "name": "AceYKN"
+      },
+      "datePublished": pageData.frontmatter.date || new Date().toISOString().split('T')[0],
+      "image": ogImage
+    }
+    head.push(['script', { type: 'application/ld+json' }, JSON.stringify(jsonLd)])
 
     return head
   }
