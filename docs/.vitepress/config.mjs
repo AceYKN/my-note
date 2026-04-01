@@ -169,7 +169,7 @@ export default defineConfig({
       href: 'https://cdn.jsdelivr.net/npm/katex@0.16.44/dist/katex.min.css'
     }],
     // Favicon
-    ['link', { rel: 'icon', href: '/my-note/favicon.ico' }],
+    ['link', { rel: 'icon', href: '/my-note/logo.svg' }],
     // Meta tags
     ['meta', { name: 'theme-color', content: '#646cff' }],
     ['meta', { property: 'og:type', content: 'website' }],
