@@ -27,15 +27,15 @@ export default defineConfig({
   // 2. 网站基本元数据
   title: "Studiorum",
   description: "AceYKN 的学习笔记整理",
-  lang: 'zh-CN', // 设置语言为中文
+  lang: 'ZH-CN',
   lastUpdated: true, // 显示最后更新时间
 
   // 3. 主题配置
   themeConfig: {
     sidebarMenuLabel: 'Menu',
     // ロゴと左上タイトル
-    logo: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"><text y="26" font-size="26" font-family="serif">栞</text></svg>' },
     siteTitle: 'Studiorum',
+    logo: '/logo.svg',
     // 顶部导航栏
     nav: [
       { text: '首页', link: '/' },
@@ -65,18 +65,18 @@ export default defineConfig({
         },
         translations: {
           button: {
-            buttonText: '検索',
-            buttonAriaLabel: 'ドキュメントを検索'
+            buttonText: '搜索文档',
+            buttonAriaLabel: '搜索文档'
           },
           modal: {
-            displayDetails: '詳細リストを表示',
-            resetButtonTitle: 'クエリをクリア',
-            backButtonTitle: '戻る',
-            noResultsText: '該当する結果が見つかりません',
+            displayDetails: '显示详情',
+            resetButtonTitle: '清除查询',
+            backButtonTitle: '返回',
+            noResultsText: '未找到相关结果',
             footer: {
-              selectText: '選択',
-              navigateText: '切替',
-              closeText: '閉じる'
+              selectText: '选择',
+              navigateText: '切换',
+              closeText: '关闭'
             }
           }
         }
@@ -120,10 +120,10 @@ export default defineConfig({
       md.use(katex)
 
       // 构建时直接把 <table> 包裹在 <div class="table-container"> 中，零客户端开销
-      md.renderer.rules.table_open = function (tokens, idx, options, env, self) {
+      md.renderer.rules.table_open = function(tokens, idx, options, env, self) {
         return '<div class="table-container">' + self.renderToken(tokens, idx, options)
       }
-      md.renderer.rules.table_close = function (tokens, idx, options, env, self) {
+      md.renderer.rules.table_close = function(tokens, idx, options, env, self) {
         return self.renderToken(tokens, idx, options) + '</div>'
       }
     },
@@ -187,7 +187,7 @@ export default defineConfig({
     ]
   ],
 
-  // 7. 为每页自动注入 OG 标签
+  // 7. 为每页自动注入 OG 标签和 JSON-LD
   transformHead({ pageData, siteData }) {
     const head = []
     const title = pageData.title || siteData.title

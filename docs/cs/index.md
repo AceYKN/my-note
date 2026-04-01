@@ -26,7 +26,7 @@ sidebar: false
     <div class="course-body">
       <div class="course-name">Algorithm Design & Analysis</div>
       <div class="course-name-sub">算法设计与分析</div>
-      <div class="course-desc">過去問・解題ノート。</div>
+      <div class="course-desc">過去問・ノート。</div>
     </div>
     <div class="course-badge available">履修中</div>
   </a>
@@ -41,15 +41,15 @@ sidebar: false
     <div class="course-badge available">履修中</div>
   </a>
 
-  <div class="course-card disabled">
+  <a class="course-card" href="/my-note/cs/se/">
     <div class="course-icon">🔧</div>
     <div class="course-body">
       <div class="course-name">Software Engineering</div>
       <div class="course-name-sub">软件工程</div>
-      <div class="course-desc">ノートは準備中です。</div>
+      <div class="course-desc">ノート。</div>
     </div>
-    <div class="course-badge soon">近日公開</div>
-  </div>
+    <div class="course-badge available">履修中</div>
+  </a>
 
 </div>
 
