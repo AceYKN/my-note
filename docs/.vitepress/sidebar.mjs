@@ -12,24 +12,27 @@
  *   sidebar: false        # 设为 false 则不出现在侧边栏
  *   ---
  *
- * 新目录需要在下方 FALLBACK_DIR_NAMES 中添加映射。
+ * 新目录需要在下方 DIR_DISPLAY_NAMES 中添加映射。
  */
 
 import fs from 'node:fs'
 import path from 'node:path'
 
 // ============================================================
-// 目录名 → 侧边栏显示名 (可选映射，作为兜底)
+// 唯一需要维护的配置：目录名 → 侧边栏显示名
+// 添加新目录时只需在这里加一行
 // ============================================================
-const FALLBACK_DIR_NAMES = {
+const DIR_DISPLAY_NAMES = {
+  // /math/ 子目录
   abstract_algebra: '抽象代数',
   math_analysis: '数学分析',
   ode: '常微分方程',
+  // /cs/ 子目录
   os: '操作系统',
   algo: '算法设计与分析',
-  db: '数据库系统',
   pastpapers: '過去問',
   HW: '宿題',
+  // /code/ 子目录（如果以后拆子目录）
 }
 
 // 不参与侧边栏生成的顶级目录
@@ -54,38 +57,6 @@ function parseFrontmatter(content) {
     }
   }
   return result
-}
-
-/** 获取目录的显示名称 */
-function getDirDisplayName(dirPath, dirName) {
-  // 1. 尝试从 meta.json 读取
-  const metaPath = path.join(dirPath, 'meta.json')
-  if (fs.existsSync(metaPath)) {
-    try {
-      const meta = JSON.parse(fs.readFileSync(metaPath, 'utf-8'))
-      if (meta.title) return meta.title
-    } catch (e) {
-      console.error(`Error parsing ${metaPath}:`, e)
-    }
-  }
-
-  // 2. 尝试从 index.md 读取
-  const indexPath = path.join(dirPath, 'index.md')
-  if (fs.existsSync(indexPath)) {
-    const content = fs.readFileSync(indexPath, 'utf-8')
-    const fm = parseFrontmatter(content)
-    if (fm.title) return fm.title
-    
-    // 3. 如果没有 frontmatter，尝试取第一个标题
-    const h = content.match(/^#\s+(.+)$/m)
-    if (h) return h[1].trim()
-  }
-
-  // 4. 尝试兜底映射
-  if (FALLBACK_DIR_NAMES[dirName]) return FALLBACK_DIR_NAMES[dirName]
-
-  // 5. 将下划线转为空格并首字母大写
-  return dirName.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
 }
 
 /** 从一个 .md 文件中提取元信息 */
@@ -154,7 +125,7 @@ function buildSidebarForDir(dirPath, urlPrefix) {
     const items = buildSidebarForDir(subPath, `${urlPrefix}${dir.name}/`)
     if (items.length === 0) continue
     result.push({
-      text: getDirDisplayName(subPath, dir.name),
+      text: DIR_DISPLAY_NAMES[dir.name] || dir.name,
       collapsed: true,
       items,
     })
@@ -172,32 +143,6 @@ function buildSidebarForDir(dirPath, urlPrefix) {
 // ============================================================
 
 /**
- * 递归注册目录及其所有子目录为独立的 sidebar key。
- * VitePress 按最长前缀匹配 key，只有当路由精确命中某个 key 时
- * 该 key 的 sidebar 才会被激活。因此三级目录 /cs/os/HW/ 必须有自己的 key，
- * 否则访问其中的页面时 VitePress 找不到对应 sidebar 而显示空白。
- */
-function registerSidebarKeys(sidebar, dirPath, urlPrefix, groupText) {
-  const items = buildSidebarForDir(dirPath, urlPrefix)
-  if (items.length === 0) return
-
-  // 注册当前目录为独立 key
-  sidebar[urlPrefix] = groupText
-    ? [{ text: groupText, items }]
-    : items
-
-  // 递归注册所有子目录为独立 key（支持任意深度嵌套）
-  const entries = fs.readdirSync(dirPath, { withFileTypes: true })
-  for (const entry of entries) {
-    if (!entry.isDirectory() || entry.name.startsWith('.')) continue
-    const subDirPath = path.join(dirPath, entry.name)
-    const subPrefix = `${urlPrefix}${entry.name}/`
-    // 子目录沿用父目录的分组标题（即课程名），不再新建标题
-    registerSidebarKeys(sidebar, subDirPath, subPrefix, groupText)
-  }
-}
-
-/**
  * @param {string} docsDir - docs 目录的绝对路径
  * @returns {object} VitePress sidebar 配置对象
  */
@@ -210,18 +155,27 @@ export function generateSidebar(docsDir) {
     const topDirPath = path.join(docsDir, entry.name)
     const topPrefix = `/${entry.name}/`
 
-    // 顶级目录：直接注册（不带分组标题）
-    registerSidebarKeys(sidebar, topDirPath, topPrefix, null)
+    // 顶级目录的 sidebar（供直属 .md 文件使用，如 /math/math）
+    const topItems = buildSidebarForDir(topDirPath, topPrefix)
+    if (topItems.length > 0) {
+      sidebar[topPrefix] = topItems
+    }
 
-    // 一级子目录（课程）：注册并附带课程名称作为分组标题
+    // 为每个子目录（课程）单独生成 sidebar key
+    // VitePress 使用最长前缀匹配，/cs/os/ 优先于 /cs/
     const subEntries = fs.readdirSync(topDirPath, { withFileTypes: true })
     for (const subEntry of subEntries) {
       if (!subEntry.isDirectory() || subEntry.name.startsWith('.')) continue
       const subDirPath = path.join(topDirPath, subEntry.name)
       const subPrefix = `${topPrefix}${subEntry.name}/`
-      const groupText = getDirDisplayName(subDirPath, subEntry.name)
-      // 递归注册该课程目录及其所有子目录（HW、note 等），共享同一份侧边栏内容
-      registerSidebarKeys(sidebar, subDirPath, subPrefix, groupText)
+      const subItems = buildSidebarForDir(subDirPath, subPrefix)
+      if (subItems.length > 0) {
+        // 用课程名作为 sidebar 顶部分组标题
+        sidebar[subPrefix] = [{
+          text: DIR_DISPLAY_NAMES[subEntry.name] || subEntry.name,
+          items: subItems
+        }]
+      }
     }
   }
 

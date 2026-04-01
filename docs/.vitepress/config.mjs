@@ -15,27 +15,20 @@ export default defineConfig({
 
   // sitemap 配置（有助于搜索引擎索引）
   sitemap: {
-    hostname: 'https://aceykn.github.io/my-note/',
-    lastmod: true,
-    changefreq: 'weekly',
-    priority: 0.8,
-    transformItems: (items) => {
-      return items.filter((item) => !item.url.includes('404'))
-    }
+    hostname: 'https://aceykn.github.io/my-note/'
   },
 
   // 2. 网站基本元数据
   title: "Studiorum",
   description: "AceYKN 的学习笔记整理",
-  lang: 'ZH-CN',
+  lang: 'zh-CN', // 设置语言为中文
   lastUpdated: true, // 显示最后更新时间
 
   // 3. 主题配置
   themeConfig: {
-    sidebarMenuLabel: 'Menu',
     // ロゴと左上タイトル
+    logo: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"><text y="26" font-size="26" font-family="serif">栞</text></svg>' },
     siteTitle: 'Studiorum',
-    logo: '/logo.svg',
     // 顶部导航栏
     nav: [
       { text: '首页', link: '/' },
@@ -65,18 +58,18 @@ export default defineConfig({
         },
         translations: {
           button: {
-            buttonText: '搜索文档',
-            buttonAriaLabel: '搜索文档'
+            buttonText: '検索',
+            buttonAriaLabel: 'ドキュメントを検索'
           },
           modal: {
-            displayDetails: '显示详情',
-            resetButtonTitle: '清除查询',
-            backButtonTitle: '返回',
-            noResultsText: '未找到相关结果',
+            displayDetails: '詳細リストを表示',
+            resetButtonTitle: 'クエリをクリア',
+            backButtonTitle: '戻る',
+            noResultsText: '該当する結果が見つかりません',
             footer: {
-              selectText: '选择',
-              navigateText: '切换',
-              closeText: '关闭'
+              selectText: '選択',
+              navigateText: '切替',
+              closeText: '閉じる'
             }
           }
         }
@@ -120,10 +113,10 @@ export default defineConfig({
       md.use(katex)
 
       // 构建时直接把 <table> 包裹在 <div class="table-container"> 中，零客户端开销
-      md.renderer.rules.table_open = function(tokens, idx, options, env, self) {
+      md.renderer.rules.table_open = function (tokens, idx, options, env, self) {
         return '<div class="table-container">' + self.renderToken(tokens, idx, options)
       }
-      md.renderer.rules.table_close = function(tokens, idx, options, env, self) {
+      md.renderer.rules.table_close = function (tokens, idx, options, env, self) {
         return self.renderToken(tokens, idx, options) + '</div>'
       }
     },
@@ -135,16 +128,10 @@ export default defineConfig({
 
   // 5. Vite 配置（代码高亮主题）
   vite: {
-    ssr: {
-      noExternal: ['mark.js']
-    },
     server: {
       host: '127.0.0.1',
       port: Number(process.env.PORT) || 4173
     },
-    build: {
-      chunkSizeWarningLimit: 1000
-    }
   },
 
   // 6. Head 配置 - 字体预加载和子集化
@@ -169,25 +156,15 @@ export default defineConfig({
       href: 'https://cdn.jsdelivr.net/npm/katex@0.16.44/dist/katex.min.css'
     }],
     // Favicon
-    ['link', { rel: 'icon', href: '/my-note/logo.svg' }],
+    ['link', { rel: 'icon', href: '/my-note/favicon.ico' }],
     // Meta tags
     ['meta', { name: 'theme-color', content: '#646cff' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'zh_CN' }],
-    ['meta', { property: 'og:site_name', content: '我的知识库' }],
-    // Google Analytics
-    [
-      'script',
-      { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-DMLQNKGTNZ' }
-    ],
-    [
-      'script',
-      {},
-      "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-DMLQNKGTNZ');"
-    ]
+    ['meta', { property: 'og:site_name', content: '我的知识库' }]
   ],
 
-  // 7. 为每页自动注入 OG 标签和 JSON-LD
+  // 7. 为每页自动注入 OG 标签
   transformHead({ pageData, siteData }) {
     const head = []
     const title = pageData.title || siteData.title
@@ -206,22 +183,6 @@ export default defineConfig({
     // 如需自定义 OG 图片，可在 frontmatter 中设置 ogImage
     const ogImage = pageData.frontmatter.ogImage || `${baseUrl}/og-default.png`
     head.push(['meta', { property: 'og:image', content: ogImage }])
-
-    // 为文章生成 JSON-LD 结构化数据
-    const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": title,
-      "description": description,
-      "url": pageUrl,
-      "author": {
-        "@type": "Person",
-        "name": "AceYKN"
-      },
-      "datePublished": pageData.frontmatter.date || new Date().toISOString().split('T')[0],
-      "image": ogImage
-    }
-    head.push(['script', { type: 'application/ld+json' }, JSON.stringify(jsonLd)])
 
     return head
   }

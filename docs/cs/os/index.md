@@ -41,6 +41,21 @@ title: 课程概览
       <span class="file-name">Chap. 3 Note</span>
       <span class="file-desc">Process Description and Control</span>
     </a>
+    <a class="file-card" href="/my-note/cs/os/note/chap4">
+      <span class="file-icon">📄</span>
+      <span class="file-name">Chap. 4 Note</span>
+      <span class="file-desc">Threads, SMP, and Microkernels</span>
+    </a>
+    <a class="file-card" href="/my-note/cs/os/note/chap5">
+      <span class="file-icon">📄</span>
+      <span class="file-name">Chap. 5 Note</span>
+      <span class="file-desc">Concurrency: Mutual Exclusion and Synchronization</span>
+    </a>
+    <a class="file-card" href="/my-note/cs/os/note/chap6">
+      <span class="file-icon">📄</span>
+      <span class="file-name">Chap. 6 Note</span>
+      <span class="file-desc">Concurrency: Deadlock and Starvation</span>
+    </a>
   </div>
 </div>
 

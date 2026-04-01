@@ -22,14 +22,19 @@
   --lg-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
   --lg-glass-shadow-elevated: 0 16px 48px rgba(0, 0, 0, 0.1), 0 4px 16px rgba(0, 0, 0, 0.06);
   --lg-glass-inset-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), inset 0 -1px 1px rgba(0, 0, 0, 0.04);
-  --lg-refraction: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.2) 100%);
+  --lg-refraction: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.2) 100%);
 
   /* --- Iridescent Palette — 日本の伝統色 --- */
-  --lg-iridescent-1: #5b9bd5;  /* 藍色 light */
-  --lg-iridescent-2: #f2a7bb;  /* 桜色 sakura */
-  --lg-iridescent-3: #9b8ec4;  /* 藤色 wisteria */
-  --lg-iridescent-4: #8db255;  /* 若草色 young grass */
-  --lg-iridescent-5: #c97b9b;  /* 撫子色 dianthus */
+  --lg-iridescent-1: #5b9bd5;
+  /* 藍色 light */
+  --lg-iridescent-2: #f2a7bb;
+  /* 桜色 sakura */
+  --lg-iridescent-3: #9b8ec4;
+  /* 藤色 wisteria */
+  --lg-iridescent-4: #8db255;
+  /* 若草色 young grass */
+  --lg-iridescent-5: #c97b9b;
+  /* 撫子色 dianthus */
 
   /* --- Brand Accent — 藍色 --- */
   --lg-accent: #2a5fa0;
@@ -76,9 +81,10 @@
   --lg-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.2);
   --lg-glass-shadow-elevated: 0 16px 48px rgba(0, 0, 0, 0.35), 0 4px 16px rgba(0, 0, 0, 0.25);
   --lg-glass-inset-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), inset 0 -1px 1px rgba(0, 0, 0, 0.15);
-  --lg-refraction: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.01) 50%, rgba(255,255,255,0.05) 100%);
+  --lg-refraction: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 50%, rgba(255, 255, 255, 0.05) 100%);
 
-  --lg-accent: #f2a7bb;  /* 桜色 for dark mode */
+  --lg-accent: #f2a7bb;
+  /* 桜色 for dark mode */
   --lg-accent-soft: rgba(242, 167, 187, 0.18);
   --lg-accent-glow: rgba(242, 167, 187, 0.28);
 
@@ -110,22 +116,32 @@
   top: -40%;
   left: -40%;
   background:
-    radial-gradient(ellipse 600px 600px at 20% 30%, rgba(91, 155, 213, 0.38) 0%, transparent 70%),   /* 藍 */
-    radial-gradient(ellipse 500px 500px at 75% 20%, rgba(242, 167, 187, 0.30) 0%, transparent 70%),  /* 桜 */
-    radial-gradient(ellipse 700px 700px at 50% 70%, rgba(155, 142, 196, 0.28) 0%, transparent 70%),  /* 藤 */
-    radial-gradient(ellipse 400px 400px at 85% 75%, rgba(141, 178, 85, 0.22) 0%, transparent 70%),   /* 若草 */
-    radial-gradient(ellipse 450px 450px at 10% 80%, rgba(201, 123, 155, 0.22) 0%, transparent 70%);  /* 撫子 */
+    radial-gradient(ellipse 600px 600px at 20% 30%, rgba(91, 155, 213, 0.38) 0%, transparent 70%),
+    /* 藍 */
+    radial-gradient(ellipse 500px 500px at 75% 20%, rgba(242, 167, 187, 0.30) 0%, transparent 70%),
+    /* 桜 */
+    radial-gradient(ellipse 700px 700px at 50% 70%, rgba(155, 142, 196, 0.28) 0%, transparent 70%),
+    /* 藤 */
+    radial-gradient(ellipse 400px 400px at 85% 75%, rgba(141, 178, 85, 0.22) 0%, transparent 70%),
+    /* 若草 */
+    radial-gradient(ellipse 450px 450px at 10% 80%, rgba(201, 123, 155, 0.22) 0%, transparent 70%);
+  /* 撫子 */
   animation: lg-flow 25s ease-in-out infinite;
   filter: blur(40px);
 }
 
 .dark .lg-background::before {
   background:
-    radial-gradient(ellipse 600px 600px at 20% 30%, rgba(42, 95, 160, 0.28) 0%, transparent 70%),    /* 藍 dark */
-    radial-gradient(ellipse 500px 500px at 75% 20%, rgba(180, 100, 130, 0.22) 0%, transparent 70%),  /* 桜 dark */
-    radial-gradient(ellipse 700px 700px at 50% 70%, rgba(100, 88, 155, 0.20) 0%, transparent 70%),   /* 藤 dark */
-    radial-gradient(ellipse 400px 400px at 85% 75%, rgba(80, 120, 50, 0.18) 0%, transparent 70%),    /* 若草 dark */
-    radial-gradient(ellipse 450px 450px at 10% 80%, rgba(150, 70, 100, 0.15) 0%, transparent 70%);   /* 撫子 dark */
+    radial-gradient(ellipse 600px 600px at 20% 30%, rgba(42, 95, 160, 0.28) 0%, transparent 70%),
+    /* 藍 dark */
+    radial-gradient(ellipse 500px 500px at 75% 20%, rgba(180, 100, 130, 0.22) 0%, transparent 70%),
+    /* 桜 dark */
+    radial-gradient(ellipse 700px 700px at 50% 70%, rgba(100, 88, 155, 0.20) 0%, transparent 70%),
+    /* 藤 dark */
+    radial-gradient(ellipse 400px 400px at 85% 75%, rgba(80, 120, 50, 0.18) 0%, transparent 70%),
+    /* 若草 dark */
+    radial-gradient(ellipse 450px 450px at 10% 80%, rgba(150, 70, 100, 0.15) 0%, transparent 70%);
+  /* 撫子 dark */
   filter: blur(50px);
 }
 
@@ -141,15 +157,20 @@
 }
 
 @keyframes lg-flow {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0, 0) rotate(0deg) scale(1);
   }
+
   25% {
     transform: translate(3%, -2%) rotate(2deg) scale(1.02);
   }
+
   50% {
     transform: translate(-2%, 3%) rotate(-1deg) scale(0.98);
   }
+
   75% {
     transform: translate(1%, 1%) rotate(1deg) scale(1.01);
   }
@@ -192,7 +213,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f0f2f5; /* Match lg-background base — prevents white flash on compositing */
+  background: #f0f2f5;
+  /* Match lg-background base — prevents white flash on compositing */
 }
 
 html.dark {
@@ -207,70 +229,26 @@ body {
    4. Dynamic Island Navigation Bar
    ========================================================================== */
 /*
- * GLASS ON .VPNav (the transform parent) on Desktop, .VPNavBar on Mobile
- * Prevents VPNav from creating a stacking context on mobile that traps VPNavScreen.
+ * GLASS ON .VPNav (the transform parent), not .VPNavBar (the child).
+ * Applying backdrop-filter on the SAME element that has will-change:transform
+ * avoids Chrome's cross-compositing-layer sampling artifacts that cause
+ * the dark-mode "flash-to-white" bug when the navbar slides away.
  */
-
-/* DESKTOP (≥ 768px): VPNav gets the glass — hamburger is hidden by VitePress at ≥768px */
-@media (min-width: 768px) {
-  .VPNav {
-    background: var(--lg-glass-bg) !important;
-    backdrop-filter: blur(var(--lg-blur-heavy)) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(var(--lg-blur-heavy)) saturate(180%) !important;
-    border-bottom: 1px solid var(--lg-glass-border) !important;
-    box-shadow: var(--lg-glass-shadow), var(--lg-glass-inset-shadow) !important;
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    will-change: transform;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-  .VPNav.nav-hidden {
-    transform: translateY(-100%) !important;
-  }
-  
-  .VPNavBar {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
-    transition: none !important;
-  }
+.VPNav {
+  background: var(--lg-glass-bg) !important;
+  backdrop-filter: blur(var(--lg-blur-heavy)) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(var(--lg-blur-heavy)) saturate(180%) !important;
+  border-bottom: 1px solid var(--lg-glass-border) !important;
+  box-shadow: var(--lg-glass-shadow), var(--lg-glass-inset-shadow) !important;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* MOBILE (< 768px): VPNavBar gets the glass — VPNav must NOT create a stacking context
-   so that VPNavScreen (the fullscreen overlay) can use position:fixed relative to viewport */
-@media (max-width: 767px) {
-  .VPNav {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
-  }
-  
-  .VPNavBar {
-    background: var(--lg-glass-bg) !important;
-    backdrop-filter: blur(var(--lg-blur-heavy)) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(var(--lg-blur-heavy)) saturate(180%) !important;
-    border-bottom: 1px solid var(--lg-glass-border) !important;
-    box-shadow: var(--lg-glass-shadow), var(--lg-glass-inset-shadow) !important;
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s !important;
-  }
-  
-  .VPNav.nav-hidden .VPNavBar {
-    transform: translateY(-100%) !important;
-  }
-  
-  .VPNavBar.screen-open {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
-  }
-
-} /* end @media (max-width: 767px) */
+.VPNav.nav-hidden {
+  transform: translateY(-100%) !important;
+}
 
 /* Glass refraction highlight on top edge */
 .VPNav::before {
@@ -280,13 +258,28 @@ body {
   left: 5%;
   right: 5%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
   pointer-events: none;
   z-index: 1;
 }
 
 .dark .VPNav::before {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+}
+
+/* VPNavBar is transparent — visual glass is carried by parent .VPNav */
+.VPNavBar {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+.VPNavBar.screen-open {
+  background: transparent !important;
+  border-bottom: none !important;
 }
 
 .VPNavBar .title {
@@ -305,7 +298,8 @@ body {
 .VPNavBarMenuLink {
   border-radius: var(--lg-radius-md) !important;
   padding: 5px 12px !important;
-  line-height: 1.5 !important;  /* Override VitePress 64px line-height */
+  line-height: 1.5 !important;
+  /* Override VitePress 64px line-height */
   align-self: center !important;
   transition: background var(--lg-duration-fast) var(--lg-ease), color var(--lg-duration-fast) var(--lg-ease) !important;
   color: var(--lg-text-secondary) !important;
@@ -327,7 +321,7 @@ body {
 }
 
 /* VPFlyout button ("..." extra nav) — same compact size as menu links */
-.VPNavBar .VPFlyout > .button {
+.VPNavBar .VPFlyout>.button {
   border-radius: var(--lg-radius-md) !important;
   padding: 5px 12px !important;
   line-height: 1.5 !important;
@@ -335,18 +329,18 @@ body {
   transition: background var(--lg-duration-fast) var(--lg-ease) !important;
 }
 
-.VPNavBar .VPFlyout > .button:hover {
+.VPNavBar .VPFlyout>.button:hover {
   background: rgba(255, 255, 255, 0.15) !important;
 }
 
-.dark .VPNavBar .VPFlyout > .button:hover {
+.dark .VPNavBar .VPFlyout>.button:hover {
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* Search trigger glass style */
 .VPNavBarSearch .DocSearch-Button,
 .VPNavBarSearchButton {
-  background: rgba(255,255,255,0.18) !important;
+  background: rgba(255, 255, 255, 0.18) !important;
   backdrop-filter: blur(var(--lg-blur-light)) !important;
   border: 1px solid var(--lg-glass-border-subtle) !important;
   border-radius: var(--lg-radius-pill) !important;
@@ -357,7 +351,7 @@ body {
 
 .dark .VPNavBarSearch .DocSearch-Button,
 .dark .VPNavBarSearchButton {
-  background: rgba(255,255,255,0.06) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
 }
 
 .VPNavBarSearch .DocSearch-Button:hover,
@@ -368,14 +362,14 @@ body {
 
 /* Theme toggle glass */
 .VPNavBarAppearance .VPSwitch {
-  background: rgba(255,255,255,0.2) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
   border: 1px solid var(--lg-glass-border-subtle) !important;
   border-radius: var(--lg-radius-pill) !important;
   backdrop-filter: blur(var(--lg-blur-light)) !important;
 }
 
 .dark .VPNavBarAppearance .VPSwitch {
-  background: rgba(255,255,255,0.08) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Social links glass */
@@ -397,6 +391,7 @@ body {
   border-bottom: 1px solid var(--lg-glass-border-subtle) !important;
   transition: transform 0.3s ease, opacity 0.3s ease !important;
 }
+
 .VPLocalNav.local-nav-hidden {
   transform: translateY(-100%) !important;
   opacity: 0 !important;
@@ -473,7 +468,7 @@ body {
 }
 
 /* Sidebar group titles */
-.VPSidebarItem.level-0 > .item > .text {
+.VPSidebarItem.level-0>.item>.text {
   font-weight: 600 !important;
   letter-spacing: -0.01em;
   color: var(--lg-text-primary) !important;
@@ -492,14 +487,14 @@ body {
   background: var(--lg-glass-bg-hover) !important;
 }
 
-.VPSidebarItem.is-active > .item .link {
+.VPSidebarItem.is-active>.item .link {
   background: var(--lg-accent-soft) !important;
   color: var(--lg-accent) !important;
   font-weight: 600;
   box-shadow: var(--lg-glass-inset-shadow) !important;
 }
 
-.VPSidebarItem.is-active > .item .link::before {
+.VPSidebarItem.is-active>.item .link::before {
   content: '';
   position: absolute;
   left: 0;
@@ -528,6 +523,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -706,19 +702,23 @@ body {
 }
 
 /* --- Lists --- */
-.vp-doc ul, .vp-doc ol {
+.vp-doc ul,
+.vp-doc ol {
   padding-left: 1.5em;
   margin-bottom: 20px;
 }
+
 .vp-doc li {
   margin: 8px 0;
   line-height: 1.7;
 }
-.vp-doc ul > li {
+
+.vp-doc ul>li {
   list-style: none;
   position: relative;
 }
-.vp-doc ul > li::before {
+
+.vp-doc ul>li::before {
   content: '';
   position: absolute;
   left: -1em;
@@ -755,7 +755,7 @@ body {
   z-index: 0;
 }
 
-.vp-doc .table-container > table {
+.vp-doc .table-container>table {
   position: relative;
   z-index: 1;
 }
@@ -768,7 +768,7 @@ body {
 }
 
 .vp-doc th {
-  background: rgba(255,255,255,0.12);
+  background: rgba(255, 255, 255, 0.12);
   color: var(--lg-text-primary);
   padding: 12px 16px;
   text-align: left;
@@ -780,7 +780,7 @@ body {
 }
 
 .dark .vp-doc th {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .vp-doc td {
@@ -789,7 +789,7 @@ body {
 }
 
 .vp-doc tr:hover {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
   transition: background var(--lg-duration-fast);
 }
 
@@ -806,9 +806,10 @@ body {
   display: block;
   margin: 32px auto;
 }
+
 .vp-doc img:hover {
   transform: scale(1.01) translateY(-2px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
 /* --- Horizontal Rule --- */
@@ -836,17 +837,16 @@ body {
 }
 
 /* --- Inline Code — Glass chip --- */
-.vp-doc :not(pre) > code {
+.vp-doc :not(pre)>code {
   color: var(--lg-accent);
   background: var(--lg-accent-soft);
+  backdrop-filter: blur(8px);
   padding: 3px 7px;
   border-radius: 6px;
   font-family: var(--lg-font-mono);
   font-size: 0.88em;
   font-weight: 500;
   border: 1px solid rgba(123, 140, 255, 0.12);
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
 }
 
 /* --- Code Blocks — Glass container --- */
@@ -858,11 +858,12 @@ body {
   overflow: hidden;
 }
 
-.vp-doc div[class*='language-'] > button.copy {
+.vp-doc div[class*='language-']>button.copy {
   opacity: 0;
   transition: opacity 0.3s;
 }
-.vp-doc div[class*='language-']:hover > button.copy {
+
+.vp-doc div[class*='language-']:hover>button.copy {
   opacity: 1;
 }
 
@@ -895,10 +896,12 @@ body {
   background: rgba(123, 140, 255, 0.08) !important;
   border-left: 4px solid var(--lg-accent) !important;
 }
+
 .custom-block.warning {
   background: rgba(255, 197, 23, 0.08) !important;
   border-left: 4px solid #eab308 !important;
 }
+
 .custom-block.danger {
   background: rgba(239, 68, 68, 0.08) !important;
   border-left: 4px solid #ef4444 !important;
@@ -969,7 +972,7 @@ body {
 }
 
 .VPButton.alt {
-  background: rgba(255,255,255,0.1) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(var(--lg-blur-light)) !important;
   border: 1px solid var(--lg-glass-border-subtle) !important;
   color: var(--lg-text-secondary) !important;
@@ -980,13 +983,13 @@ body {
 }
 
 .VPButton.alt:hover {
-  background: rgba(255,255,255,0.2) !important;
+  background: rgba(255, 255, 255, 0.2) !important;
   color: var(--lg-text-primary) !important;
   transform: translateY(-1px);
 }
 
 .dark .VPButton.alt {
-  background: rgba(255,255,255,0.04) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
 }
 
 /* Feature cards — glass */
@@ -1057,6 +1060,7 @@ body {
     opacity: 0;
     transform: scale(0.96);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -1070,19 +1074,24 @@ body {
   width: 6px;
   height: 6px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.12);
   border-radius: 3px;
 }
+
 .dark ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.12);
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, 0.2);
 }
+
 .dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
@@ -1109,8 +1118,15 @@ body {
 }
 
 @keyframes lg-shimmer {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* ==========================================================================
@@ -1169,6 +1185,7 @@ body {
     transform: translateX(-100%) !important;
     transition: opacity 0.5s, transform 0.25s ease !important;
   }
+
   .VPSidebar.open {
     opacity: 1 !important;
     visibility: visible !important;
@@ -1187,12 +1204,15 @@ body {
     padding: 0 32px !important;
     background-color: transparent !important;
   }
+
   .VPNavBar.has-sidebar .content {
     padding-left: 0 !important;
   }
+
   .VPNavBar.has-sidebar .container {
     max-width: calc(var(--vp-layout-max-width) - 64px) !important;
   }
+
   .VPNavBar.has-sidebar .divider {
     padding-left: 0 !important;
   }
@@ -1200,9 +1220,11 @@ body {
   .VPLocalNav {
     padding-left: 0 !important;
   }
+
   .VPLocalNav .menu {
     display: flex !important;
   }
+
   .VPLocalNav .VPLocalNavOutlineDropdown {
     display: none !important;
   }
@@ -1251,6 +1273,7 @@ body {
    18. Print Styles
    ========================================================================== */
 @media print {
+
   .lg-background,
   .reading-progress-bar,
   .back-to-top {

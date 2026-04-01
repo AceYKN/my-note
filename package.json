@@ -24,7 +24,7 @@
   "homepage": "https://github.com/AceYKN/my-note#readme",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@mdit/plugin-katex": "^0.25.1",
+    "@mdit/plugin-katex": "^0.25.2",
     "eslint": "^10.1.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-vue": "^10.8.0",
