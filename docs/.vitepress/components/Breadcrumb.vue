@@ -4,49 +4,60 @@ import { useData, withBase } from 'vitepress'
 
 const { page, theme } = useData()
 
+// 从整个侧边栏树中递归构建 link → text 的扁平映射
+const sidebarTextMap = computed(() => {
+  const map = new Map()
+  const sidebar = theme.value.sidebar
+  if (!sidebar) return map
+
+  function walk(items) {
+    if (!Array.isArray(items)) return
+    for (const item of items) {
+      if (item.link) {
+        const normalized = item.link.replace(/\/$/, '').replace(/\.html$/, '')
+        map.set(normalized, item.text)
+      }
+      if (item.items) walk(item.items)
+    }
+  }
+
+  if (Array.isArray(sidebar)) {
+    walk(sidebar)
+  } else {
+    for (const items of Object.values(sidebar)) {
+      walk(items)
+    }
+  }
+
+  return map
+})
+
 const breadcrumbs = computed(() => {
   const path = page.value.relativePath
   if (!path || path === 'index.md') return []
-  
+
   const parts = path.replace(/\.md$/, '').split('/')
   const crumbs = [{ text: '首页', link: '/' }]
-  
+
   let currentPath = ''
   parts.forEach((part, index) => {
     if (!part) return
-    
+
     currentPath += `/${part}`
     const isLast = index === parts.length - 1
-    
-    // 从侧边栏或页面标题获取更友好的名称
-    let displayName = part
-    
-    // 常见路径的中文映射
-    const nameMap = {
-      'math': '数学笔记',
-      'code': '编程开发',
-      'abstract_algebra': '抽象代数',
-      'math_analysis': '数学分析',
-      'ode': '常微分方程',
-      'groupproblem': '特殊类型的群',
-      'ring': '环的基本理论',
-      'ringHW': '环的习题详解',
-      'prob': '题目内容',
-      '3-2&4-1 HW': '3-2 4-1 作业',
-      '4-2HW': '4-2 作业',
-      'Week13HW': 'Week 13 作业',
-      'cpp-start': 'C++ 入门'
-    }
-    
-    displayName = nameMap[part] || page.value.title || part
-    
+
+    // 优先从侧边栏数据查找，最后段回退到页面标题，否则用原始路径段
+    const displayName = sidebarTextMap.value.get(currentPath)
+      || (isLast ? page.value.title : null)
+      || part
+
     crumbs.push({
       text: displayName,
       link: isLast ? '' : currentPath,
       active: isLast
     })
   })
-  
+
   return crumbs
 })
 </script>

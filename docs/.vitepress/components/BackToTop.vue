@@ -50,11 +50,14 @@ onUnmounted(() => {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--vp-c-brand-1);
-  color: white;
-  border: none;
+  background: var(--lg-glass-bg, rgba(255, 255, 255, 0.38));
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  color: var(--lg-accent, #2a5fa0);
+  border: 1px solid var(--lg-glass-border, rgba(255, 255, 255, 0.45));
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--lg-glass-shadow, 0 8px 32px rgba(0, 0, 0, 0.06)),
+              inset 0 1px 1px rgba(255, 255, 255, 0.6);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -63,9 +66,10 @@ onUnmounted(() => {
 }
 
 .back-to-top:hover {
-  background: var(--vp-c-brand-2);
+  background: var(--lg-glass-bg-hover, rgba(255, 255, 255, 0.52));
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--lg-glass-shadow-elevated, 0 16px 48px rgba(0, 0, 0, 0.1)),
+              inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 .back-to-top:active {
