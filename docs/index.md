@@ -2,8 +2,9 @@
 layout: home
 
 hero:
-  name: "My Notes"
-  text: "Keep Simple, Keep Learning."
+  name: "Studiorum"
+  text: "知識を、記す。"
+  tagline: "Learning is a journey, not a destination."
   actions:
     - theme: brand
       text: "Mathematics"
@@ -16,15 +17,16 @@ hero:
       link: /cs/
 
 features:
-  - title: Mathematics
+  - title: MATH
     details: Abstract Algebra / Mathematical Analysis / ODE
     link: /math/math
-  - title: Programming
+  - title: DEV
     details: C++ / Go / Vue.js / Frontend
     link: /code/cpp-start
-  - title: Computer Science
+  - title: CS
     details: OS / Algorithm Design & Analysis
     link: /cs/
 ---
 
+<SeasonBadge />
 <StatsDisplay />

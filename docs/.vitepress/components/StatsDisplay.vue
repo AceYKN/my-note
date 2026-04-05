@@ -7,7 +7,7 @@ const { page } = useData()
 const lastUpdated = computed(() => {
   const ts = page.value.lastUpdated
   if (!ts) return ''
-  return new Date(ts).toLocaleDateString('en-US', {
+  return new Date(ts).toLocaleDateString('ja-JP', {
     month: 'short',
     day: 'numeric',
     year: 'numeric'

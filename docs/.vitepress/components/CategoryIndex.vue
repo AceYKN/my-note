@@ -48,7 +48,7 @@ const isOpen = (index) => expandedIndices.value.has(index)
           <span class="chapter-title">{{ group.text }}</span>
         </div>
         <div class="header-right">
-          <span class="count-badge">{{ group.items?.length || 0 }} 篇</span>
+          <span class="count-badge">{{ group.items?.length || 0 }} 本</span>
           <span class="toggle-icon"></span>
         </div>
       </button>

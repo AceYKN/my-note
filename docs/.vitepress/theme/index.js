@@ -7,6 +7,7 @@ import StatsDisplay from '../components/StatsDisplay.vue'
 import ReadingProgress from '../components/ReadingProgress.vue'
 import BackToTop from '../components/BackToTop.vue'
 import Breadcrumb from '../components/Breadcrumb.vue'
+import SeasonBadge from '../components/SeasonBadge.vue'
 
 export default {
   extends: DefaultTheme,
@@ -17,5 +18,6 @@ export default {
     app.component('ReadingProgress', ReadingProgress)
     app.component('BackToTop', BackToTop)
     app.component('Breadcrumb', Breadcrumb)
+    app.component('SeasonBadge', SeasonBadge)
   }
 }

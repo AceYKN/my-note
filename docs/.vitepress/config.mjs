@@ -27,20 +27,20 @@ export default defineConfig({
   // 2. 网站基本元数据
   title: "Studiorum",
   description: "AceYKN 的学习笔记整理",
-  lang: 'ZH-CN',
+  lang: 'zh-CN',
   lastUpdated: true, // 显示最后更新时间
 
   // 3. 主题配置
   themeConfig: {
-    sidebarMenuLabel: 'Menu',
+    sidebarMenuLabel: 'メニュー',
     // ロゴと左上タイトル
     siteTitle: 'Studiorum',
     logo: '/logo.svg',
     // 顶部导航栏
     nav: [
-      { text: '首页', link: '/' },
-      { text: '数学笔记', link: '/math/math' },
-      { text: '編程開発', link: '/code/cpp-start' },
+      { text: 'Home', link: '/' },
+      { text: '数学 · Math', link: '/math/math' },
+      { text: '開発 · Dev', link: '/code/cpp-start' },
       { text: 'Computer Science', link: '/cs/' }
     ],
 
@@ -91,19 +91,19 @@ export default defineConfig({
     // 文章大纲 (右侧目录)
     outline: {
       level: 'deep', // 显示 h2-h6
-      label: 'On this page'
+      label: '目次'
     },
 
     // 编辑链接
     editLink: {
       pattern: 'https://github.com/AceYKN/my-note/edit/main/docs/:path',
-      text: 'Edit this page on GitHub'
+      text: 'GitHub で編集'
     },
 
     // 文档页脚 (上一篇/下一篇)
     docFooter: {
-      prev: 'Previous',
-      next: 'Next'
+      prev: '← Prev',
+      next: 'Next →'
     },
 
     // 页脚
@@ -161,7 +161,7 @@ export default defineConfig({
     }],
     ['link', {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap'
+      href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Noto+Serif+JP:wght@400;500;700&display=swap'
     }],
     // KaTeX 样式
     ['link', {

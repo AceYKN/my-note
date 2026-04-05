@@ -37,7 +37,7 @@ const breadcrumbs = computed(() => {
   if (!path || path === 'index.md') return []
 
   const parts = path.replace(/\.md$/, '').split('/')
-  const crumbs = [{ text: '首页', link: '/' }]
+  const crumbs = [{ text: 'Home', link: '/' }]
 
   let currentPath = ''
   parts.forEach((part, index) => {

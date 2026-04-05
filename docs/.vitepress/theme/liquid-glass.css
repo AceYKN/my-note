@@ -550,6 +550,7 @@ body {
 
 /* --- Headings --- */
 .vp-doc h1 {
+  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 48px;
@@ -823,17 +824,19 @@ body {
 }
 
 .vp-doc hr::after {
-  content: '◆';
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--lg-accent);
-  font-size: 0.55em;
-  opacity: 0.9;
-  background: var(--vp-c-bg, #f0f2f5);
-  padding: 0 6px;
-  line-height: 1;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--lg-accent);
+  opacity: 0.82;
+  box-shadow: 0 0 8px var(--lg-accent-glow);
+  background-image: var(--washi-texture);
+  background-size: 40px 40px;
 }
 
 /* --- Inline Code — Glass chip --- */
