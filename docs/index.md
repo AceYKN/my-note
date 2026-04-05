@@ -28,5 +28,4 @@ features:
     link: /cs/
 ---
 
-<SeasonBadge />
 <StatsDisplay />

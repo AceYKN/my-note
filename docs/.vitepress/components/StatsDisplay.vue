@@ -4,21 +4,34 @@ import { useData } from 'vitepress'
 
 const { page } = useData()
 
+const season = computed(() => {
+  const month = new Date().getMonth() + 1
+  const year = new Date().getFullYear()
+  if (month >= 3 && month <= 5)  return { kanji: '春', en: 'Spring', color: 'sakura', year }
+  if (month >= 6 && month <= 8)  return { kanji: '夏', en: 'Summer', color: 'wakakusa', year }
+  if (month >= 9 && month <= 11) return { kanji: '秋', en: 'Autumn', color: 'fuji', year }
+  return { kanji: '冬', en: 'Winter', color: 'ai', year }
+})
+
 const lastUpdated = computed(() => {
   const ts = page.value.lastUpdated
   if (!ts) return ''
-  return new Date(ts).toLocaleDateString('ja-JP', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
-  })
+  const date = new Date(ts)
+  const datePart = date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })
+  const weekday = date.toLocaleDateString('ja-JP', { weekday: 'narrow' })
+  return `${datePart}（${weekday}曜日）`
 })
 </script>
 
 <template>
-  <div v-if="lastUpdated" class="stats-container">
-    <div class="stat-item">
-      <span class="stat-label">Last updated</span>
+  <div class="stats-container">
+    <div class="stat-item season-item" :class="`season-${season.color}`">
+      <span class="stat-season-kanji">{{ season.kanji }}</span>
+      <span class="stat-season-label">{{ season.en }} {{ season.year }}</span>
+    </div>
+    <div v-if="lastUpdated" class="stat-divider"></div>
+    <div v-if="lastUpdated" class="stat-item">
+      <span class="stat-label">最終更新</span>
       <span class="stat-value-small">{{ lastUpdated }}</span>
     </div>
   </div>
@@ -74,6 +87,39 @@ const lastUpdated = computed(() => {
   color: var(--lg-text-secondary, rgba(0,0,0,0.55));
   font-weight: 500;
   letter-spacing: 0.02em;
+}
+
+/* Season segment */
+.stat-season-kanji {
+  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  font-size: 1.15em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat-season-label {
+  font-size: 0.78em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  opacity: 0.85;
+}
+
+.season-sakura  { color: #b85470; }
+.season-wakakusa { color: #4a6e1c; }
+.season-fuji    { color: #5c4a8a; }
+.season-ai      { color: #1e4d8a; }
+.dark .season-sakura   { color: #f2a7bb; }
+.dark .season-wakakusa { color: #a8d46f; }
+.dark .season-fuji     { color: #b8addf; }
+.dark .season-ai       { color: #7ab5e0; }
+
+/* Divider between segments */
+.stat-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--lg-glass-border, rgba(0,0,0,0.12));
+  border-radius: 1px;
+  opacity: 0.6;
 }
 
 @media (max-width: 768px) {
