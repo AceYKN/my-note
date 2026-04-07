@@ -2,6 +2,7 @@
 import DefaultTheme from "vitepress/theme";
 import ReadingProgress from "../components/ReadingProgress.vue";
 import BackToTop from "../components/BackToTop.vue";
+import Breadcrumb from "../components/Breadcrumb.vue";
 import { useScrollHideNav } from "../composables/useScrollHideNav";
 
 const { Layout } = DefaultTheme;
@@ -16,6 +17,10 @@ useScrollHideNav();
   <Layout>
     <template #layout-top>
       <ReadingProgress />
+    </template>
+
+    <template #doc-before>
+      <Breadcrumb />
     </template>
     
     <template #layout-bottom>

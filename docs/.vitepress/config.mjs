@@ -18,10 +18,12 @@ export default defineConfig({
     hostname: 'https://aceykn.github.io/my-note/',
     lastmod: true,
     changefreq: 'weekly',
-    priority: 0.8,
-    transformItems: (items) => {
-      return items.filter((item) => !item.url.includes('404'))
-    }
+    transformItems: (items) => items
+      .filter(item => !item.url.includes('404'))
+      .map(item => ({
+        ...item,
+        priority: item.url.split('/').length <= 3 ? 0.9 : 0.7
+      }))
   },
 
   // 2. 网站基本元数据
@@ -204,13 +206,17 @@ export default defineConfig({
     }
 
     // 如需自定义 OG 图片，可在 frontmatter 中设置 ogImage
-    const ogImage = pageData.frontmatter.ogImage || `${baseUrl}/og-default.png`
+    const ogImage = pageData.frontmatter.ogImage || `${baseUrl}/og-default.svg`
     head.push(['meta', { property: 'og:image', content: ogImage }])
 
+    // 判断是否为学术笔记页面
+    const isAcademic = /\/(math|cs|os|algo|db|se|ode|abstract_algebra|math_analysis)\//.test(pageData.relativePath)
+
     // 为文章生成 JSON-LD 结构化数据
+    const datePublished = pageData.frontmatter.date || new Date().toISOString().split('T')[0]
     const jsonLd = {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": isAcademic ? ["Article", "LearningResource"] : "Article",
       "headline": title,
       "description": description,
       "url": pageUrl,
@@ -218,9 +224,21 @@ export default defineConfig({
         "@type": "Person",
         "name": "AceYKN"
       },
-      "datePublished": pageData.frontmatter.date || new Date().toISOString().split('T')[0],
+      "datePublished": datePublished,
       "image": ogImage
     }
+
+    // 学术笔记额外补充 LearningResource 字段
+    if (isAcademic) {
+      jsonLd.educationalLevel = "undergraduate"
+      jsonLd.learningResourceType = "lecture notes"
+      jsonLd.inLanguage = "zh-CN"
+      jsonLd.provider = {
+        "@type": "Person",
+        "name": "AceYKN"
+      }
+    }
+
     head.push(['script', { type: 'application/ld+json' }, JSON.stringify(jsonLd)])
 
     return head

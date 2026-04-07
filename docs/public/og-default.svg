@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- Ambient background gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#0d1b3e"/>
+      <stop offset="45%"  stop-color="#1a2a5e"/>
+      <stop offset="100%" stop-color="#0b1530"/>
+    </linearGradient>
+
+    <!-- Iridescent accent orb — top-left -->
+    <radialGradient id="orb1" cx="0%" cy="0%" r="70%">
+      <stop offset="0%"   stop-color="#5b9bd5" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#5b9bd5" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Iridescent accent orb — bottom-right -->
+    <radialGradient id="orb2" cx="100%" cy="100%" r="70%">
+      <stop offset="0%"   stop-color="#9b8ec4" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="#9b8ec4" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Sakura orb — center -->
+    <radialGradient id="orb3" cx="60%" cy="40%" r="50%">
+      <stop offset="0%"   stop-color="#f2a7bb" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#f2a7bb" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Iridescent progress-bar style strip -->
+    <linearGradient id="strip" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#5b9bd5"/>
+      <stop offset="33%"  stop-color="#9b8ec4"/>
+      <stop offset="66%"  stop-color="#f2a7bb"/>
+      <stop offset="100%" stop-color="#c97b9b"/>
+    </linearGradient>
+
+    <!-- Glass card blur filter -->
+    <filter id="glass-blur" x="-5%" y="-5%" width="110%" height="110%">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+
+    <!-- Soft drop-shadow for text -->
+    <filter id="text-shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- ── Background ── -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- ── Iridescent ambient orbs ── -->
+  <rect width="1200" height="630" fill="url(#orb1)"/>
+  <rect width="1200" height="630" fill="url(#orb2)"/>
+  <rect width="1200" height="630" fill="url(#orb3)"/>
+
+  <!-- ── Decorative grid lines (subtle) ── -->
+  <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+    <line x1="0" y1="157" x2="1200" y2="157"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="472" x2="1200" y2="472"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+  </g>
+
+  <!-- ── Iridescent top strip ── -->
+  <rect x="0" y="0" width="1200" height="4" fill="url(#strip)"/>
+
+  <!-- ── Glass card ── -->
+  <rect x="60" y="100" width="1080" height="430"
+        rx="24" ry="24"
+        fill="rgba(255,255,255,0.06)"
+        stroke="rgba(255,255,255,0.14)"
+        stroke-width="1"
+        filter="url(#glass-blur)"/>
+
+  <!-- ── Glass card inner highlight ── -->
+  <rect x="61" y="101" width="1078" height="1"
+        rx="0" ry="0"
+        fill="rgba(255,255,255,0.20)"/>
+
+  <!-- ── Logo placeholder circle ── -->
+  <circle cx="150" cy="210" r="36"
+          fill="rgba(255,255,255,0.10)"
+          stroke="rgba(255,255,255,0.22)"
+          stroke-width="1.5"/>
+  <!-- S glyph -->
+  <text x="150" y="221"
+        font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif"
+        font-size="30" font-weight="700"
+        fill="rgba(255,255,255,0.90)"
+        text-anchor="middle"
+        filter="url(#text-shadow)">S</text>
+
+  <!-- ── Site title ── -->
+  <text x="204" y="224"
+        font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif"
+        font-size="28" font-weight="600" letter-spacing="0.5"
+        fill="rgba(255,255,255,0.55)"
+        filter="url(#text-shadow)">Studiorum</text>
+
+  <!-- ── Main headline ── -->
+  <text x="150" y="330"
+        font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Noto Serif JP', serif"
+        font-size="72" font-weight="800" letter-spacing="-1"
+        fill="rgba(255,255,255,0.96)"
+        filter="url(#text-shadow)">学习笔记</text>
+
+  <!-- ── Subtitle ── -->
+  <text x="150" y="390"
+        font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif"
+        font-size="28" font-weight="400" letter-spacing="0.3"
+        fill="rgba(255,255,255,0.50)">数学 · CS · 开发 · AceYKN</text>
+
+  <!-- ── Iridescent tag pills ── -->
+  <rect x="150" y="430" width="120" height="34" rx="17"
+        fill="rgba(91,155,213,0.22)" stroke="rgba(91,155,213,0.5)" stroke-width="1"/>
+  <text x="210" y="452"
+        font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif"
+        font-size="16" font-weight="500" fill="#5b9bd5" text-anchor="middle">Math</text>
+
+  <rect x="286" y="430" width="96" height="34" rx="17"
+        fill="rgba(155,142,196,0.22)" stroke="rgba(155,142,196,0.5)" stroke-width="1"/>
+  <text x="334" y="452"
+        font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif"
+        font-size="16" font-weight="500" fill="#9b8ec4" text-anchor="middle">CS</text>
+
+  <rect x="398" y="430" width="112" height="34" rx="17"
+        fill="rgba(242,167,187,0.22)" stroke="rgba(242,167,187,0.5)" stroke-width="1"/>
+  <text x="454" y="452"
+        font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif"
+        font-size="16" font-weight="500" fill="#f2a7bb" text-anchor="middle">Dev</text>
+
+  <!-- ── URL watermark ── -->
+  <text x="1050" y="490"
+        font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif"
+        font-size="18" font-weight="400" letter-spacing="0.2"
+        fill="rgba(255,255,255,0.25)"
+        text-anchor="end">aceykn.github.io/my-note</text>
+
+  <!-- ── Bottom iridescent strip ── -->
+  <rect x="0" y="626" width="1200" height="4" fill="url(#strip)"/>
+</svg>

@@ -1120,6 +1120,33 @@ body {
   height: 2px !important;
 }
 
+/* ==========================================================================
+   14. View Transitions API
+   ========================================================================== */
+@keyframes vt-fade-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-6px); }
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+::view-transition-old(root) {
+  animation: 160ms var(--lg-ease) both vt-fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 220ms var(--lg-ease) 80ms both vt-fade-in;
+}
+
+/* Dark mode — 降低明暗对比幅度，保持视觉平滑 */
+.dark::view-transition-old(root),
+.dark::view-transition-new(root) {
+  animation-duration: 200ms;
+}
+
 @keyframes lg-shimmer {
 
   0%,
