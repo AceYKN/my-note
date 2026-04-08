@@ -25,6 +25,11 @@ title: 课程概览
       <span class="file-name">Chap. 4 HW</span>
       <span class="file-desc">Threads</span>
     </a>
+    <a class="file-card" href="/my-note/cs/os/HW/chap5-hw">
+      <span class="file-icon">📄</span>
+      <span class="file-name">Chap. 5 HW</span>
+      <span class="file-desc">Concurrency: Mutual Exclusion and Synchronization</span>
+    </a>
   </div>
 </div>
 
