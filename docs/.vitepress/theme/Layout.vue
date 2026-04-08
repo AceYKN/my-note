@@ -4,10 +4,12 @@ import ReadingProgress from "../components/ReadingProgress.vue";
 import BackToTop from "../components/BackToTop.vue";
 import Breadcrumb from "../components/Breadcrumb.vue";
 import { useScrollHideNav } from "../composables/useScrollHideNav";
+import { useOutlineScrollSpy } from "../composables/useOutlineScrollSpy";
 
 const { Layout } = DefaultTheme;
 
 useScrollHideNav();
+useOutlineScrollSpy();
 </script>
 
 <template>
