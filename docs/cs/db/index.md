@@ -21,7 +21,7 @@ title: Database Systems
 <div class="db-section">
   <h2>📖 Notes</h2>
   <div class="file-grid">
-    <a class="file-card" href="/my-note/cs/db/pastpapers/normalization">
+    <a class="file-card" href="/my-note/cs/db/notes/normalization">
       <span class="file-icon">📄</span>
       <span class="file-name">数据库规范化流程</span>
       <span class="file-desc">从 E-R 图到 BCNF 的标准化推导步骤</span>
