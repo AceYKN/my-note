@@ -540,8 +540,13 @@ body {
   transition: color var(--lg-duration-fast) var(--lg-ease);
 }
 
-.VPDocAsideOutline .outline-link:hover {
+.VPDocAsideOutline .outline-link:hover,
+.VPDocAsideOutline .outline-link.active {
   color: var(--lg-accent) !important;
+}
+
+.VPDocAsideOutline .outline-link.active {
+  font-weight: 600;
 }
 
 /* ==========================================================================
