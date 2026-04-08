@@ -31,7 +31,7 @@ sidebar: false
     <div class="course-badge available">履修中</div>
   </a>
 
-  <a class="course-card" href="/my-note/cs/db/pastpapers/db-pastpaper-1">
+  <a class="course-card" href="/my-note/cs/db/">
     <div class="course-icon">💾</div>
     <div class="course-body">
       <div class="course-name">Database Systems</div>
