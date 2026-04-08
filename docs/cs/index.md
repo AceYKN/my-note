@@ -21,7 +21,7 @@ sidebar: false
     <div class="course-badge available">履修中</div>
   </a>
 
-  <a class="course-card" href="/my-note/cs/algo/pastpapers/2024-2025-se2">
+  <a class="course-card" href="/my-note/cs/algo/">
     <div class="course-icon">⚙️</div>
     <div class="course-body">
       <div class="course-name">Algorithm Design & Analysis</div>

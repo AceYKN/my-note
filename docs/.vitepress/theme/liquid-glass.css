@@ -848,7 +848,6 @@ body {
 .vp-doc :not(pre)>code {
   color: var(--lg-accent);
   background: var(--lg-accent-soft);
-  backdrop-filter: blur(8px);
   padding: 3px 7px;
   border-radius: 6px;
   font-family: var(--lg-font-mono);
