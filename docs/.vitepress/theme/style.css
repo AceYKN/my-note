@@ -21,8 +21,9 @@
   --vp-c-tip-soft: var(--vp-c-brand-soft);
 
   /* ==================== 首页特效 ==================== */
-  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-color: var(--vp-c-brand-1);
   --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+  --vp-home-hero-image-filter: none;
 
   /* ==================== 布局尺寸 ==================== */
   --vp-layout-max-width: 1440px;
@@ -53,6 +54,112 @@
 }
 
 /* 导航栏滚动自动隐藏 — 规则已迁移至 liquid-glass.css */
+
+/* ==========================================================================
+   首页高级动画 (Apple Style)
+   ========================================================================== */
+@keyframes apple-fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.VPHomeHero {
+  position: relative;
+  z-index: 1;
+}
+
+.VPHomeHero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  width: 900px;
+  height: 600px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(189,52,254,0.15) 0%, rgba(65,209,255,0.15) 30%, transparent 60%);
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.VPHomeHero .name {
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  font-size: clamp(48px, 6vw, 72px);
+  background: var(--vp-home-hero-name-background);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: apple-fade-in-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.VPHomeHero .text {
+  font-weight: 700;
+  font-size: clamp(36px, 5vw, 64px);
+  letter-spacing: -0.02em;
+  animation: apple-fade-in-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.05s forwards;
+  opacity: 0;
+}
+
+.VPHomeHero .tagline {
+  opacity: 0;
+  font-size: clamp(20px, 2.5vw, 24px);
+  color: var(--vp-c-text-2);
+  margin-top: 16px;
+  animation: apple-fade-in-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s forwards;
+}
+
+.VPHomeHero .actions {
+  opacity: 0;
+  margin-top: 40px;
+  animation: apple-fade-in-up 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+}
+
+/* 按钮微调: 更加圆润 / Apple Pill 风格 */
+.VPButton.brand {
+  border-radius: 24px !important;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.2);
+}
+.VPButton.alt {
+  border-radius: 24px !important;
+  font-weight: 600;
+  background: var(--vp-c-bg-soft);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+/* 特性卡片极简加载与平滑景深悬浮 */
+.VPFeatures .items {
+  opacity: 0;
+  animation: apple-fade-in-up 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+}
+
+.VPFeature {
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+  background: var(--vp-c-bg-soft) !important;
+}
+
+.VPFeature:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.04) !important;
+  border-color: var(--vp-c-brand-1) !important;
+}
+
+.VPFeature .icon {
+  color: var(--vp-c-brand-1) !important;
+  filter: drop-shadow(0 4px 12px var(--vp-c-brand-soft)) !important;
+  transition: transform 0.4s ease;
+}
+
+.VPFeature:hover .icon {
+  transform: scale(1.08);
+}
 
 /* ==========================================================================
    全局滚动条美化
