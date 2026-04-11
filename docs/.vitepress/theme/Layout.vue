@@ -1,6 +1,7 @@
 <script setup>
 import DefaultTheme from "vitepress/theme";
 import ReadingProgress from "../components/ReadingProgress.vue";
+import LoadingProgress from "../components/LoadingProgress.vue";
 import BackToTop from "../components/BackToTop.vue";
 import Breadcrumb from "../components/Breadcrumb.vue";
 import { useScrollHideNav } from "../composables/useScrollHideNav";
@@ -18,6 +19,7 @@ useOutlineScrollSpy();
 
   <Layout>
     <template #layout-top>
+      <LoadingProgress />
       <ReadingProgress />
     </template>
 
