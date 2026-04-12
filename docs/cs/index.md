@@ -2,6 +2,7 @@
 layout: doc
 title: Computer Science
 sidebar: false
+description: 计算机科学课程笔记汇总，包含操作系统、算法设计与分析、数据库系统、软件工程等科目的课程内容、作业与历年考题。
 ---
 
 <div class="cs-header">

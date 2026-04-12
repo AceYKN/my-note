@@ -1,5 +1,6 @@
 ---
 title: Operating Systems
+description: 操作系统学习笔记与作业，教材 William Stallings《Operating Systems: Internals and Design Principles》第9版，涵盖进程、线程、内存管理、文件系统等核心章节。
 ---
 
 <div class="os-header">

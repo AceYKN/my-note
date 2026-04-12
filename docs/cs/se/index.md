@@ -1,6 +1,7 @@
 ---
 title: Software Engineering
 sidebar: false
+description: 软件工程学习笔记，基于 Ian Sommerville 教材，涵盖软件过程模型、需求获取与分析、架构模式、需求追溯矩阵（RTM）等内容。
 ---
 
 <div class="se-header">

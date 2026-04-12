@@ -28,7 +28,7 @@ export default defineConfig({
 
   // 2. 网站基本元数据
   title: "Studiorum",
-  description: "AceYKN 的学习笔记整理",
+  description: "AceYKN 的学习笔记整理 — 数学、计算机科学、软件工程课程笔记、习题与过去问汇总。Studiorum by AceYKN.",
   lang: 'zh-CN',
   lastUpdated: true, // 显示最后更新时间
 
@@ -176,7 +176,8 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#646cff' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'zh_CN' }],
-    ['meta', { property: 'og:site_name', content: '我的知识库' }],
+    ['meta', { property: 'og:site_name', content: 'Studiorum — AceYKN 的学习笔记' }],
+    ['meta', { name: 'keywords', content: 'AceYKN,学习笔记,笔记整理,数学笔记,计算机科学,操作系统,算法,数据库,软件工程,抽象代数,数学分析,常微分方程,Studiorum' }],
     // Google Analytics
     [
       'script',
@@ -193,12 +194,20 @@ export default defineConfig({
   transformHead({ pageData, siteData }) {
     const head = []
     const title = pageData.title || siteData.title
-    const description = pageData.description || siteData.description
     const baseUrl = 'https://aceykn.github.io/my-note'
     const pageUrl = `${baseUrl}/${pageData.relativePath.replace(/(\.md)?$/, '.html').replace(/index\.html$/, '')}`
 
+    // 自动生成 description：frontmatter > 全站描述兜底，并拼接页面标题提升关键词覆盖
+    const siteFallback = siteData.description
+    let description = pageData.description
+    if (!description && pageData.title && pageData.title !== siteData.title) {
+      description = `${pageData.title} — ${siteFallback}`
+    }
+    description = description || siteFallback
+
     head.push(['meta', { property: 'og:title', content: title }])
     head.push(['meta', { property: 'og:url', content: pageUrl }])
+    head.push(['link', { rel: 'canonical', href: pageUrl }])
 
     if (description) {
       head.push(['meta', { name: 'description', content: description }])
