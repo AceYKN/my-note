@@ -65,6 +65,42 @@ description: "操作系统学习笔记与作业，教材 William Stallings Opera
   </div>
 </div>
 
+<div class="os-section">
+  <h2>📋 Review</h2>
+  <div class="file-grid">
+    <a class="file-card" href="/my-note/cs/os/review/Def">
+      <span class="file-icon">📄</span>
+      <span class="file-name">名词解释</span>
+      <span class="file-desc">Definitions</span>
+    </a>
+    <a class="file-card" href="/my-note/cs/os/review/fill-in-the blanks">
+      <span class="file-icon">📄</span>
+      <span class="file-name">填空题</span>
+      <span class="file-desc">Fill in the Blanks</span>
+    </a>
+    <a class="file-card" href="/my-note/cs/os/review/mcq">
+      <span class="file-icon">📄</span>
+      <span class="file-name">选择题</span>
+      <span class="file-desc">Multiple Choice Questions</span>
+    </a>
+    <a class="file-card" href="/my-note/cs/os/review/TorF">
+      <span class="file-icon">📄</span>
+      <span class="file-name">判断题</span>
+      <span class="file-desc">True or False</span>
+    </a>
+    <a class="file-card" href="/my-note/cs/os/review/shortans">
+      <span class="file-icon">📄</span>
+      <span class="file-name">简答题</span>
+      <span class="file-desc">Short Answer Questions</span>
+    </a>
+    <a class="file-card" href="/my-note/cs/os/review/prob">
+      <span class="file-icon">📄</span>
+      <span class="file-name">应用题</span>
+      <span class="file-desc">Application Problems</span>
+    </a>
+  </div>
+</div>
+
 <style scoped>
 .os-header {
   text-align: center;
