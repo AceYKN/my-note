@@ -5,13 +5,65 @@ import { onMounted, onUnmounted } from 'vue'
  * visible via CSS but its internal useActiveAnchor skips (isAsideEnabled is
  * false unless width >= 1280px with a sidebar).
  *
- * At 1280px+ VitePress's built-in handles it; we do nothing to avoid conflicts.
+ * At 1280px+ VitePress's built-in handles it; we only add container auto-scroll
+ * via MutationObserver to keep the active TOC link visible.
  */
 export function useOutlineScrollSpy() {
-  let cleanup = null
+  let cleanupScrollSpy = null
+  let cleanupObserver = null
 
-  function run() {
-    // Only operate in the custom range (960–1279px)
+  // ── Universal: auto-scroll .aside-container to keep active link visible ──
+  function setupContainerScroll() {
+    const scrollContainer = document.querySelector('.aside-container')
+    const outline = document.querySelector('.VPDocAsideOutline')
+    if (!scrollContainer || !outline) return
+
+    function scrollToActive(link) {
+      const linkTop = link.getBoundingClientRect().top
+      const cTop = scrollContainer.getBoundingClientRect().top
+      const cBottom = scrollContainer.getBoundingClientRect().bottom
+      if (linkTop < cTop + 32) {
+        scrollContainer.scrollBy({ top: linkTop - cTop - 32, behavior: 'smooth' })
+      } else if (linkTop > cBottom - 48) {
+        scrollContainer.scrollBy({ top: linkTop - cBottom + 48, behavior: 'smooth' })
+      }
+    }
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'class' &&
+          mutation.target.classList.contains('active')
+        ) {
+          scrollToActive(mutation.target)
+          break
+        }
+      }
+    })
+
+    // Observe all outline links for class changes
+    outline.querySelectorAll('a').forEach(a => {
+      observer.observe(a, { attributes: true, attributeFilter: ['class'] })
+    })
+
+    // Re-attach when the outline re-renders (route change)
+    const listObserver = new MutationObserver(() => {
+      observer.disconnect()
+      outline.querySelectorAll('a').forEach(a => {
+        observer.observe(a, { attributes: true, attributeFilter: ['class'] })
+      })
+    })
+    listObserver.observe(outline, { childList: true, subtree: true })
+
+    cleanupObserver = () => {
+      observer.disconnect()
+      listObserver.disconnect()
+    }
+  }
+
+  // ── 960–1279px only: custom scroll spy (VitePress built-in is disabled) ──
+  function runScrollSpy() {
     if (!window.matchMedia('(min-width: 960px) and (max-width: 1279px)').matches) {
       return
     }
@@ -87,18 +139,22 @@ export function useOutlineScrollSpy() {
     window.addEventListener('scroll', throttled, { passive: true })
     requestAnimationFrame(onScroll)
 
-    cleanup = () => window.removeEventListener('scroll', throttled)
+    cleanupScrollSpy = () => window.removeEventListener('scroll', throttled)
   }
 
   onMounted(() => {
-    // Give VitePress time to render the aside
-    requestAnimationFrame(run)
+    requestAnimationFrame(() => {
+      setupContainerScroll()
+      runScrollSpy()
+    })
   })
 
   onUnmounted(() => {
-    cleanup?.()
+    cleanupScrollSpy?.()
+    cleanupObserver?.()
   })
 }
+
 
 function throttle(fn, wait) {
   let timer = null
