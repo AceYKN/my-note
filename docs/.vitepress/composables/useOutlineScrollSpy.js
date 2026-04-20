@@ -22,8 +22,11 @@ export function useOutlineScrollSpy() {
       const linkTop = link.getBoundingClientRect().top
       const cTop = scrollContainer.getBoundingClientRect().top
       const cBottom = scrollContainer.getBoundingClientRect().bottom
-      if (linkTop < cTop + 32) {
-        scrollContainer.scrollBy({ top: linkTop - cTop - 32, behavior: 'smooth' })
+      // padding-top accounts for the fixed nav bar; content is hidden below it
+      const paddingTop = parseFloat(getComputedStyle(scrollContainer).paddingTop) || 0
+      const visibleTop = cTop + paddingTop
+      if (linkTop < visibleTop + 8) {
+        scrollContainer.scrollBy({ top: linkTop - visibleTop - 8, behavior: 'smooth' })
       } else if (linkTop > cBottom - 48) {
         scrollContainer.scrollBy({ top: linkTop - cBottom + 48, behavior: 'smooth' })
       }
