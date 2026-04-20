@@ -73,7 +73,7 @@ description: "操作系统学习笔记与作业，教材 William Stallings Opera
       <span class="file-name">名词解释</span>
       <span class="file-desc">Definitions</span>
     </a>
-    <a class="file-card" href="/my-note/cs/os/review/fill-in-the blanks">
+    <a class="file-card" href="/my-note/cs/os/review/fill-in-the-blanks">
       <span class="file-icon">📄</span>
       <span class="file-name">填空题</span>
       <span class="file-desc">Fill in the Blanks</span>
