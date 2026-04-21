@@ -1,0 +1,5 @@
+# Tell GitHub Linguist to treat .vitepress source files as code, not documentation
+docs/.vitepress/**/*.vue  linguist-documentation=false linguist-detectable=true
+docs/.vitepress/**/*.css  linguist-documentation=false linguist-detectable=true
+docs/.vitepress/**/*.js   linguist-documentation=false linguist-detectable=true
+docs/.vitepress/**/*.mjs  linguist-documentation=false linguist-detectable=true
