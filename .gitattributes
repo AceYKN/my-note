@@ -3,3 +3,9 @@ docs/.vitepress/**/*.vue  linguist-documentation=false linguist-detectable=true
 docs/.vitepress/**/*.css  linguist-documentation=false linguist-detectable=true
 docs/.vitepress/**/*.js   linguist-documentation=false linguist-detectable=true
 docs/.vitepress/**/*.mjs  linguist-documentation=false linguist-detectable=true
+
+# GitHub Actions workflows
+.github/**/*.yml  linguist-documentation=false linguist-detectable=true
+
+# Markdown notes are documentation, not code — keep excluded (Linguist default)
+# *.md  linguist-documentation=true  (already default, no need to specify)
