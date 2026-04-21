@@ -70,6 +70,26 @@
   --lg-duration-fast: 0.15s;
   --lg-duration-base: 0.3s;
   --lg-duration-slow: 0.5s;
+
+  /* --- Shared tokens (migrated from style.css) --- */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
 }
 
 /* --- Dark Mode Overrides --- */
@@ -91,6 +111,11 @@
   --lg-text-primary: rgba(255, 255, 255, 0.95);
   --lg-text-secondary: rgba(255, 255, 255, 0.6);
   --lg-text-tertiary: rgba(255, 255, 255, 0.35);
+
+  /* 深色模式阴影覆盖 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* ==========================================================================

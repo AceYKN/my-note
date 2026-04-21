@@ -28,29 +28,6 @@
   /* ==================== 布局尺寸 ==================== */
   --vp-layout-max-width: 1440px;
   --vp-sidebar-width: 280px;
-  
-  /* ==================== 间距系统 ==================== */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 48px;
-  
-  /* ==================== 圆角系统 ==================== */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  
-  /* ==================== 阴影系统 ==================== */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-  
-  /* ==================== 过渡动画 ==================== */
-  --transition-fast: 0.15s ease;
-  --transition-base: 0.3s ease;
-  --transition-slow: 0.5s ease;
 }
 
 /* 导航栏滚动自动隐藏 — 规则已迁移至 liquid-glass.css */
@@ -650,11 +627,6 @@ html {
   
   /* 深色模式下的分隔线 */
   --vp-c-divider: rgba(255, 255, 255, 0.12);
-  
-  /* 深色模式下的阴影 */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* 深色模式下的表格对比度 */
