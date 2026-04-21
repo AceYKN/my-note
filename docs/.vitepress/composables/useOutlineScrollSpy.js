@@ -1,4 +1,5 @@
 import { onMounted, onUnmounted } from 'vue'
+import { onContentUpdated } from 'vitepress'
 
 /**
  * Custom scrollspy for the 960–1279px range where VitePress forces the aside
@@ -7,32 +8,40 @@ import { onMounted, onUnmounted } from 'vue'
  *
  * At 1280px+ VitePress's built-in handles it; we only add container auto-scroll
  * via MutationObserver to keep the active TOC link visible.
+ *
+ * Uses onContentUpdated (route-change hook) for reliable re-initialization
+ * instead of a fragile listObserver approach.
  */
 export function useOutlineScrollSpy() {
+  let scrollContainer = null
+  let linkObserver = null
   let cleanupScrollSpy = null
-  let cleanupObserver = null
+
+  // ── Helpers ──────────────────────────────────────────────────────────────
+
+  function scrollToActive(link) {
+    if (!scrollContainer) return
+    const linkTop = link.getBoundingClientRect().top
+    const cTop = scrollContainer.getBoundingClientRect().top
+    const cBottom = scrollContainer.getBoundingClientRect().bottom
+    // padding-top accounts for the fixed nav bar; content is hidden below it
+    const paddingTop = parseFloat(getComputedStyle(scrollContainer).paddingTop) || 0
+    const visibleTop = cTop + paddingTop
+    if (linkTop < visibleTop + 8) {
+      scrollContainer.scrollBy({ top: linkTop - visibleTop - 8, behavior: 'smooth' })
+    } else if (linkTop > cBottom - 48) {
+      scrollContainer.scrollBy({ top: linkTop - cBottom + 48, behavior: 'smooth' })
+    }
+  }
 
   // ── Universal: auto-scroll .aside-container to keep active link visible ──
   function setupContainerScroll() {
-    const scrollContainer = document.querySelector('.aside-container')
-    const outline = document.querySelector('.VPDocAsideOutline')
-    if (!scrollContainer || !outline) return
+    scrollContainer = document.querySelector('.aside-container')
+    if (!scrollContainer) return
 
-    function scrollToActive(link) {
-      const linkTop = link.getBoundingClientRect().top
-      const cTop = scrollContainer.getBoundingClientRect().top
-      const cBottom = scrollContainer.getBoundingClientRect().bottom
-      // padding-top accounts for the fixed nav bar; content is hidden below it
-      const paddingTop = parseFloat(getComputedStyle(scrollContainer).paddingTop) || 0
-      const visibleTop = cTop + paddingTop
-      if (linkTop < visibleTop + 8) {
-        scrollContainer.scrollBy({ top: linkTop - visibleTop - 8, behavior: 'smooth' })
-      } else if (linkTop > cBottom - 48) {
-        scrollContainer.scrollBy({ top: linkTop - cBottom + 48, behavior: 'smooth' })
-      }
-    }
+    if (linkObserver) linkObserver.disconnect()
 
-    const observer = new MutationObserver((mutations) => {
+    linkObserver = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
         if (
           mutation.type === 'attributes' &&
@@ -45,37 +54,32 @@ export function useOutlineScrollSpy() {
       }
     })
 
-    // Observe all outline links for class changes
+    attachLinkObserver()
+  }
+
+  /** Re-observe all current outline links — called on mount and content updates */
+  function attachLinkObserver() {
+    if (!linkObserver) return
+    const outline = document.querySelector('.VPDocAsideOutline')
+    if (!outline) return
+    linkObserver.disconnect()
     outline.querySelectorAll('a').forEach(a => {
-      observer.observe(a, { attributes: true, attributeFilter: ['class'] })
+      linkObserver.observe(a, { attributes: true, attributeFilter: ['class'] })
     })
-
-    // Re-attach when the outline re-renders (route change)
-    const listObserver = new MutationObserver(() => {
-      observer.disconnect()
-      outline.querySelectorAll('a').forEach(a => {
-        observer.observe(a, { attributes: true, attributeFilter: ['class'] })
-      })
-    })
-    listObserver.observe(outline, { childList: true, subtree: true })
-
-    cleanupObserver = () => {
-      observer.disconnect()
-      listObserver.disconnect()
-    }
   }
 
   // ── 960–1279px only: custom scroll spy (VitePress built-in is disabled) ──
-  function runScrollSpy() {
-    if (!window.matchMedia('(min-width: 960px) and (max-width: 1279px)').matches) {
-      return
-    }
+
+  /** Activates the correct TOC link based on current scroll position */
+  function triggerScrollSpy() {
+    if (!window.matchMedia('(min-width: 960px) and (max-width: 1279px)').matches) return
 
     const container = document.querySelector('.VPDocAsideOutline')
     const marker = document.querySelector('.VPDocAsideOutline .outline-marker')
     if (!container || !marker) return
 
-    let prevLink = null
+    // Read current active link from DOM to avoid stale closure reference
+    let prevLink = container.querySelector('a.active') || null
 
     function getScrollOffset() {
       const nav = document.querySelector('.VPNav')
@@ -114,10 +118,10 @@ export function useOutlineScrollSpy() {
       const headings = [...document.querySelectorAll('.vp-doc :where(h1,h2,h3,h4,h5,h6)')]
         .filter(el => el.id)
 
+      if (!headings.length) return
+
       const isBottom =
         Math.abs(scrollY + window.innerHeight - document.body.offsetHeight) < 1
-
-      if (!headings.length) return
 
       if (isBottom) {
         activateLink('#' + headings[headings.length - 1].id)
@@ -138,23 +142,42 @@ export function useOutlineScrollSpy() {
       activateLink(activeHash)
     }
 
+    // Replace existing scroll listener with a fresh one
+    if (cleanupScrollSpy) {
+      cleanupScrollSpy()
+      cleanupScrollSpy = null
+    }
+
     const throttled = throttle(onScroll, 100)
     window.addEventListener('scroll', throttled, { passive: true })
+    // Immediately resolve active link for the current scroll position
     requestAnimationFrame(onScroll)
 
     cleanupScrollSpy = () => window.removeEventListener('scroll', throttled)
   }
 
+  // ── Lifecycle ─────────────────────────────────────────────────────────────
+
   onMounted(() => {
     requestAnimationFrame(() => {
       setupContainerScroll()
-      runScrollSpy()
+      triggerScrollSpy()
+    })
+  })
+
+  // Re-initialize on every route change (content update)
+  onContentUpdated(() => {
+    requestAnimationFrame(() => {
+      // Re-observe new links rendered for the new page
+      attachLinkObserver()
+      // Reset and re-run scroll spy so initial heading is highlighted
+      triggerScrollSpy()
     })
   })
 
   onUnmounted(() => {
     cleanupScrollSpy?.()
-    cleanupObserver?.()
+    linkObserver?.disconnect()
   })
 }
 
