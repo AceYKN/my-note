@@ -1,3 +1,6 @@
+# Obsidian plugin files are third-party vendored code — exclude from stats
+.obsidian/**  linguist-vendored=true
+
 # Tell GitHub Linguist to treat .vitepress source files as code, not documentation
 docs/.vitepress/**/*.vue  linguist-documentation=false linguist-detectable=true
 docs/.vitepress/**/*.css  linguist-documentation=false linguist-detectable=true
