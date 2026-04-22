@@ -1,18 +1,26 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const isVisible = ref(false)
+const scrollProgress = ref(0)
+
+const RADIUS = 21
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS
+
+const strokeDashoffset = computed(() =>
+  CIRCUMFERENCE * (1 - scrollProgress.value / 100)
+)
 
 const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  })
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const handleScroll = () => {
   requestAnimationFrame(() => {
-    isVisible.value = window.scrollY > 300
+    const winScroll = document.documentElement.scrollTop || document.body.scrollTop
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
+    isVisible.value = winScroll > 300
+    scrollProgress.value = height > 0 ? (winScroll / height) * 100 : 0
   })
 }
 
@@ -32,10 +40,45 @@ onUnmounted(() => {
       v-if="isVisible"
       class="back-to-top"
       @click="scrollToTop"
-      aria-label="Back to top"
-      title="▲ TOP"
+      :aria-label="`Back to top (${Math.round(scrollProgress)}%)`"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Progress ring -->
+      <svg
+        class="progress-ring"
+        width="54"
+        height="54"
+        viewBox="0 0 54 54"
+        aria-hidden="true"
+      >
+        <circle
+          class="progress-ring__track"
+          cx="27" cy="27" :r="RADIUS"
+          fill="none"
+          stroke-width="2.5"
+        />
+        <circle
+          class="progress-ring__arc"
+          cx="27" cy="27" :r="RADIUS"
+          fill="none"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          :stroke-dasharray="CIRCUMFERENCE"
+          :stroke-dashoffset="strokeDashoffset"
+        />
+      </svg>
+      <!-- Up arrow -->
+      <svg
+        class="arrow-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="18" height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
         <polyline points="18 15 12 9 6 15"></polyline>
       </svg>
     </button>
@@ -63,6 +106,8 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* SVG ring needs overflow visible */
+  overflow: visible;
 }
 
 .back-to-top:hover {
@@ -76,14 +121,43 @@ onUnmounted(() => {
   transform: translateY(-2px);
 }
 
-.back-to-top svg {
+/* Progress ring — absolutely positioned, centered over button */
+.progress-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  pointer-events: none;
+}
+
+.progress-ring__track {
+  stroke: rgba(0, 0, 0, 0.08);
+}
+
+.dark .progress-ring__track {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.progress-ring__arc {
+  stroke: var(--lg-iridescent-2, #f2a7bb); /* 桜色 light */
+  transition: stroke-dashoffset 0.12s ease-out;
+}
+
+.dark .progress-ring__arc {
+  stroke: var(--lg-accent, #f2a7bb); /* 桜色 dark (already overridden to sakura) */
+}
+
+.arrow-icon {
+  position: relative;
+  z-index: 1;
   transition: transform 0.3s ease;
 }
 
-.back-to-top:hover svg {
+.back-to-top:hover .arrow-icon {
   transform: translateY(-2px);
 }
 
+/* Appear/leave transition */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease, transform 0.3s ease;

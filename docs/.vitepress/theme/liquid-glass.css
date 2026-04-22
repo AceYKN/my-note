@@ -717,6 +717,22 @@ body {
   overflow: hidden;
 }
 
+/* Decorative large opening quote mark */
+.vp-doc blockquote::before {
+  content: '\201C';
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  font-size: 5em;
+  line-height: 1;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: var(--lg-accent);
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
 .vp-doc blockquote::after {
   content: '';
   position: absolute;
@@ -897,6 +913,40 @@ body {
 
 .vp-doc div[class*='language-']:hover>button.copy {
   opacity: 1;
+}
+
+/* Language label — glass capsule badge */
+.vp-doc div[class*='language-'] .lang {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 0.72em;
+  font-family: var(--lg-font-mono);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lg-accent);
+  background: var(--lg-accent-soft);
+  border: 1px solid rgba(42, 95, 160, 0.18);
+  border-radius: var(--lg-radius-pill);
+  padding: 2px 9px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--lg-glass-inset-shadow);
+  opacity: 0.75;
+  transition: opacity var(--lg-duration-fast) var(--lg-ease);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.vp-doc div[class*='language-']:hover .lang {
+  opacity: 1;
+}
+
+.dark .vp-doc div[class*='language-'] .lang {
+  color: var(--lg-accent);
+  background: var(--lg-accent-soft);
+  border-color: rgba(242, 167, 187, 0.18);
 }
 
 /* --- Math (KaTeX) --- */
@@ -1152,30 +1202,32 @@ body {
 }
 
 /* ==========================================================================
-   14. View Transitions API
+   14. View Transitions API — 有品质的滑入切换
    ========================================================================== */
-@keyframes vt-fade-out {
-  from { opacity: 1; transform: translateY(0); }
-  to   { opacity: 0; transform: translateY(-6px); }
+@keyframes vt-slide-out {
+  from { opacity: 1;  transform: translateY(0)    scale(1);    filter: blur(0); }
+  to   { opacity: 0;  transform: translateY(-28px) scale(0.97); filter: blur(2px); }
 }
 
-@keyframes vt-fade-in {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes vt-slide-in {
+  from { opacity: 0;  transform: translateY(36px) scale(0.97); filter: blur(2px); }
+  to   { opacity: 1;  transform: translateY(0)   scale(1);    filter: blur(0); }
 }
 
 ::view-transition-old(root) {
-  animation: 160ms var(--lg-ease) both vt-fade-out;
+  animation: 220ms cubic-bezier(0.4, 0, 1, 1) both vt-slide-out;
 }
 
 ::view-transition-new(root) {
-  animation: 220ms var(--lg-ease) 80ms both vt-fade-in;
+  animation: 360ms cubic-bezier(0, 0, 0.2, 1) 100ms both vt-slide-in;
 }
 
-/* Dark mode — 降低明暗对比幅度，保持视觉平滑 */
-.dark::view-transition-old(root),
+/* Dark mode — 稍降位移幅度，减少闪烁感 */
+.dark::view-transition-old(root) {
+  animation-duration: 180ms;
+}
 .dark::view-transition-new(root) {
-  animation-duration: 200ms;
+  animation-duration: 300ms;
 }
 
 @keyframes lg-shimmer {
@@ -1328,6 +1380,19 @@ body {
   .VPNavBar .title {
     font-size: 1em;
   }
+}
+
+/* ==========================================================================
+   19. Text Selection — 桜/藤 (light) · 藍 (dark)
+   ========================================================================== */
+::selection {
+  background-color: rgba(198, 154, 191, 0.30); /* 桜 × 藤 blend */
+  color: var(--lg-text-primary);
+}
+
+.dark ::selection {
+  background-color: rgba(91, 155, 213, 0.38); /* 藍色 */
+  color: var(--lg-text-primary);
 }
 
 /* ==========================================================================
