@@ -21,18 +21,26 @@ const lastUpdated = computed(() => {
   const weekday = date.toLocaleDateString('ja-JP', { weekday: 'narrow' })
   return `${datePart}（${weekday}曜日）`
 })
+
+const greeting = computed(() => {
+  const h = new Date().getHours()
+  if (h >= 5 && h < 12)  return { text: 'おはよう', sub: 'Good morning' }
+  if (h >= 12 && h < 18) return { text: 'こんにちは', sub: 'Good afternoon' }
+  if (h >= 18 && h < 23) return { text: 'こんばんは', sub: 'Good evening' }
+  return { text: 'おやすみ', sub: 'Good night' }
+})
 </script>
 
 <template>
   <div class="stats-container">
+    <div class="stat-item greeting-item">
+      <span class="stat-greeting-text">{{ greeting.text }}</span>
+      <span class="stat-greeting-sub">{{ greeting.sub }}</span>
+    </div>
+    <div class="stat-divider"></div>
     <div class="stat-item season-item" :class="`season-${season.color}`">
       <span class="stat-season-kanji">{{ season.kanji }}</span>
       <span class="stat-season-label">{{ season.en }} {{ season.year }}</span>
-    </div>
-    <div v-if="lastUpdated" class="stat-divider"></div>
-    <div v-if="lastUpdated" class="stat-item">
-      <span class="stat-label">最終更新</span>
-      <span class="stat-value-small">{{ lastUpdated }}</span>
     </div>
   </div>
 </template>
@@ -87,6 +95,23 @@ const lastUpdated = computed(() => {
   color: var(--lg-text-secondary, rgba(0,0,0,0.55));
   font-weight: 500;
   letter-spacing: 0.02em;
+}
+
+/* Greeting segment */
+.stat-greeting-text {
+  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  font-size: 1.05em;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--lg-accent, #7b8cff);
+}
+
+.stat-greeting-sub {
+  font-size: 0.75em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  opacity: 0.7;
+  color: var(--lg-text-secondary, rgba(0,0,0,0.55));
 }
 
 /* Season segment */
