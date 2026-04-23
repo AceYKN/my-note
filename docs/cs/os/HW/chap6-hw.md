@@ -1,4 +1,10 @@
-# Homework for Chapter 6
+---
+title: Chap. 6 HW
+order: 6
+---
+
+
+# OS Chap.6 HW
 
 ## Problem 1
 Consider the following snapshot of a system. There are no outstanding unsatisfied requests for resources.
