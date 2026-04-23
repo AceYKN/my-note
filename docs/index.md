@@ -5,16 +5,6 @@ hero:
   name: "Studiorum"
   text: "知識を、記す。"
   tagline: "Learning is a journey, not a destination."
-  actions:
-    - theme: brand
-      text: "Mathematics"
-      link: /math/math
-    - theme: alt
-      text: "Programming"
-      link: /code/cpp-start
-    - theme: alt
-      text: "Computer Science"
-      link: /cs/
 
 features:
   - title: MATH

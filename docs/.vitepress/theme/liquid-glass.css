@@ -1012,7 +1012,8 @@ body {
 }
 
 .VPHero {
-  padding-top: 80px !important;
+  padding-top: 140px !important;
+  padding-bottom: 60px !important;
 }
 
 .VPHero .name {
@@ -1034,6 +1035,9 @@ body {
 
 .VPHero .tagline {
   color: var(--lg-text-tertiary) !important;
+  margin-top: 20px !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1.9 !important;
 }
 
 /* Hero action buttons — glass */
@@ -1076,8 +1080,19 @@ body {
   background: rgba(255, 255, 255, 0.04) !important;
 }
 
+/* Features section vertical breathing room */
+.VPFeatures {
+  padding-top: 24px !important;
+  padding-bottom: 96px !important;
+}
+
+.VPFeatures .container > .items {
+  gap: 20px !important;
+}
+
 /* Feature cards — glass */
 .VPFeature {
+  padding: 32px 28px !important;
   background: var(--lg-glass-bg) !important;
   backdrop-filter: blur(var(--lg-blur)) saturate(160%) !important;
   -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(160%) !important;
@@ -1124,6 +1139,16 @@ body {
 
 html.dark .VPFeature img[src$=".svg"] {
   filter: invert(1) brightness(2) !important;
+}
+
+@media (max-width: 768px) {
+  .VPHero {
+    padding-top: 80px !important;
+    padding-bottom: 32px !important;
+  }
+  .VPFeatures {
+    padding-bottom: 56px !important;
+  }
 }
 
 /* ==========================================================================
