@@ -31,6 +31,11 @@ description: "操作系统学习笔记、作业、复习题目，教材 William 
       <span class="file-name">Chap. 5 HW</span>
       <span class="file-desc">Concurrency: Mutual Exclusion and Synchronization</span>
     </a>
+    <a class="file-card" href="/my-note/cs/os/HW/chap6-hw">
+      <span class="file-icon">📄</span>
+      <span class="file-name">Chap. 6 HW</span>
+      <span class="file-desc">Concurrency: Deadlock and Starvation</span>
+    </a>
   </div>
 </div>
 
