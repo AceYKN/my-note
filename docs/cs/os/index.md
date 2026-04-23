@@ -68,6 +68,11 @@ description: "操作系统学习笔记、作业、复习题目，教材 William 
 <div class="os-section">
   <h2>📋 Review</h2>
   <div class="file-grid">
+    <a class="file-card file-card--highlight" href="/my-note/cs/os/review/midterm-exercise">
+      <span class="file-icon">📝</span>
+      <span class="file-name">期中综合练习</span>
+      <span class="file-desc">CH1–CH6 Exercise</span>
+    </a>
     <a class="file-card" href="/my-note/cs/os/review/Def">
       <span class="file-icon">📄</span>
       <span class="file-name">名词解释</span>
