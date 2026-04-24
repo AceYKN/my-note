@@ -1,4 +1,4 @@
-﻿/**
+/**
  * style.css — MathJax (mjx-container) 独有样式
  * 其余所有规则已迁移至 liquid-glass.css
  */
@@ -9,8 +9,7 @@
   font-size: 1.1em !important;
   color: var(--vp-c-text-1);
   max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto hidden;
 }
 
 /* 独立公式块增加间距和滚动提示 */
@@ -64,7 +63,7 @@ mjx-container[display="true"]:hover::after {
 /* ==========================================================================
    移动端 — card-grid 单列 (liquid-glass.css 未覆盖)
    ========================================================================== */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .card-grid {
     grid-template-columns: 1fr !important;
   }
