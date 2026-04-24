@@ -163,12 +163,7 @@ export default defineConfig({
     }],
     ['link', {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Noto+Serif+JP:wght@400;500;700&display=swap'
-    }],
-    // KaTeX 样式
-    ['link', {
-      rel: 'stylesheet',
-      href: 'https://cdn.jsdelivr.net/npm/katex@0.16.44/dist/katex.min.css'
+      href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600&display=swap'
     }],
     // Favicon
     ['link', { rel: 'icon', href: '/my-note/logo.svg' }],
