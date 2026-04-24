@@ -9,7 +9,11 @@
     "docs:preview": "vitepress preview docs",
     "lint": "eslint . --fix",
     "format": "prettier --write \"docs/.vitepress/**/*.{js,mjs,vue}\"",
-    "lint:css": "stylelint \"docs/.vitepress/**/*.{css,vue}\" --fix"
+    "lint:css": "stylelint \"docs/.vitepress/**/*.{css,vue}\" --fix",
+    "sync": "node scripts/sync-index.mjs",
+    "clean": "node scripts/clean-cites.mjs",
+    "push": "node scripts/push.mjs",
+    "admin": "node scripts/admin.mjs"
   },
   "repository": {
     "type": "git",

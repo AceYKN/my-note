@@ -11,16 +11,27 @@ description: 软件工程学习笔记，基于 Ian Sommerville 教材，涵盖�
 
 <div class="se-section">
   <h2>📖 Notes by Chapter</h2>
+  <!-- sync-start: notesbychap -->
   <div class="file-grid">
+    <a class="file-card" href="/my-note/cs/se/notesbychap/">
+      <span class="file-icon">📄</span>
+      <span class="file-name">.md</span>
+      <span class="file-desc"></span>
+    </a>
     <a class="file-card" href="/my-note/cs/se/notesbychap/chap1">
       <span class="file-icon">📄</span>
-      <span class="file-name">Chapter 1</span>
-      <span class="file-desc">Introduction</span>
+      <span class="file-name">chap1</span>
+      <span class="file-desc"></span>
+    </a>
+    <a class="file-card" href="/my-note/cs/se/notesbychap/chap10">
+      <span class="file-icon">📄</span>
+      <span class="file-name">Test Chapter 10</span>
+      <span class="file-desc"></span>
     </a>
     <a class="file-card" href="/my-note/cs/se/notesbychap/chap2">
       <span class="file-icon">📄</span>
-      <span class="file-name">Chapter 2</span>
-      <span class="file-desc">Software Processes</span>
+      <span class="file-name">chap2</span>
+      <span class="file-desc"></span>
     </a>
     <a class="file-card" href="/my-note/cs/se/notesbychap/chap3">
       <span class="file-icon">📄</span>
@@ -39,8 +50,8 @@ description: 软件工程学习笔记，基于 Ian Sommerville 教材，涵盖�
     </a>
     <a class="file-card" href="/my-note/cs/se/notesbychap/chap6">
       <span class="file-icon">📄</span>
-      <span class="file-name">Chapter 6</span>
-      <span class="file-desc">Architectural Design</span>
+      <span class="file-name">Executive Summary</span>
+      <span class="file-desc"></span>
     </a>
     <a class="file-card" href="/my-note/cs/se/notesbychap/chap7">
       <span class="file-icon">📄</span>
@@ -49,15 +60,16 @@ description: 软件工程学习笔记，基于 Ian Sommerville 教材，涵盖�
     </a>
     <a class="file-card" href="/my-note/cs/se/notesbychap/chap8">
       <span class="file-icon">📄</span>
-      <span class="file-name">Chapter 8</span>
-      <span class="file-desc">Software Testing</span>
+      <span class="file-name">**Executive Summary**</span>
+      <span class="file-desc"></span>
     </a>
     <a class="file-card" href="/my-note/cs/se/notesbychap/chap9">
       <span class="file-icon">📄</span>
-      <span class="file-name">Chapter 9</span>
-      <span class="file-desc">Software Evolution</span>
+      <span class="file-name">Executive Summary</span>
+      <span class="file-desc"></span>
     </a>
   </div>
+  <!-- sync-end: notesbychap -->
 </div>
 
 <div class="se-section">
