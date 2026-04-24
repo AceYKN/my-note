@@ -24,15 +24,22 @@ const ROOT = resolve(__dirname, '..')
 const DOCS_ROOT = join(ROOT, 'docs')
 const VITEPRESS_BASE = '/my-note'
 
-/** 从 markdown 文件第一个 # 标题里提取 title 和 desc */
+/** 从 markdown 文件提取 title 和 desc，优先 frontmatter，其次第一行标题 */
 function parseTitle(filePath) {
   let content = ''
   try { content = readFileSync(filePath, 'utf-8') } catch { /* empty file */ }
+  // 去掉 BOM
+  content = content.replace(/^\uFEFF/, '')
 
-  for (const line of content.split('\n')) {
-    const m = line.match(/^#+\s+(.+)/)
-    if (m) {
-      const heading = m[1].trim()
+  // 1. 尝试 frontmatter title
+  const fmMatch = content.match(/^---[\s\S]*?^title:\s*(.+)/m)
+  if (fmMatch) return { title: fmMatch[1].trim(), desc: '' }
+
+  // 2. 优先找 h1（只取第一个 # 标题，不限于 ## 以内，避免跳过 h1 去读 h2）
+  const h1Match = content.match(/^#\s+(.+)/m)
+  if (h1Match) {
+    const heading = h1Match[1].trim().replace(/\*\*/g, '')
+    if (!/^executive summary$/i.test(heading)) {
       const colonIdx = heading.indexOf(': ')
       const dashIdx  = heading.indexOf(' - ')
       if (colonIdx !== -1) return { title: heading.slice(0, colonIdx).trim(), desc: heading.slice(colonIdx + 2).trim() }
@@ -40,8 +47,12 @@ function parseTitle(filePath) {
       return { title: heading, desc: '' }
     }
   }
-  // fallback 到文件名
-  return { title: basename(filePath, '.md'), desc: '' }
+
+  // 3. fallback：chapN → Chapter N，其他就用文件名
+  const base = basename(filePath, '.md')
+  const chapMatch = base.match(/^chap(\d+)$/i)
+  if (chapMatch) return { title: `Chapter ${chapMatch[1]}`, desc: '' }
+  return { title: base, desc: '' }
 }
 
 /** 生成单个 file-card HTML */
@@ -65,9 +76,9 @@ const absDir   = resolve(ROOT, notesDir)
 const dirName  = basename(absDir)
 const indexPath = join(absDir, '..', 'index.md')
 
-// 读取目录下所有 .md（按文件名排序，排除 index.md）
+// 读取目录下所有 .md（按文件名排序，排除 index.md，排除空 basename 的文件如 .md）
 const files = readdirSync(absDir)
-  .filter(f => f.endsWith('.md') && f !== 'index.md')
+  .filter(f => f.endsWith('.md') && f !== 'index.md' && basename(f, '.md') !== '')
   .sort()
 
 // 相对于 docs/ 的路径，用于拼 URL
