@@ -43,7 +43,8 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: '数学 · Math', link: '/math/math' },
       { text: '開発 · Dev', link: '/code/cpp-start' },
-      { text: 'Computer Science', link: '/cs/' }
+      { text: 'Computer Science', link: '/cs/' },
+      { text: '語言 · Language', link: '/language/' }
     ],
 
     // 侧边栏 — 从文件系统自动生成，无需手动维护
