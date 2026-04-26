@@ -67,6 +67,11 @@ description: "操作系统学习笔记、作业、复习题目，教材 William 
       <span class="file-name">Chap. 6 Note</span>
       <span class="file-desc">Concurrency: Deadlock and Starvation</span>
     </a>
+    <a class="file-card" href="/my-note/cs/os/note/chap9">
+      <span class="file-icon">📄</span>
+      <span class="file-name">Chap. 9 Note</span>
+      <span class="file-desc">Uniprocessor Scheduling</span>
+    </a>
   </div>
 </div>
 
