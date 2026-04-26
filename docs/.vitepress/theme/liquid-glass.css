@@ -220,7 +220,7 @@
 }
 
 .dark .lg-background {
-  background: #07071a;
+  background: #060a12;
 }
 
 /* Layer A — 6-color floating orbs */
@@ -251,20 +251,20 @@
 
 .dark .lg-background::before {
   background:
-    radial-gradient(ellipse 900px 800px at 15% 25%, rgb(20 55 120 / 22%) 0%, transparent 65%),
+    radial-gradient(ellipse 900px 800px at 15% 25%, rgb(28 70 138 / 18%) 0%, transparent 65%),
     /* 藍 dark */
-    radial-gradient(ellipse 700px 650px at 80% 16%, rgb(110 40 75 / 16%) 0%, transparent 65%),
-    /* 桜 dark */
-    radial-gradient(ellipse 1000px 850px at 48% 75%, rgb(55 42 110 / 20%) 0%, transparent 65%),
-    /* 藤 dark */
-    radial-gradient(ellipse 550px 550px at 88% 80%, rgb(15 65 35 / 14%) 0%, transparent 65%),
+    radial-gradient(ellipse 700px 650px at 80% 16%, rgb(26 52 88 / 12%) 0%, transparent 65%),
+    /* slate blue dark */
+    radial-gradient(ellipse 1000px 850px at 48% 75%, rgb(22 44 90 / 16%) 0%, transparent 65%),
+    /* cool navy dark */
+    radial-gradient(ellipse 550px 550px at 88% 80%, rgb(16 58 44 / 10%) 0%, transparent 65%),
     /* 若草 dark */
-    radial-gradient(ellipse 650px 600px at 5% 85%, rgb(90 28 55 / 15%) 0%, transparent 65%),
-    /* 撫子 dark */
-    radial-gradient(ellipse 800px 700px at 60% 42%, rgb(40 30 150 / 18%) 0%, transparent 65%);
+    radial-gradient(ellipse 650px 600px at 5% 85%, rgb(20 42 72 / 10%) 0%, transparent 65%),
+    /* cool shadow dark */
+    radial-gradient(ellipse 800px 700px at 60% 42%, rgb(34 64 126 / 14%) 0%, transparent 65%);
 
-    /* 紫堇 dark */
-  filter: blur(80px);
+    /* neutral indigo dark */
+  filter: blur(96px);
 }
 
 /* Layer B — Aurora: ultra-subtle slow hue-rotating prismatic shimmer */
@@ -292,17 +292,17 @@
 }
 
 .dark .lg-background::after {
-  opacity: 0.18;
+  opacity: 0.12;
   mix-blend-mode: soft-light;
   background-image:
     url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"),
     linear-gradient(
       115deg,
-      rgb(80 60 220 / 8%) 0%,
-      rgb(40 100 200 / 5%) 25%,
-      rgb(60 45 220 / 7%) 50%,
-      rgb(40 100 200 / 5%) 75%,
-      rgb(80 60 220 / 8%) 100%
+      rgb(32 76 148 / 5%) 0%,
+      rgb(34 90 140 / 3%) 25%,
+      rgb(24 58 108 / 4%) 50%,
+      rgb(34 90 140 / 3%) 75%,
+      rgb(32 76 148 / 5%) 100%
     );
   background-size: 256px 256px, 400% 400%;
 }
