@@ -9,7 +9,8 @@
     "docs:preview": "vitepress preview docs",
     "lint": "eslint . --fix",
     "format": "prettier --write \"docs/.vitepress/**/*.{js,mjs,vue}\"",
-    "lint:css": "stylelint \"docs/.vitepress/**/*.{css,vue}\" --fix"
+    "lint:css": "stylelint \"docs/.vitepress/**/*.{css,vue}\" --fix",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -25,14 +26,25 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@mdit/plugin-katex": "^0.25.2",
-    "eslint": "^10.1.0",
+    "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-vue": "^10.8.0",
-    "katex": "^0.16.44",
-    "prettier": "^3.8.1",
-    "stylelint": "^17.6.0",
+    "eslint-plugin-vue": "^10.9.0",
+    "husky": "^9.1.7",
+    "katex": "^0.16.45",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.8.3",
+    "stylelint": "^17.9.1",
     "stylelint-config-standard": "^40.0.0",
     "vitepress": "^1.6.4",
-    "vue": "^3.5.25"
+    "vue": "^3.5.33"
+  },
+  "lint-staged": {
+    "docs/.vitepress/**/*.{js,mjs,vue}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "docs/.vitepress/**/*.css": [
+      "stylelint --fix"
+    ]
   }
 }

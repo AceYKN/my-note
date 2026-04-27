@@ -22,14 +22,30 @@ import path from 'node:path'
 // 目录名 → 侧边栏显示名 (可选映射，作为兜底)
 // ============================================================
 const FALLBACK_DIR_NAMES = {
+  // 数学
   abstract_algebra: '抽象代数',
   math_analysis: '数学分析',
   ode: '常微分方程',
+  math: '数学',
+  // 计算机科学
+  cs: '计算机科学',
   os: '操作系统',
   algo: '算法设计与分析',
   db: '数据库系统',
+  se: '软件工程',
+  code: '编程入门',
+  // 语言
+  language: '言語',
+  deutsch: 'Deutsch',
+  nihongo: '日本語',
+  'german-for-reading': 'German for Reading',
+  // 通用
+  notes: 'ノート',
+  note: 'ノート',
+  notesbychap: '章節ノート',
+  review: '復習',
   pastpapers: '過去問',
-  HW: '宿題',
+  HW: '宿題'
 }
 
 // 不参与侧边栏生成的顶级目录
@@ -85,7 +101,7 @@ function getDirDisplayName(dirPath, dirName) {
   if (FALLBACK_DIR_NAMES[dirName]) return FALLBACK_DIR_NAMES[dirName]
 
   // 5. 将下划线转为空格并首字母大写
-  return dirName.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+  return dirName.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
 /** 从一个 .md 文件中提取元信息 */
@@ -134,18 +150,19 @@ function collectFiles(dirPath, urlPrefix) {
     items.push({
       text: meta.title,
       link: `${urlPrefix}${entry.name.replace(/\.md$/, '')}`,
-      order: meta.order,
+      order: meta.order
     })
   }
 
   items.sort((a, b) => a.order - b.order)
-  return items.map(({ order, ...rest }) => rest)
+  // eslint-disable-next-line no-unused-vars
+  return items.map(({ order: _order, ...rest }) => rest)
 }
 
 /** 扫描一个顶级目录，生成其侧边栏配置 */
 function buildSidebarForDir(dirPath, urlPrefix) {
   const entries = fs.readdirSync(dirPath, { withFileTypes: true })
-  const subDirs = entries.filter(e => e.isDirectory() && !e.name.startsWith('.'))
+  const subDirs = entries.filter((e) => e.isDirectory() && !e.name.startsWith('.'))
   const result = []
 
   // 子目录 → 折叠分组（递归支持多层嵌套）
@@ -156,7 +173,7 @@ function buildSidebarForDir(dirPath, urlPrefix) {
     result.push({
       text: getDirDisplayName(subPath, dir.name),
       collapsed: true,
-      items,
+      items
     })
   }
 
@@ -182,9 +199,7 @@ function registerSidebarKeys(sidebar, dirPath, urlPrefix, groupText) {
   if (items.length === 0) return
 
   // 注册当前目录为独立 key
-  sidebar[urlPrefix] = groupText
-    ? [{ text: groupText, items }]
-    : items
+  sidebar[urlPrefix] = groupText ? [{ text: groupText, items }] : items
 
   // 递归注册所有子目录为独立 key（支持任意深度嵌套）
   const entries = fs.readdirSync(dirPath, { withFileTypes: true })

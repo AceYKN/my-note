@@ -47,6 +47,17 @@ jobs:
         # 这里会运行 package.json 里的 docs:build 命令
         run: npm run docs:build
 
+      - name: Check broken links
+        # lychee 检查构建产物中的内部链接（排除外部链接避免网络超时）
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >
+            --offline
+            --include-fragments
+            --base docs/.vitepress/dist
+            docs/.vitepress/dist/**/*.html
+          fail: true
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

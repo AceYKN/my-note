@@ -47,9 +47,8 @@ const breadcrumbs = computed(() => {
     const isLast = index === parts.length - 1
 
     // 优先从侧边栏数据查找，最后段回退到页面标题，否则用原始路径段
-    const displayName = sidebarTextMap.value.get(currentPath)
-      || (isLast ? page.value.title : null)
-      || part
+    const displayName =
+      sidebarTextMap.value.get(currentPath) || (isLast ? page.value.title : null) || part
 
     crumbs.push({
       text: displayName,
@@ -65,33 +64,29 @@ const breadcrumbs = computed(() => {
 <template>
   <nav v-if="breadcrumbs.length > 1" class="breadcrumb" aria-label="Breadcrumb">
     <ol class="breadcrumb-list">
-      <li 
-        v-for="(crumb, index) in breadcrumbs" 
+      <li
+        v-for="(crumb, index) in breadcrumbs"
         :key="index"
         class="breadcrumb-item"
         :class="{ active: crumb.active }"
       >
-        <a 
-          v-if="crumb.link && !crumb.active" 
-          :href="withBase(crumb.link)"
-          class="breadcrumb-link"
-        >
+        <a v-if="crumb.link && !crumb.active" :href="withBase(crumb.link)" class="breadcrumb-link">
           {{ crumb.text }}
         </a>
         <span v-else class="breadcrumb-text">
           {{ crumb.text }}
         </span>
-        <svg 
-          v-if="index < breadcrumbs.length - 1" 
+        <svg
+          v-if="index < breadcrumbs.length - 1"
           class="breadcrumb-separator"
-          xmlns="http://www.w3.org/2000/svg" 
-          width="16" 
-          height="16" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          stroke-width="2" 
-          stroke-linecap="round" 
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
           stroke-linejoin="round"
         >
           <polyline points="9 18 15 12 9 6"></polyline>
@@ -105,12 +100,12 @@ const breadcrumbs = computed(() => {
 .breadcrumb {
   margin-bottom: 24px;
   padding: 10px 16px;
-  background: var(--lg-glass-bg, rgba(255,255,255,0.38));
+  background: var(--lg-glass-bg, rgba(255, 255, 255, 0.38));
   backdrop-filter: blur(32px) saturate(160%);
   -webkit-backdrop-filter: blur(32px) saturate(160%);
-  border: 1px solid var(--lg-glass-border-subtle, rgba(255,255,255,0.22));
+  border: 1px solid var(--lg-glass-border-subtle, rgba(255, 255, 255, 0.22));
   border-radius: 999px;
-  box-shadow: inset 0 1px 1px rgba(255,255,255,0.5);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
   animation: fadeInDown 0.4s ease-out;
   display: inline-flex;
 }
@@ -133,7 +128,7 @@ const breadcrumbs = computed(() => {
 }
 
 .breadcrumb-link {
-  color: var(--lg-text-secondary, rgba(0,0,0,0.55));
+  color: var(--lg-text-secondary, rgba(0, 0, 0, 0.55));
   text-decoration: none;
   padding: 4px 8px;
   border-radius: 6px;
@@ -143,11 +138,11 @@ const breadcrumbs = computed(() => {
 
 .breadcrumb-link:hover {
   color: var(--lg-accent, #7b8cff);
-  background: rgba(255,255,255,0.25);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .breadcrumb-text {
-  color: var(--lg-text-primary, rgba(0,0,0,0.88));
+  color: var(--lg-text-primary, rgba(0, 0, 0, 0.88));
   font-weight: 600;
   padding: 4px 8px;
 }
@@ -157,7 +152,7 @@ const breadcrumbs = computed(() => {
 }
 
 .breadcrumb-separator {
-  color: var(--lg-text-tertiary, rgba(0,0,0,0.35));
+  color: var(--lg-text-tertiary, rgba(0, 0, 0, 0.35));
   opacity: 0.5;
 }
 
@@ -175,8 +170,33 @@ const breadcrumbs = computed(() => {
 @media (max-width: 768px) {
   .breadcrumb {
     font-size: 0.85em;
+    max-width: 100%;
+    overflow-x: auto;
+    /* 允许横向滚动以容纳长路径 */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    flex-wrap: nowrap;
   }
-  
+
+  .breadcrumb::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  .breadcrumb-list {
+    flex-wrap: nowrap;
+    min-width: max-content;
+  }
+
+  /* 当路径超过 3 段时，中间项缩短为最多 8 个字符并加省略号 */
+  .breadcrumb-item:not(:first-child):not(:last-child) .breadcrumb-link {
+    max-width: 6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+
   .breadcrumb-link,
   .breadcrumb-text {
     padding: 2px 4px;

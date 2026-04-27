@@ -18,17 +18,40 @@ export default defineConfig({
     hostname: 'https://aceykn.github.io/my-note/',
     lastmod: true,
     changefreq: 'weekly',
-    transformItems: (items) => items
-      .filter(item => !item.url.includes('404'))
-      .map(item => ({
-        ...item,
-        priority: item.url.split('/').length <= 3 ? 0.9 : 0.7
-      }))
+    transformItems: (items) =>
+      items
+        .filter((item) => !item.url.includes('404'))
+        .map((item) => {
+          const url = item.url
+          // 首页与各科目入口页最高优先级
+          const isRoot = url === '' || url === 'index.html'
+          const isIndex = url.endsWith('/') || url.endsWith('index.html')
+          // 高价值复习/总结页
+          const isHighValue = /\/(review|prob|Def|fill-in-the-blanks|mcq|shortans|TorF)/.test(url)
+          // 计算路径深度
+          const depth = url.split('/').length
+
+          let priority
+          if (isRoot) {
+            priority = 1.0
+          } else if (isIndex && depth <= 3) {
+            priority = 0.9
+          } else if (isHighValue) {
+            priority = 0.85
+          } else if (depth <= 3) {
+            priority = 0.8
+          } else {
+            priority = 0.6
+          }
+
+          return { ...item, priority }
+        })
   },
 
   // 2. 网站基本元数据
-  title: "Studiorum",
-  description: "AceYKN 的学习笔记整理 — 数学、计算机科学、软件工程课程笔记、习题与过去问汇总。Studiorum by AceYKN.",
+  title: 'Studiorum',
+  description:
+    'AceYKN 的学习笔记整理 — 数学、计算机科学、软件工程课程笔记、习题与过去问汇总。Studiorum by AceYKN.',
   lang: 'zh-CN',
   lastUpdated: true, // 显示最后更新时间
 
@@ -86,9 +109,7 @@ export default defineConfig({
     },
 
     // 社交链接
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/AceYKN/my-note' }
-    ],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/AceYKN/my-note' }],
 
     // 文章大纲 (右侧目录)
     outline: {
@@ -110,7 +131,8 @@ export default defineConfig({
 
     // 页脚
     footer: {
-      message: '本サイトのコンテンツの一部はAIにより生成されています。内容の正確性についてはご自身でご確認ください。',
+      message:
+        '本サイトのコンテンツの一部はAIにより生成されています。内容の正確性についてはご自身でご確認ください。',
       copyright: 'CC0 1.0 パブリックドメイン — AceYKN は著作権を放棄します'
     }
   },
@@ -122,10 +144,10 @@ export default defineConfig({
       md.use(katex)
 
       // 构建时直接把 <table> 包裹在 <div class="table-container"> 中，零客户端开销
-      md.renderer.rules.table_open = function(tokens, idx, options, env, self) {
+      md.renderer.rules.table_open = function (tokens, idx, options, env, self) {
         return '<div class="table-container">' + self.renderToken(tokens, idx, options)
       }
-      md.renderer.rules.table_close = function(tokens, idx, options, env, self) {
+      md.renderer.rules.table_close = function (tokens, idx, options, env, self) {
         return self.renderToken(tokens, idx, options) + '</div>'
       }
     },
@@ -152,19 +174,36 @@ export default defineConfig({
   // 6. Head 配置 - 字体预加载和子集化
   head: [
     // 预加载关键字体（仅加载拉丁字符集）
-    ['link', {
-      rel: 'preconnect',
-      href: 'https://fonts.googleapis.com'
-    }],
-    ['link', {
-      rel: 'preconnect',
-      href: 'https://fonts.gstatic.com',
-      crossorigin: ''
-    }],
-    ['link', {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600&display=swap'
-    }],
+    [
+      'link',
+      {
+        rel: 'dns-prefetch',
+        href: 'https://fonts.googleapis.com'
+      }
+    ],
+    [
+      'link',
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com'
+      }
+    ],
+    [
+      'link',
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: ''
+      }
+    ],
+    // Inter（拉丁）+ Noto Sans SC（简体中文子集），确保非 Apple 平台 CJK 字符一致渲染
+    [
+      'link',
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600&family=Noto+Sans+SC:wght@400;600&display=swap'
+      }
+    ],
     // Favicon
     ['link', { rel: 'icon', href: '/my-note/logo.svg' }],
     // Meta tags
@@ -172,12 +211,16 @@ export default defineConfig({
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'zh_CN' }],
     ['meta', { property: 'og:site_name', content: 'Studiorum — AceYKN 的学习笔记' }],
-    ['meta', { name: 'keywords', content: 'AceYKN,学习笔记,笔记整理,数学笔记,计算机科学,操作系统,算法,数据库,软件工程,抽象代数,数学分析,常微分方程,Studiorum' }],
-    // Google Analytics
     [
-      'script',
-      { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-DMLQNKGTNZ' }
+      'meta',
+      {
+        name: 'keywords',
+        content:
+          'AceYKN,学习笔记,笔记整理,数学笔记,计算机科学,操作系统,算法,数据库,软件工程,抽象代数,数学分析,常微分方程,Studiorum'
+      }
     ],
+    // Google Analytics
+    ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-DMLQNKGTNZ' }],
     [
       'script',
       {},
@@ -214,32 +257,34 @@ export default defineConfig({
     head.push(['meta', { property: 'og:image', content: ogImage }])
 
     // 判断是否为学术笔记页面
-    const isAcademic = /\/(math|cs|os|algo|db|se|ode|abstract_algebra|math_analysis)\//.test(pageData.relativePath)
+    const isAcademic = /\/(math|cs|os|algo|db|se|ode|abstract_algebra|math_analysis)\//.test(
+      pageData.relativePath
+    )
 
     // 为文章生成 JSON-LD 结构化数据
     const datePublished = pageData.frontmatter.date || new Date().toISOString().split('T')[0]
     const jsonLd = {
-      "@context": "https://schema.org",
-      "@type": isAcademic ? ["Article", "LearningResource"] : "Article",
-      "headline": title,
-      "description": description,
-      "url": pageUrl,
-      "author": {
-        "@type": "Person",
-        "name": "AceYKN"
+      '@context': 'https://schema.org',
+      '@type': isAcademic ? ['Article', 'LearningResource'] : 'Article',
+      headline: title,
+      description: description,
+      url: pageUrl,
+      author: {
+        '@type': 'Person',
+        name: 'AceYKN'
       },
-      "datePublished": datePublished,
-      "image": ogImage
+      datePublished: datePublished,
+      image: ogImage
     }
 
     // 学术笔记额外补充 LearningResource 字段
     if (isAcademic) {
-      jsonLd.educationalLevel = "undergraduate"
-      jsonLd.learningResourceType = "lecture notes"
-      jsonLd.inLanguage = "zh-CN"
+      jsonLd.educationalLevel = 'undergraduate'
+      jsonLd.learningResourceType = 'lecture notes'
+      jsonLd.inLanguage = 'zh-CN'
       jsonLd.provider = {
-        "@type": "Person",
-        "name": "AceYKN"
+        '@type': 'Person',
+        name: 'AceYKN'
       }
     }
 
