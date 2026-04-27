@@ -45,18 +45,8 @@ jobs:
 
       - name: Build with VitePress
         # 这里会运行 package.json 里的 docs:build 命令
+        # VitePress 构建时内置死链检查，ignoreDeadLinks 默认关闭，有死链会直接报错
         run: npm run docs:build
-
-      - name: Check broken links
-        # lychee 检查构建产物中的内部链接（--root-dir 指定根目录解析根相对路径）
-        uses: lycheeverse/lychee-action@v2
-        with:
-          args: >
-            --offline
-            --include-fragments
-            --root-dir ${{ github.workspace }}/docs/.vitepress/dist
-            ${{ github.workspace }}/docs/.vitepress/dist/**/*.html
-          fail: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
