@@ -40,11 +40,10 @@ export default defineConfig({
     logo: '/logo.svg',
     // 顶部导航栏
     nav: [
-      { text: 'Home', link: '/' },
-      { text: '数学 · Math', link: '/math/math' },
-      { text: '開発 · Dev', link: '/code/cpp-start' },
-      { text: 'Computer Science', link: '/cs/' },
-      { text: '語言 · Language', link: '/language/' }
+      { text: '數學', link: '/math/math' },
+      { text: '開発', link: '/code/cpp-start' },
+      { text: '電腦', link: '/cs/' },
+      { text: '言語', link: '/language/' }
     ],
 
     // 侧边栏 — 从文件系统自动生成，无需手动维护
