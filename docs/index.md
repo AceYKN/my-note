@@ -25,3 +25,5 @@ features:
 ---
 
 <StatsDisplay />
+
+<TaipeiTime />

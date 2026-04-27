@@ -9,6 +9,7 @@ import ReadingProgress from '../components/ReadingProgress.vue'
 import BackToTop from '../components/BackToTop.vue'
 import Breadcrumb from '../components/Breadcrumb.vue'
 import SeasonBadge from '../components/SeasonBadge.vue'
+import TaipeiTime from '../components/TaipeiTime.vue'
 
 export default {
   extends: DefaultTheme,
@@ -20,6 +21,7 @@ export default {
     app.component('BackToTop', BackToTop)
     app.component('Breadcrumb', Breadcrumb)
     app.component('SeasonBadge', SeasonBadge)
+    app.component('TaipeiTime', TaipeiTime)
 
     // View Transitions API — 页面切换过渡
     if (typeof document !== 'undefined' && 'startViewTransition' in document) {
