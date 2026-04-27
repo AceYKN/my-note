@@ -1,8 +1,5 @@
 <script setup>
 import { computed } from 'vue'
-import { useData } from 'vitepress'
-
-const { page } = useData()
 
 const season = computed(() => {
   const month = new Date().getMonth() + 1
@@ -11,15 +8,6 @@ const season = computed(() => {
   if (month >= 6 && month <= 8)  return { kanji: '夏', en: 'Summer', color: 'wakakusa', year }
   if (month >= 9 && month <= 11) return { kanji: '秋', en: 'Autumn', color: 'fuji', year }
   return { kanji: '冬', en: 'Winter', color: 'ai', year }
-})
-
-const lastUpdated = computed(() => {
-  const ts = page.value.lastUpdated
-  if (!ts) return ''
-  const date = new Date(ts)
-  const datePart = date.toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' })
-  const weekday = date.toLocaleDateString('ja-JP', { weekday: 'narrow' })
-  return `${datePart}（${weekday}曜日）`
 })
 
 const greeting = computed(() => {

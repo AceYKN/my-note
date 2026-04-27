@@ -3,5 +3,17 @@
   "rules": {
     "selector-class-pattern": null,
     "custom-property-pattern": null
-  }
+  },
+  "overrides": [
+    {
+      "files": ["docs/.vitepress/theme/liquid-glass.css"],
+      "rules": {
+        "no-duplicate-selectors": null,
+        "declaration-block-no-duplicate-properties": null,
+        "property-no-vendor-prefix": null,
+        "declaration-property-value-keyword-no-deprecated": null,
+        "no-descending-specificity": null
+      }
+    }
+  ]
 }

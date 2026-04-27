@@ -6,6 +6,26 @@ export default [
   { ignores: ['docs/.vitepress/dist/**', 'docs/.vitepress/cache/**', 'node_modules/**'] },
   js.configs.recommended,
   ...vue.configs['flat/recommended'],
+  {
+    files: ['docs/.vitepress/config.mjs'],
+    languageOptions: {
+      globals: {
+        process: 'readonly'
+      }
+    }
+  },
+  {
+    files: ['docs/.vitepress/**/*.{js,vue}'],
+    languageOptions: {
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        fetch: 'readonly',
+        AbortController: 'readonly',
+        performance: 'readonly'
+      }
+    }
+  },
   prettier,
   {
     rules: {
