@@ -48,14 +48,14 @@ jobs:
         run: npm run docs:build
 
       - name: Check broken links
-        # lychee 检查构建产物中的内部链接（排除外部链接避免网络超时）
+        # lychee 检查构建产物中的内部链接（--root-dir 指定根目录解析根相对路径）
         uses: lycheeverse/lychee-action@v2
         with:
           args: >
             --offline
             --include-fragments
-            --base docs/.vitepress/dist
-            docs/.vitepress/dist/**/*.html
+            --root-dir ${{ github.workspace }}/docs/.vitepress/dist
+            ${{ github.workspace }}/docs/.vitepress/dist/**/*.html
           fail: true
 
       - name: Upload artifact
