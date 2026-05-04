@@ -1,3 +1,8 @@
+---
+title: Chap. 9 Note
+order: 9
+---
+
 # 单处理器调度（Uniprocessor Scheduling）
 
 ---
