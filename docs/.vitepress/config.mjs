@@ -7,6 +7,29 @@ import path from 'node:path'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const docsDir = path.resolve(__dirname, '..')
 
+/** Vite 插件：监听 .md 文件新增/删除，自动重启 dev server 以更新侧边栏 */
+function sidebarWatcherPlugin() {
+  return {
+    name: 'sidebar-watcher',
+    configureServer(server) {
+      // 监听 docs 目录下所有 .md 文件的新增和删除
+      server.watcher.add(path.join(docsDir, '**/*.md'))
+      server.watcher.on('add', (file) => {
+        if (file.endsWith('.md')) {
+          console.log(`[sidebar-watcher] New file detected: ${file}, restarting...`)
+          server.restart()
+        }
+      })
+      server.watcher.on('unlink', (file) => {
+        if (file.endsWith('.md')) {
+          console.log(`[sidebar-watcher] File removed: ${file}, restarting...`)
+          server.restart()
+        }
+      })
+    }
+  }
+}
+
 export default defineConfig({
   // ==========================================
   // 1. 核心部署配置 (解决样式不显示的关键)
@@ -159,6 +182,7 @@ export default defineConfig({
 
   // 5. Vite 配置（代码高亮主题）
   vite: {
+    plugins: [sidebarWatcherPlugin()],
     ssr: {
       noExternal: ['mark.js']
     },

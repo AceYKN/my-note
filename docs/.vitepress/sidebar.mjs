@@ -194,21 +194,22 @@ function buildSidebarForDir(dirPath, urlPrefix) {
  * 该 key 的 sidebar 才会被激活。因此三级目录 /cs/os/HW/ 必须有自己的 key，
  * 否则访问其中的页面时 VitePress 找不到对应 sidebar 而显示空白。
  */
-function registerSidebarKeys(sidebar, dirPath, urlPrefix, groupText) {
-  const items = buildSidebarForDir(dirPath, urlPrefix)
+function registerSidebarKeys(sidebar, dirPath, urlPrefix, groupText, sharedItems = null) {
+  // 若父目录已构建好完整 items，子目录直接复用（共享同一份侧边栏）
+  const items = sharedItems ?? buildSidebarForDir(dirPath, urlPrefix)
   if (items.length === 0) return
 
   // 注册当前目录为独立 key
   sidebar[urlPrefix] = groupText ? [{ text: groupText, items }] : items
 
-  // 递归注册所有子目录为独立 key（支持任意深度嵌套）
+  // 递归注册所有子目录，共享父目录完整的 items，
+  // 确保无论浏览哪个子页面都能看到完整课程侧边栏
   const entries = fs.readdirSync(dirPath, { withFileTypes: true })
   for (const entry of entries) {
     if (!entry.isDirectory() || entry.name.startsWith('.')) continue
     const subDirPath = path.join(dirPath, entry.name)
     const subPrefix = `${urlPrefix}${entry.name}/`
-    // 子目录沿用父目录的分组标题（即课程名），不再新建标题
-    registerSidebarKeys(sidebar, subDirPath, subPrefix, groupText)
+    registerSidebarKeys(sidebar, subDirPath, subPrefix, groupText, items)
   }
 }
 
