@@ -41,22 +41,22 @@ onUnmounted(() => {
       @click="scrollToTop"
     >
       <!-- Progress ring -->
-      <svg class="progress-ring" width="54" height="54" viewBox="0 0 54 54" aria-hidden="true">
+      <svg class="progress-ring" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
         <circle
           class="progress-ring__track"
-          cx="27"
-          cy="27"
+          cx="24"
+          cy="24"
           :r="RADIUS"
           fill="none"
-          stroke-width="2.5"
+          stroke-width="3"
         />
         <circle
           class="progress-ring__arc"
-          cx="27"
-          cy="27"
+          cx="24"
+          cy="24"
           :r="RADIUS"
           fill="none"
-          stroke-width="2.5"
+          stroke-width="3"
           stroke-linecap="round"
           :stroke-dasharray="CIRCUMFERENCE"
           :stroke-dashoffset="strokeDashoffset"
@@ -90,30 +90,37 @@ onUnmounted(() => {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--lg-glass-bg, rgba(255, 255, 255, 0.38));
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  color: var(--lg-accent, #2a5fa0);
-  border: 1px solid var(--lg-glass-border, rgba(255, 255, 255, 0.45));
+  background: rgb(255 255 255 / 70%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: none;
+  color: var(--lg-text-secondary);
   cursor: pointer;
-  box-shadow:
-    var(--lg-glass-shadow, 0 8px 32px rgba(0, 0, 0, 0.06)),
-    inset 0 1px 1px rgba(255, 255, 255, 0.6);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  /* SVG ring needs overflow visible */
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
   overflow: visible;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
+}
+
+.dark .back-to-top {
+  background: rgb(255 255 255 / 7%);
+  color: var(--lg-text-secondary);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 30%);
 }
 
 .back-to-top:hover {
-  background: var(--lg-glass-bg-hover, rgba(255, 255, 255, 0.52));
-  transform: translateY(-4px);
-  box-shadow:
-    var(--lg-glass-shadow-elevated, 0 16px 48px rgba(0, 0, 0, 0.1)),
-    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  opacity: 0.85;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 12%);
+}
+
+.dark .back-to-top:hover {
+  box-shadow: 0 8px 28px rgb(0 0 0 / 40%);
 }
 
 .back-to-top:active {
@@ -130,11 +137,11 @@ onUnmounted(() => {
 }
 
 .progress-ring__track {
-  stroke: rgba(0, 0, 0, 0.08);
+  stroke: rgba(0, 0, 0, 0.14);
 }
 
 .dark .progress-ring__track {
-  stroke: rgba(255, 255, 255, 0.08);
+  stroke: rgba(255, 255, 255, 0.18);
 }
 
 .progress-ring__arc {
