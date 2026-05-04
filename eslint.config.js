@@ -7,7 +7,7 @@ export default [
   js.configs.recommended,
   ...vue.configs['flat/recommended'],
   {
-    files: ['docs/.vitepress/**/*.mjs'],
+    files: ['docs/.vitepress/**/*.mjs', 'scripts/**/*.mjs'],
     languageOptions: {
       globals: {
         console: 'readonly',

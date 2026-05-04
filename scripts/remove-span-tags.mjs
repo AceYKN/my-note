@@ -63,7 +63,7 @@ const stat = fs.statSync(target);
 let changed = 0;
 
 if (stat.isFile()) {
-    changed += processFile(target);
+    processFile(target);
 } else if (stat.isDirectory()) {
     const files = walkFiles(target, ext);
     for (const filePath of files) {
