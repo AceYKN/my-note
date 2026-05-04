@@ -10,6 +10,7 @@ import BackToTop from '../components/BackToTop.vue'
 import Breadcrumb from '../components/Breadcrumb.vue'
 import SeasonBadge from '../components/SeasonBadge.vue'
 import TaipeiTime from '../components/TaipeiTime.vue'
+import FontModeToggle from '../components/FontModeToggle.vue'
 
 export default {
   extends: DefaultTheme,
@@ -22,6 +23,7 @@ export default {
     app.component('Breadcrumb', Breadcrumb)
     app.component('SeasonBadge', SeasonBadge)
     app.component('TaipeiTime', TaipeiTime)
+    app.component('FontModeToggle', FontModeToggle)
 
     // View Transitions API — 页面切换过渡
     if (typeof document !== 'undefined' && 'startViewTransition' in document) {

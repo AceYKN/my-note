@@ -1,16 +1,17 @@
 <script setup>
-import DefaultTheme from "vitepress/theme";
-import ReadingProgress from "../components/ReadingProgress.vue";
-import LoadingProgress from "../components/LoadingProgress.vue";
-import BackToTop from "../components/BackToTop.vue";
-import Breadcrumb from "../components/Breadcrumb.vue";
-import { useScrollHideNav } from "../composables/useScrollHideNav";
-import { useOutlineScrollSpy } from "../composables/useOutlineScrollSpy";
+import DefaultTheme from 'vitepress/theme'
+import ReadingProgress from '../components/ReadingProgress.vue'
+import LoadingProgress from '../components/LoadingProgress.vue'
+import BackToTop from '../components/BackToTop.vue'
+import Breadcrumb from '../components/Breadcrumb.vue'
+import FontModeToggle from '../components/FontModeToggle.vue'
+import { useScrollHideNav } from '../composables/useScrollHideNav'
+import { useOutlineScrollSpy } from '../composables/useOutlineScrollSpy'
 
-const { Layout } = DefaultTheme;
+const { Layout } = DefaultTheme
 
-useScrollHideNav();
-useOutlineScrollSpy();
+useScrollHideNav()
+useOutlineScrollSpy()
 </script>
 
 <template>
@@ -26,12 +27,15 @@ useOutlineScrollSpy();
     <template #doc-before>
       <Breadcrumb />
     </template>
-    
+
+    <template #doc-after>
+      <FontModeToggle />
+    </template>
+
     <template #layout-bottom>
       <BackToTop />
     </template>
   </Layout>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -23,7 +23,12 @@ export default [
         document: 'readonly',
         fetch: 'readonly',
         AbortController: 'readonly',
-        performance: 'readonly'
+        performance: 'readonly',
+        localStorage: 'readonly',
+        sessionStorage: 'readonly',
+        requestAnimationFrame: 'readonly',
+        MutationObserver: 'readonly',
+        IntersectionObserver: 'readonly'
       }
     }
   },

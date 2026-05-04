@@ -7,6 +7,11 @@ import path from 'node:path'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const docsDir = path.resolve(__dirname, '..')
 
+// 全局 CJK 字体风格：'TC'（思源繁体）或 'JP'（思源日文）
+const CJK_FONT_VARIANT = 'JP'
+const CJK_FONT_PRIMARY = CJK_FONT_VARIANT === 'JP' ? 'Noto+Serif+JP' : 'Noto+Serif+TC'
+const CJK_FONT_FALLBACK = 'Noto+Serif+SC'
+
 /** Vite 插件：监听 .md 文件新增/删除，自动重启 dev server 以更新侧边栏 */
 function sidebarWatcherPlugin() {
   return {
@@ -152,11 +157,10 @@ export default defineConfig({
       next: 'Next →'
     },
 
-    // 页脚
+    // 頁腳
     footer: {
-      message:
-        '本サイトのコンテンツの一部はAIにより生成されています。内容の正確性についてはご自身でご確認ください。',
-      copyright: 'CC0 1.0 パブリックドメイン — AceYKN は著作権を放棄します'
+      message: '本站所載，間有由 AI 所生成者。其辭義真偽，請君自審之。',
+      copyright: 'CC0 1.0 公有領域 — 盡捐著作權'
     }
   },
 
@@ -220,12 +224,13 @@ export default defineConfig({
         crossorigin: ''
       }
     ],
-    // Inter（拉丁）+ Noto Sans SC（简体中文子集），确保非 Apple 平台 CJK 字符一致渲染
+    // 古典 mode: IBM Plex Serif（英文正文）+ Crimson Pro（英文标题）
+    // 通用: Inter + 思源字形（主字形 + SC 补字）
     [
       'link',
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600&family=Noto+Sans+SC:wght@400;600&display=swap'
+        href: `https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:opsz,wght@14..32,400;14..32,600&family=Noto+Sans+TC:wght@400;600&family=Noto+Sans+SC:wght@400;600&family=${CJK_FONT_PRIMARY}:wght@400;600&family=${CJK_FONT_FALLBACK}:wght@400;600&display=swap`
       }
     ],
     // Favicon
