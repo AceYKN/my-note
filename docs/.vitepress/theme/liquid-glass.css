@@ -875,19 +875,34 @@ body {
 /* --- Headings --- */
 .vp-doc h1 {
   font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho', serif;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  margin-bottom: 48px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 56px;
   text-align: center;
-  background: linear-gradient(135deg, var(--lg-iridescent-1), var(--lg-iridescent-2), var(--lg-iridescent-3));
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: inline-block;
+  color: var(--lg-text-primary);
+  background: none;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+  display: block;
   width: 100%;
   position: relative;
-  padding-top: 12px;
-  font-size: 2.2em;
-  line-height: 1.2;
+  padding-top: 24px;
+  padding-bottom: 28px;
+  font-size: 2.6em;
+  line-height: 1.25;
+}
+
+/* Centered ornamental rule beneath title */
+.vp-doc h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3em;
+  height: 1px;
+  background: var(--lg-accent);
+  opacity: 0.7;
 }
 
 /* Remove the star decoration, keep it clean */
@@ -896,59 +911,38 @@ body {
 }
 
 .vp-doc h2 {
-  margin-top: 56px;
+  margin-top: 72px;
   margin-bottom: 24px;
-  padding: 14px 20px;
-  border-left: 4px solid var(--lg-accent);
-  background: var(--lg-glass-bg);
-  backdrop-filter: var(--lg-backdrop-light);
-  -webkit-backdrop-filter: var(--lg-backdrop-light);
-  border-radius: 0 var(--lg-radius-md) var(--lg-radius-md) 0;
-  box-shadow: var(--lg-glass-shadow), var(--lg-glass-inset-shadow);
-  border-top: 1.5px solid var(--lg-border-bright);
-  border-right: 1px solid var(--lg-border-dim);
-  border-bottom: 1px solid var(--lg-border-dim);
-  font-size: 1.5em;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  padding: 0 0 18px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  background: none;
+  box-shadow: none;
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  font-size: 1.55em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   color: var(--lg-text-primary);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
-/* Subtle top sheen */
+/* Short accent underline — sits atop the full-width divider */
 .vp-doc h2::after {
   content: '';
   position: absolute;
-  top: 0;
+  bottom: -1px;
   left: 0;
-  right: 0;
-  height: 50%;
-  background: linear-gradient(180deg,
-      rgb(255 255 255 / 14%) 0%,
-      transparent 100%);
+  width: 2.2em;
+  height: 2px;
+  background: var(--lg-accent);
+  border-radius: 1px;
   pointer-events: none;
-  border-radius: inherit;
 }
 
 .vp-doc h2::before {
   display: none;
-}
-
-/* Dark mode H2 — clean glass, single accent, no glow */
-.dark .vp-doc h2 {
-  background: rgb(255 255 255 / 5%);
-  border-left-color: rgb(140 120 255 / 80%);
-  border-top-color: rgb(255 255 255 / 12%);
-  box-shadow:
-    0 4px 20px rgb(0 0 0 / 35%),
-    var(--lg-glass-inset-shadow);
-}
-
-.dark .vp-doc h2::after {
-  background: linear-gradient(180deg,
-      rgb(255 255 255 / 6%) 0%,
-      transparent 100%);
 }
 
 .vp-doc h3 {
