@@ -7,16 +7,14 @@ const scrollProgress = ref(0)
 const RADIUS = 21
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
 
-const strokeDashoffset = computed(() =>
-  CIRCUMFERENCE * (1 - scrollProgress.value / 100)
-)
+const strokeDashoffset = computed(() => CIRCUMFERENCE * (1 - scrollProgress.value / 100))
 
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 const handleScroll = () => {
-  requestAnimationFrame(() => {
+  window.requestAnimationFrame(() => {
     const winScroll = document.documentElement.scrollTop || document.body.scrollTop
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
     isVisible.value = winScroll > 300
@@ -39,26 +37,24 @@ onUnmounted(() => {
     <button
       v-if="isVisible"
       class="back-to-top"
-      @click="scrollToTop"
       :aria-label="`Back to top (${Math.round(scrollProgress)}%)`"
+      @click="scrollToTop"
     >
       <!-- Progress ring -->
-      <svg
-        class="progress-ring"
-        width="54"
-        height="54"
-        viewBox="0 0 54 54"
-        aria-hidden="true"
-      >
+      <svg class="progress-ring" width="54" height="54" viewBox="0 0 54 54" aria-hidden="true">
         <circle
           class="progress-ring__track"
-          cx="27" cy="27" :r="RADIUS"
+          cx="27"
+          cy="27"
+          :r="RADIUS"
           fill="none"
           stroke-width="2.5"
         />
         <circle
           class="progress-ring__arc"
-          cx="27" cy="27" :r="RADIUS"
+          cx="27"
+          cy="27"
+          :r="RADIUS"
           fill="none"
           stroke-width="2.5"
           stroke-linecap="round"
@@ -70,7 +66,8 @@ onUnmounted(() => {
       <svg
         class="arrow-icon"
         xmlns="http://www.w3.org/2000/svg"
-        width="18" height="18"
+        width="18"
+        height="18"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -99,8 +96,9 @@ onUnmounted(() => {
   color: var(--lg-accent, #2a5fa0);
   border: 1px solid var(--lg-glass-border, rgba(255, 255, 255, 0.45));
   cursor: pointer;
-  box-shadow: var(--lg-glass-shadow, 0 8px 32px rgba(0, 0, 0, 0.06)),
-              inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  box-shadow:
+    var(--lg-glass-shadow, 0 8px 32px rgba(0, 0, 0, 0.06)),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -113,8 +111,9 @@ onUnmounted(() => {
 .back-to-top:hover {
   background: var(--lg-glass-bg-hover, rgba(255, 255, 255, 0.52));
   transform: translateY(-4px);
-  box-shadow: var(--lg-glass-shadow-elevated, 0 16px 48px rgba(0, 0, 0, 0.1)),
-              inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  box-shadow:
+    var(--lg-glass-shadow-elevated, 0 16px 48px rgba(0, 0, 0, 0.1)),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 .back-to-top:active {
@@ -160,7 +159,9 @@ onUnmounted(() => {
 /* Appear/leave transition */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .fade-enter-from,
