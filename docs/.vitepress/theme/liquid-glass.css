@@ -424,25 +424,15 @@ body {
    ========================================================================== */
 
 /*
- * GLASS ON .VPNav (the transform parent), not .VPNavBar (the child).
- * Applying backdrop-filter on the SAME element that has will-change:transform
- * avoids Chrome's cross-compositing-layer sampling artifacts that cause
- * the dark-mode "flash-to-white" bug when the navbar slides away.
+ * Glass effect on .VPNavBar (NOT .VPNav).
+ * backdrop-filter creates a containing block for position:fixed elements.
+ * .VPNavScreen is position:fixed and lives inside .VPNav — if .VPNav has
+ * backdrop-filter, the screen panel gets clipped to nav height.
+ * Applying glass to .VPNavBar (sibling of .VPNavScreen) avoids this.
  */
 .VPNav {
-  background: var(--lg-glass-bg) !important;
-  backdrop-filter: var(--lg-backdrop-heavy) !important;
-  backdrop-filter: var(--lg-backdrop-heavy) !important;
-  border-bottom: 1px solid var(--lg-glass-border) !important;
-  box-shadow:
-    var(--lg-glass-shadow),
-    var(--lg-glass-inset-shadow) !important;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  will-change: transform;
-  backface-visibility: hidden;
   position: relative;
-
-  /* overflow:hidden removed — it clips flyout dropdown menus */
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
   overflow: visible;
 }
 
@@ -460,7 +450,7 @@ body {
   height: 100%;
   background: var(--lg-specular-combined);
   pointer-events: none;
-  z-index: 1;
+  z-index: -1;
   mix-blend-mode: overlay;
   opacity: 0.9;
 }
@@ -477,21 +467,23 @@ body {
       rgb(255 255 255 / 14%) 0%,
       transparent 100%);
   pointer-events: none;
-  z-index: 1;
+  z-index: -1;
   border-top: 1.5px solid var(--lg-border-bright);
 }
 
-/* VPNavBar is transparent — visual glass is carried by parent .VPNav */
+/* Glass lives on .VPNavBar */
 .VPNavBar {
-  background: transparent !important;
-  backdrop-filter: none !important;
-  border-bottom: none !important;
-  box-shadow: none !important;
+  background: var(--lg-glass-bg) !important;
+  backdrop-filter: var(--lg-backdrop-heavy) !important;
+  border-bottom: 1px solid var(--lg-glass-border) !important;
+  box-shadow:
+    var(--lg-glass-shadow),
+    var(--lg-glass-inset-shadow) !important;
   transition: none !important;
 }
 
 .VPNavBar.screen-open {
-  background: transparent !important;
+  background: var(--lg-glass-bg) !important;
   border-bottom: none !important;
 }
 
@@ -550,49 +542,83 @@ body {
   background: rgb(255 255 255 / 10%) !important;
 }
 
-/* Search trigger glass style */
+/* Search trigger — plain icon on all screens */
 .VPNavBarSearch .DocSearch-Button,
 .VPNavBarSearchButton {
-  background: rgb(255 255 255 / 62%) !important;
-  backdrop-filter: blur(20px) saturate(180%) brightness(102%) !important;
-  backdrop-filter: blur(20px) saturate(180%) brightness(102%) !important;
-  border-top: 1.5px solid rgb(255 255 255 / 90%) !important;
-  border-left: 1px solid rgb(255 255 255 / 70%) !important;
-  border-bottom: 1px solid rgb(0 0 0 / 10%) !important;
-  border-right: 1px solid rgb(0 0 0 / 7%) !important;
-  border-radius: var(--lg-radius-pill) !important;
-  box-shadow:
-    0 4px 16px rgb(0 0 0 / 10%),
-    inset 0 1.5px 0 rgb(255 255 255 / 90%),
-    inset 0 -1px 0 rgb(0 0 0 / 6%) !important;
-  transition: all var(--lg-duration-base) var(--lg-ease) !important;
-  min-width: 180px !important;
-  color: rgb(0 0 0 / 65%) !important;
+  background: none !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 50% !important;
+  min-width: unset !important;
+  color: var(--lg-text-secondary) !important;
+  transition: color var(--lg-duration-fast) var(--lg-ease) !important;
 }
 
 .dark .VPNavBarSearch .DocSearch-Button,
 .dark .VPNavBarSearchButton {
-  background: rgb(255 255 255 / 10%) !important;
-  border-color: rgb(255 255 255 / 28%) rgb(0 0 0 / 30%) rgb(0 0 0 / 40%) rgb(255 255 255 / 20%) !important;
-  color: rgb(255 255 255 / 70%) !important;
-  box-shadow:
-    0 4px 20px rgb(0 0 0 / 35%),
-    inset 0 1.5px 0 rgb(255 255 255 / 22%),
-    inset 0 -1px 0 rgb(0 0 0 / 50%) !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--lg-text-secondary) !important;
 }
 
 .VPNavBarSearch .DocSearch-Button:hover,
 .VPNavBarSearchButton:hover {
-  background: rgb(255 255 255 / 80%) !important;
-  box-shadow:
-    0 6px 24px rgb(0 0 0 / 14%),
-    inset 0 1.5px 0 rgb(255 255 255 / 95%),
-    inset 0 -1px 0 rgb(0 0 0 / 6%) !important;
+  background: none !important;
+  box-shadow: none !important;
+  color: var(--lg-text-primary) !important;
 }
 
 .dark .VPNavBarSearch .DocSearch-Button:hover,
 .dark .VPNavBarSearchButton:hover {
-  background: rgb(255 255 255 / 16%) !important;
+  background: none !important;
+  color: var(--lg-text-primary) !important;
+}
+
+/* Search trigger — elegant bordered pill on wider screens */
+@media (width >= 768px) {
+  .VPNavBarSearch .DocSearch-Button,
+  .VPNavBarSearchButton {
+    background: rgb(255 255 255 / 45%) !important;
+    backdrop-filter: blur(12px) saturate(160%) !important;
+    border: 1px solid rgb(255 255 255 / 65%) !important;
+    border-bottom-color: rgb(0 0 0 / 8%) !important;
+    border-radius: var(--lg-radius-pill) !important;
+    box-shadow:
+      0 2px 8px rgb(0 0 0 / 6%),
+      inset 0 1px 0 rgb(255 255 255 / 80%) !important;
+    min-width: 160px !important;
+    padding: 0 14px !important;
+    color: var(--lg-text-secondary) !important;
+    transition: all var(--lg-duration-base) var(--lg-ease) !important;
+  }
+
+  .dark .VPNavBarSearch .DocSearch-Button,
+  .dark .VPNavBarSearchButton {
+    background: rgb(255 255 255 / 8%) !important;
+    border-color: rgb(255 255 255 / 18%) !important;
+    border-bottom-color: rgb(0 0 0 / 30%) !important;
+    box-shadow:
+      0 2px 12px rgb(0 0 0 / 25%),
+      inset 0 1px 0 rgb(255 255 255 / 12%) !important;
+    color: var(--lg-text-secondary) !important;
+  }
+
+  .VPNavBarSearch .DocSearch-Button:hover,
+  .VPNavBarSearchButton:hover {
+    background: rgb(255 255 255 / 70%) !important;
+    box-shadow:
+      0 4px 16px rgb(0 0 0 / 10%),
+      inset 0 1px 0 rgb(255 255 255 / 95%) !important;
+    color: var(--lg-text-primary) !important;
+  }
+
+  .dark .VPNavBarSearch .DocSearch-Button:hover,
+  .dark .VPNavBarSearchButton:hover {
+    background: rgb(255 255 255 / 14%) !important;
+    color: var(--lg-text-primary) !important;
+  }
 }
 
 /* Theme toggle glass */
@@ -1779,8 +1805,9 @@ html.dark .VPFeature img[src$=".svg"] {
     padding: 12px;
   }
 
-  .VPNavBar .title {
-    font-size: 1em;
+  /* 手機端只顯示 Logo，隱藏文字標題，釋放導航欄空間 */
+  .VPNavBarTitle .title .text {
+    display: none !important;
   }
 }
 
