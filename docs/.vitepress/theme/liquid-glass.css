@@ -19,6 +19,7 @@
   --lg-glass-bg-hover: rgb(255 255 255 / 42%);
   --lg-glass-border: rgb(255 255 255 / 55%);
   --lg-glass-border-subtle: rgb(255 255 255 / 28%);
+  --lg-nav-bg: rgb(255 255 255 / 88%);
 
   /* --- Directional borders (light from top-left) --- */
   --lg-border-bright: rgb(255 255 255 / 72%);
@@ -147,6 +148,7 @@
   --lg-glass-bg-hover: rgb(32 32 50 / 68%);
   --lg-glass-border: rgb(255 255 255 / 14%);
   --lg-glass-border-subtle: rgb(255 255 255 / 7%);
+  --lg-nav-bg: rgb(18 18 30 / 78%);
 
   /* Directional borders — brighter specular stands out more on dark bg */
   --lg-border-bright: rgb(255 255 255 / 30%);
@@ -473,7 +475,7 @@ body {
 
 /* Glass lives on .VPNavBar */
 .VPNavBar {
-  background: var(--lg-glass-bg) !important;
+  background: var(--lg-nav-bg) !important;
   backdrop-filter: var(--lg-backdrop-heavy) !important;
   border-bottom: 1px solid var(--lg-glass-border) !important;
   box-shadow:
@@ -483,7 +485,7 @@ body {
 }
 
 .VPNavBar.screen-open {
-  background: var(--lg-glass-bg) !important;
+  background: var(--lg-nav-bg) !important;
   border-bottom: none !important;
 }
 
