@@ -144,20 +144,20 @@
 
 /* --- Dark Mode Overrides --- */
 .dark {
-  --lg-glass-bg: rgb(22 22 34 / 52%);
-  --lg-glass-bg-hover: rgb(32 32 50 / 68%);
-  --lg-glass-border: rgb(255 255 255 / 14%);
-  --lg-glass-border-subtle: rgb(255 255 255 / 7%);
-  --lg-nav-bg: rgb(18 18 30 / 78%);
+  --lg-glass-bg: rgb(20 26 36 / 62%);
+  --lg-glass-bg-hover: rgb(30 38 52 / 74%);
+  --lg-glass-border: rgb(233 236 240 / 16%);
+  --lg-glass-border-subtle: rgb(233 236 240 / 9%);
+  --lg-nav-bg: rgb(18 24 34 / 82%);
 
   /* Directional borders — brighter specular stands out more on dark bg */
   --lg-border-bright: rgb(255 255 255 / 30%);
   --lg-border-dim: rgb(0 0 0 / 35%);
 
   /* Backdrop darkens content beneath (Apple "Regular" variant in dark mode) */
-  --lg-backdrop: blur(64px) saturate(180%) brightness(72%);
-  --lg-backdrop-heavy: blur(88px) saturate(200%) brightness(68%);
-  --lg-backdrop-light: blur(32px) saturate(160%) brightness(75%);
+  --lg-backdrop: blur(56px) saturate(135%) brightness(74%);
+  --lg-backdrop-heavy: blur(78px) saturate(145%) brightness(70%);
+  --lg-backdrop-light: blur(28px) saturate(125%) brightness(78%);
   --lg-glass-shadow: 0 8px 32px rgb(0 0 0 / 40%), 0 2px 8px rgb(0 0 0 / 30%);
   --lg-glass-shadow-elevated: 0 20px 60px rgb(0 0 0 / 55%), 0 6px 20px rgb(0 0 0 / 40%);
 
@@ -189,14 +189,14 @@
       rgb(255 255 255 / 10%) 0%,
       rgb(255 255 255 / 2%) 45%,
       rgb(255 255 255 / 6%) 100%);
-  --lg-accent: #f2a7bb;
+  --lg-accent: #5f6f86;
 
   /* 桜色 for dark mode */
-  --lg-accent-soft: rgb(242 167 187 / 18%);
-  --lg-accent-glow: rgb(242 167 187 / 28%);
-  --lg-text-primary: rgb(255 255 255 / 95%);
-  --lg-text-secondary: rgb(255 255 255 / 60%);
-  --lg-text-tertiary: rgb(255 255 255 / 35%);
+  --lg-accent-soft: rgb(95 111 134 / 20%);
+  --lg-accent-glow: rgb(95 111 134 / 26%);
+  --lg-text-primary: rgb(243 240 233 / 93%);
+  --lg-text-secondary: rgb(243 240 233 / 63%);
+  --lg-text-tertiary: rgb(243 240 233 / 38%);
 
   /* 深色模式阴影覆盖 */
   --shadow-sm: 0 2px 8px rgb(0 0 0 / 30%);
@@ -212,11 +212,16 @@
   inset: 0;
   z-index: -1;
   overflow: hidden;
-  background: #eef0f5;
+  background: #f5f0e8;
 }
 
 .dark .lg-background {
-  background: #060a12;
+  background-color: #0a121a;
+
+  /* 和紙纹理：低频横纹 turbulence，soft-light 叠在深底色上几乎不影响明度，只加纸感 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.85%200.12' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 400px 400px;
+  background-blend-mode: soft-light;
 }
 
 /* Layer A — 6-color floating orbs */
@@ -228,39 +233,37 @@
   top: -50%;
   left: -50%;
   background:
-    radial-gradient(ellipse 800px 700px at 18% 28%, rgb(91 155 213 / 42%) 0%, transparent 65%),
-    /* 藍 */
-    radial-gradient(ellipse 650px 600px at 78% 18%, rgb(242 167 187 / 36%) 0%, transparent 65%),
-    /* 桜 */
-    radial-gradient(ellipse 900px 750px at 50% 72%, rgb(155 142 196 / 30%) 0%, transparent 65%),
-    /* 藤 */
-    radial-gradient(ellipse 500px 500px at 88% 78%, rgb(141 178 85 / 24%) 0%, transparent 65%),
+    radial-gradient(ellipse 800px 700px at 18% 28%, rgb(134 162 186 / 32%) 0%, transparent 65%),
+    /* 缥（やまぶき水色） */
+    radial-gradient(ellipse 650px 600px at 78% 18%, rgb(234 186 190 / 28%) 0%, transparent 65%),
+    /* 薄桜 */
+    radial-gradient(ellipse 900px 750px at 50% 72%, rgb(188 178 210 / 22%) 0%, transparent 65%),
+    /* 薄藤 */
+    radial-gradient(ellipse 500px 500px at 88% 78%, rgb(162 188 140 / 20%) 0%, transparent 65%),
     /* 若草 */
-    radial-gradient(ellipse 600px 550px at 8% 82%, rgb(201 123 155 / 26%) 0%, transparent 65%),
-    /* 撫子 */
-    radial-gradient(ellipse 700px 600px at 62% 45%, rgb(108 92 231 / 20%) 0%, transparent 65%);
+    radial-gradient(ellipse 600px 550px at 8% 82%, rgb(220 186 162 / 22%) 0%, transparent 65%),
+    /* 肌色 */
+    radial-gradient(ellipse 700px 600px at 62% 45%, rgb(168 152 196 / 16%) 0%, transparent 65%);
 
-  /* 紫堇 — Apple indigo */
+  /* 薄紫 */
   animation: lg-flow 28s ease-in-out infinite;
-  filter: blur(50px);
+  filter: blur(72px);
 }
 
 .dark .lg-background::before {
   background:
-    radial-gradient(ellipse 900px 800px at 15% 25%, rgb(28 70 138 / 18%) 0%, transparent 65%),
-    /* 藍 dark */
-    radial-gradient(ellipse 700px 650px at 80% 16%, rgb(26 52 88 / 12%) 0%, transparent 65%),
-    /* slate blue dark */
-    radial-gradient(ellipse 1000px 850px at 48% 75%, rgb(22 44 90 / 16%) 0%, transparent 65%),
-    /* cool navy dark */
-    radial-gradient(ellipse 550px 550px at 88% 80%, rgb(16 58 44 / 10%) 0%, transparent 65%),
-    /* 若草 dark */
-    radial-gradient(ellipse 650px 600px at 5% 85%, rgb(20 42 72 / 10%) 0%, transparent 65%),
-    /* cool shadow dark */
-    radial-gradient(ellipse 800px 700px at 60% 42%, rgb(34 64 126 / 14%) 0%, transparent 65%);
-
-  /* neutral indigo dark */
-  filter: blur(96px);
+    radial-gradient(ellipse 900px 760px at 14% 24%, rgb(46 72 104 / 20%) 0%, transparent 66%),
+    /* 藍鼠 */
+    radial-gradient(ellipse 760px 620px at 80% 18%, rgb(66 84 110 / 14%) 0%, transparent 66%),
+    /* 墨藍灰 */
+    radial-gradient(ellipse 980px 820px at 52% 76%, rgb(30 54 86 / 16%) 0%, transparent 66%),
+    /* 深藍霧 */
+    radial-gradient(ellipse 620px 560px at 88% 82%, rgb(56 78 66 / 10%) 0%, transparent 66%),
+    /* 苔青影 */
+    radial-gradient(ellipse 700px 640px at 6% 84%, rgb(42 58 78 / 11%) 0%, transparent 66%),
+    /* 墨青陰 */
+    radial-gradient(ellipse 840px 720px at 60% 42%, rgb(58 78 104 / 13%) 0%, transparent 66%);
+  filter: blur(92px);
 }
 
 /* Layer B — Aurora: ultra-subtle slow hue-rotating prismatic shimmer */
@@ -414,7 +417,7 @@ html {
 }
 
 html.dark {
-  background: #07071a;
+  background: #0b1118;
 }
 
 body {
