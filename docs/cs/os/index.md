@@ -89,3 +89,4 @@ description: "操作系统学习笔记、作业、复习题目，教材 William 
 - **Chap. 10**: Multiprocessor, Multicore, and Real-Time Scheduling
 - **Chap. 11**: I/O Management and Disk Scheduling
 - **Chap. 12**: File Management
+- **Final exam**
