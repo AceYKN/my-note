@@ -1932,3 +1932,20 @@ html.dark .VPFeature img[src$=".svg"] {
 .dark .VPLocalSearchBox .shell {
   background: rgb(16 16 26 / 90%) !important;
 }
+
+/* ==========================================================================
+   21. Mobile Adjustments for Background Texture
+   ========================================================================== */
+@media screen and (width <= 768px) {
+  /* 缩小深色模式基础底纹 (和紙) 的颗粒感 */
+  .dark .lg-background {
+    /* 将原始的 400px 缩小至 200px */
+    background-size: 200px 200px;
+  }
+
+  /* 缩小深色模式顶部噪点/极光纹理的颗粒感 */
+  .dark .lg-background::after {
+    /* 缩小 noise texture 尺寸 (默认 256px 降到 128px) */
+    background-size: 128px 128px, 400% 400%;
+  }
+}
