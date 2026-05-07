@@ -302,6 +302,25 @@
   background-size: 256px 256px, 400% 400%;
 }
 
+/* 触控设备（手机/平板）DPR 通常为 2x-3x，SVG turbulence 噪点会被放大渲染
+   导致深色背景上的和纸纹理视觉上过于明显、"脏"。
+   hover:none 精准匹配触控设备，移除两处噪点纹理，保留颜色光晕即可。 */
+@media (hover: none) {
+  .dark .lg-background {
+    background-image: none;
+  }
+
+  .dark .lg-background::after {
+    background-image: linear-gradient(115deg,
+        rgb(32 76 148 / 5%) 0%,
+        rgb(34 90 140 / 3%) 25%,
+        rgb(24 58 108 / 4%) 50%,
+        rgb(34 90 140 / 3%) 75%,
+        rgb(32 76 148 / 5%) 100%);
+    background-size: 400% 400%;
+  }
+}
+
 @keyframes lg-flow {
   0%,
   100% {
@@ -414,10 +433,15 @@ html {
   background: #eef0f5;
 
   /* Match lg-background base — prevents white flash on compositing */
+
+  /* 声明此站点自行处理深浅色模式，防止 iOS Safari / Android Chrome
+     在系统深色模式下叠加自动暗化蒙层（导致背景"脏脏的"） */
+  color-scheme: light dark;
 }
 
 html.dark {
   background: #0b1118;
+  color-scheme: dark;
 }
 
 body {

@@ -235,8 +235,9 @@ export default defineConfig({
     ],
     // Favicon
     ['link', { rel: 'icon', href: '/my-note/logo.svg' }],
-    // Meta tags
-    ['meta', { name: 'theme-color', content: '#646cff' }],
+    // Meta tags — 分别为浅色/深色模式提供 theme-color，防止手机浏览器工具栏颜色异常
+    ['meta', { name: 'theme-color', content: '#eef0f5', media: '(prefers-color-scheme: light)' }],
+    ['meta', { name: 'theme-color', content: '#0b1118', media: '(prefers-color-scheme: dark)' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'zh_CN' }],
     ['meta', { property: 'og:site_name', content: 'Studiorum — AceYKN 的学习笔记' }],
