@@ -191,8 +191,7 @@ export default defineConfig({
       noExternal: ['mark.js']
     },
     server: {
-      host: '127.0.0.1',
-      port: Number(process.env.PORT) || 4173
+      host: '127.0.0.1'
     },
     build: {
       chunkSizeWarningLimit: 1000
