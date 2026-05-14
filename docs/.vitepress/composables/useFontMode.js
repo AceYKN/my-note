@@ -15,6 +15,13 @@ if (typeof window !== 'undefined') {
     localStorage.setItem(STORAGE_KEY, val)
     document.documentElement.dataset.fontMode = val
   })
+
+  // 跨 tab 同步：其他标签页修改 localStorage 时自动更新
+  window.addEventListener('storage', (e) => {
+    if (e.key === STORAGE_KEY && e.newValue) {
+      mode.value = e.newValue
+    }
+  })
 }
 
 export function useFontMode() {
