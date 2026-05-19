@@ -1715,6 +1715,19 @@ html.dark .VPFeature img[src$=".svg"] {
   overflow: hidden;
 }
 
+/* ─── Page Header (shared across course index pages) ─────────── */
+.page-header {
+  text-align: center;
+  margin: 2rem 0 2.5rem;
+}
+
+.page-subtitle {
+  color: var(--lg-text-secondary);
+  font-size: 0.95em;
+  margin-top: 0.5rem;
+  letter-spacing: 0.01em;
+}
+
 .pager-link::before {
   content: '';
   position: absolute;

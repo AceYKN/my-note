@@ -11,6 +11,7 @@ import Breadcrumb from '../components/Breadcrumb.vue'
 import SeasonBadge from '../components/SeasonBadge.vue'
 import TaipeiTime from '../components/TaipeiTime.vue'
 import FontModeToggle from '../components/FontModeToggle.vue'
+import FileGrid from '../components/FileGrid.vue'
 
 export default {
   extends: DefaultTheme,
@@ -24,6 +25,7 @@ export default {
     app.component('SeasonBadge', SeasonBadge)
     app.component('TaipeiTime', TaipeiTime)
     app.component('FontModeToggle', FontModeToggle)
+    app.component('FileGrid', FileGrid)
 
     // View Transitions API — 页面切换过渡
     if (typeof document !== 'undefined' && 'startViewTransition' in document) {
