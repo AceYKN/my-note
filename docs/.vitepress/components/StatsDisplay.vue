@@ -1,26 +1,30 @@
 <script setup>
-import { computed } from 'vue'
+import { ref, onMounted } from 'vue'
 
-const season = computed(() => {
-  const month = new Date().getMonth() + 1
-  const year = new Date().getFullYear()
-  if (month >= 3 && month <= 5)  return { kanji: '春', en: 'Spring', color: 'sakura', year }
-  if (month >= 6 && month <= 8)  return { kanji: '夏', en: 'Summer', color: 'wakakusa', year }
-  if (month >= 9 && month <= 11) return { kanji: '秋', en: 'Autumn', color: 'fuji', year }
-  return { kanji: '冬', en: 'Winter', color: 'ai', year }
-})
+const season = ref(null)
+const greeting = ref(null)
 
-const greeting = computed(() => {
-  const h = new Date().getHours()
-  if (h >= 5 && h < 12)  return { text: 'おはよう', sub: 'Good morning' }
-  if (h >= 12 && h < 18) return { text: 'こんにちは', sub: 'Good afternoon' }
-  if (h >= 18 && h < 23) return { text: 'こんばんは', sub: 'Good evening' }
-  return { text: 'おやすみ', sub: 'Good night' }
+onMounted(() => {
+  const now = new Date()
+  const month = now.getMonth() + 1
+  const year = now.getFullYear()
+  if (month >= 3 && month <= 5) season.value = { kanji: '春', en: 'Spring', color: 'sakura', year }
+  else if (month >= 6 && month <= 8)
+    season.value = { kanji: '夏', en: 'Summer', color: 'wakakusa', year }
+  else if (month >= 9 && month <= 11)
+    season.value = { kanji: '秋', en: 'Autumn', color: 'fuji', year }
+  else season.value = { kanji: '冬', en: 'Winter', color: 'ai', year }
+
+  const h = now.getHours()
+  if (h >= 5 && h < 12) greeting.value = { text: 'おはよう', sub: 'Good morning' }
+  else if (h >= 12 && h < 18) greeting.value = { text: 'こんにちは', sub: 'Good afternoon' }
+  else if (h >= 18 && h < 23) greeting.value = { text: 'こんばんは', sub: 'Good evening' }
+  else greeting.value = { text: 'おやすみ', sub: 'Good night' }
 })
 </script>
 
 <template>
-  <div class="stats-container">
+  <div v-if="season && greeting" class="stats-container">
     <div class="stat-item greeting-item">
       <span class="stat-greeting-text">{{ greeting.text }}</span>
       <span class="stat-greeting-sub">{{ greeting.sub }}</span>
@@ -48,8 +52,9 @@ const greeting = computed(() => {
   border-radius: 999px;
   max-width: 500px;
   font-size: 0.9em;
-  box-shadow: var(--lg-glass-shadow, 0 8px 32px rgba(0,0,0,0.06)),
-              inset 0 1px 1px rgba(255,255,255,0.6);
+  box-shadow:
+    var(--lg-glass-shadow, 0 8px 32px rgba(0, 0, 0, 0.06)),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
   animation: lg-stats-in 0.6s ease-out;
 }
 
@@ -80,7 +85,7 @@ const greeting = computed(() => {
 
 .stat-label {
   font-size: 0.82em;
-  color: var(--lg-text-secondary, rgba(0,0,0,0.55));
+  color: var(--lg-text-secondary, rgba(0, 0, 0, 0.55));
   font-weight: 500;
   letter-spacing: 0.02em;
 }
@@ -99,7 +104,7 @@ const greeting = computed(() => {
   font-weight: 500;
   letter-spacing: 0.03em;
   opacity: 0.7;
-  color: var(--lg-text-secondary, rgba(0,0,0,0.55));
+  color: var(--lg-text-secondary, rgba(0, 0, 0, 0.55));
 }
 
 /* Season segment */
@@ -117,20 +122,36 @@ const greeting = computed(() => {
   opacity: 0.85;
 }
 
-.season-sakura  { color: #b85470; }
-.season-wakakusa { color: #4a6e1c; }
-.season-fuji    { color: #5c4a8a; }
-.season-ai      { color: #1e4d8a; }
-.dark .season-sakura   { color: #f2a7bb; }
-.dark .season-wakakusa { color: #a8d46f; }
-.dark .season-fuji     { color: #b8addf; }
-.dark .season-ai       { color: #7ab5e0; }
+.season-sakura {
+  color: #b85470;
+}
+.season-wakakusa {
+  color: #4a6e1c;
+}
+.season-fuji {
+  color: #5c4a8a;
+}
+.season-ai {
+  color: #1e4d8a;
+}
+.dark .season-sakura {
+  color: #f2a7bb;
+}
+.dark .season-wakakusa {
+  color: #a8d46f;
+}
+.dark .season-fuji {
+  color: #b8addf;
+}
+.dark .season-ai {
+  color: #7ab5e0;
+}
 
 /* Divider between segments */
 .stat-divider {
   width: 1px;
   height: 28px;
-  background: var(--lg-glass-border, rgba(0,0,0,0.12));
+  background: var(--lg-glass-border, rgba(0, 0, 0, 0.12));
   border-radius: 1px;
   opacity: 0.6;
 }

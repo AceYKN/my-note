@@ -1,11 +1,11 @@
 /**
- * style.css — MathJax (mjx-container) 独有样式
+ * style.css — KaTeX 数学公式独有样式
  * 其余所有规则已迁移至 liquid-glass.css
  */
 
 
-/* --- 8. 数学公式 (MathJax) - 修复横向溢出 --- */
-.MathJax {
+/* --- 8. 数学公式 (KaTeX) - 修复横向溢出 --- */
+.katex {
   font-size: 1.1em !important;
   color: var(--vp-c-text-1);
   max-width: 100%;
@@ -13,7 +13,7 @@
 }
 
 /* 独立公式块增加间距和滚动提示 */
-mjx-container[display="true"] {
+.katex-display {
   margin: 24px 0 !important;
   padding: 16px;
   background: var(--vp-c-bg-alt);
@@ -24,26 +24,26 @@ mjx-container[display="true"] {
 }
 
 /* 滚动条样式优化 */
-mjx-container[display="true"]::-webkit-scrollbar {
+.katex-display::-webkit-scrollbar {
   height: 6px;
 }
 
-mjx-container[display="true"]::-webkit-scrollbar-track {
+.katex-display::-webkit-scrollbar-track {
   background: var(--vp-c-bg-soft);
   border-radius: 3px;
 }
 
-mjx-container[display="true"]::-webkit-scrollbar-thumb {
+.katex-display::-webkit-scrollbar-thumb {
   background: var(--vp-c-brand-soft);
   border-radius: 3px;
 }
 
-mjx-container[display="true"]::-webkit-scrollbar-thumb:hover {
+.katex-display::-webkit-scrollbar-thumb:hover {
   background: var(--vp-c-brand-1);
 }
 
 /* 溢出提示阴影 */
-mjx-container[display="true"]::after {
+.katex-display::after {
   content: '';
   position: absolute;
   right: 0;
@@ -56,7 +56,7 @@ mjx-container[display="true"]::after {
   transition: opacity var(--transition-base);
 }
 
-mjx-container[display="true"]:hover::after {
+.katex-display:hover::after {
   opacity: 1;
 }
 
@@ -68,7 +68,7 @@ mjx-container[display="true"]:hover::after {
     grid-template-columns: 1fr !important;
   }
 
-  mjx-container[display="true"] {
+  .katex-display {
     font-size: 0.9em !important;
     padding: 12px;
   }

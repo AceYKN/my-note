@@ -1,24 +1,7 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { useScrollProgress } from '../composables/useScrollProgress.js'
 
-const scrollProgress = ref(0)
-
-const updateProgress = () => {
-  requestAnimationFrame(() => {
-    const winScroll = document.documentElement.scrollTop || document.body.scrollTop
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
-    scrollProgress.value = (winScroll / height) * 100
-  })
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', updateProgress, { passive: true })
-  updateProgress()
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', updateProgress)
-})
+const { scrollProgress } = useScrollProgress()
 </script>
 
 <template>

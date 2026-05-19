@@ -1,8 +1,9 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { computed } from 'vue'
+import { useScrollProgress } from '../composables/useScrollProgress.js'
 
-const isVisible = ref(false)
-const scrollProgress = ref(0)
+const { scrollY, scrollProgress } = useScrollProgress()
+const isVisible = computed(() => scrollY.value > 300)
 
 const RADIUS = 21
 const CIRCUMFERENCE = 2 * Math.PI * RADIUS
@@ -12,24 +13,6 @@ const strokeDashoffset = computed(() => CIRCUMFERENCE * (1 - scrollProgress.valu
 const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
-
-const handleScroll = () => {
-  window.requestAnimationFrame(() => {
-    const winScroll = document.documentElement.scrollTop || document.body.scrollTop
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight
-    isVisible.value = winScroll > 300
-    scrollProgress.value = height > 0 ? (winScroll / height) * 100 : 0
-  })
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll, { passive: true })
-  handleScroll()
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
 </script>
 
 <template>

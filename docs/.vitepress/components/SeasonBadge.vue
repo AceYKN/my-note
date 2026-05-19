@@ -1,27 +1,36 @@
 <script setup>
-import { computed } from 'vue'
+import { ref, onMounted } from 'vue'
 
-const season = computed(() => {
-  const month = new Date().getMonth() + 1 // 1-12
-  const year = new Date().getFullYear()
+const season = ref(null)
 
+onMounted(() => {
+  const now = new Date()
+  const month = now.getMonth() + 1
+  const year = now.getFullYear()
   let kanji, en, color
   if (month >= 3 && month <= 5) {
-    kanji = '春'; en = 'Spring'; color = 'sakura'
+    kanji = '春'
+    en = 'Spring'
+    color = 'sakura'
   } else if (month >= 6 && month <= 8) {
-    kanji = '夏'; en = 'Summer'; color = 'wakakusa'
+    kanji = '夏'
+    en = 'Summer'
+    color = 'wakakusa'
   } else if (month >= 9 && month <= 11) {
-    kanji = '秋'; en = 'Autumn'; color = 'fuji'
+    kanji = '秋'
+    en = 'Autumn'
+    color = 'fuji'
   } else {
-    kanji = '冬'; en = 'Winter'; color = 'ai'
+    kanji = '冬'
+    en = 'Winter'
+    color = 'ai'
   }
-
-  return { kanji, en, color, year }
+  season.value = { kanji, en, color, year }
 })
 </script>
 
 <template>
-  <div class="season-badge-wrapper">
+  <div v-if="season" class="season-badge-wrapper">
     <span class="season-badge" :class="`season-${season.color}`">
       {{ season.kanji }} · {{ season.en }} {{ season.year }}
     </span>
@@ -47,15 +56,19 @@ const season = computed(() => {
   backdrop-filter: blur(24px) saturate(150%);
   -webkit-backdrop-filter: blur(24px) saturate(150%);
   border: 1px solid var(--lg-glass-border, rgba(255, 255, 255, 0.45));
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06),
-              inset 0 1px 1px rgba(255, 255, 255, 0.6);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .season-badge:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1),
-              inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
 }
 
 /* 春 — 桜色 */
@@ -86,8 +99,16 @@ const season = computed(() => {
   background: rgba(91, 155, 213, 0.13);
 }
 
-.dark .season-sakura { color: #f2a7bb; }
-.dark .season-wakakusa { color: #a8d46f; }
-.dark .season-fuji { color: #b8addf; }
-.dark .season-ai { color: #7ab5e0; }
+.dark .season-sakura {
+  color: #f2a7bb;
+}
+.dark .season-wakakusa {
+  color: #a8d46f;
+}
+.dark .season-fuji {
+  color: #b8addf;
+}
+.dark .season-ai {
+  color: #7ab5e0;
+}
 </style>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vitepress'
 
 const visible = ref(false)
@@ -7,6 +7,7 @@ const progress = ref(0)
 const done = ref(false)
 let timer = null
 let endTimer = null
+let _router = null
 
 function start() {
   clearTimeout(endTimer)
@@ -38,9 +39,22 @@ function finish() {
 }
 
 onMounted(() => {
-  const router = useRouter()
-  router.onBeforeRouteChange = () => { start() }
-  router.onAfterRouteChanged = () => { finish() }
+  _router = useRouter()
+  _router.onBeforeRouteChange = () => {
+    start()
+  }
+  _router.onAfterRouteChanged = () => {
+    finish()
+  }
+})
+
+onUnmounted(() => {
+  clearTimeout(timer)
+  clearTimeout(endTimer)
+  if (_router) {
+    _router.onBeforeRouteChange = null
+    _router.onAfterRouteChanged = null
+  }
 })
 </script>
 

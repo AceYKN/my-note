@@ -27,6 +27,8 @@ export default [
         localStorage: 'readonly',
         sessionStorage: 'readonly',
         requestAnimationFrame: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
         MutationObserver: 'readonly',
         IntersectionObserver: 'readonly'
       }
