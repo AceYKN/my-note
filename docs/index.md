@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: "Studiorum"
-  text: "知識を、記す。"
-  tagline: "Learning is a journey, not a destination."
+  name: 'Studiorum'
+  text: '知識を、記す。'
+  tagline: 'Learning is a journey, not a destination.'
 
 features:
   - title: MATH
