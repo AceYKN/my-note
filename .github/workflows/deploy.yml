@@ -41,7 +41,10 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Check source
+        run: npm run check
 
       - name: Build with VitePress
         # 这里会运行 package.json 里的 docs:build 命令

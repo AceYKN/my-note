@@ -5,12 +5,17 @@
   "description": "",
   "scripts": {
     "docs:dev": "vitepress dev docs --port 8888",
-    "docs:build": "vitepress build docs",
+    "docs:clean": "node scripts/clean-vitepress.mjs",
+    "docs:build": "npm run docs:clean && vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "strip:span": "node scripts/remove-span-tags.mjs",
-    "lint": "eslint . --fix",
-    "format": "prettier --write \"docs/.vitepress/**/*.{js,mjs,vue}\"",
-    "lint:css": "stylelint \"docs/.vitepress/**/*.{css,vue}\" --fix",
+    "check": "npm run lint:check && npm run format:check && npm run style:check",
+    "lint": "eslint \"docs/.vitepress/**/*.{js,mjs,vue}\" \"scripts/**/*.mjs\" --fix",
+    "lint:check": "eslint \"docs/.vitepress/**/*.{js,mjs,vue}\" \"scripts/**/*.mjs\" --max-warnings=0",
+    "format": "prettier --write \"docs/.vitepress/**/*.{js,mjs,vue,css}\" \"scripts/**/*.mjs\"",
+    "format:check": "prettier --check \"docs/.vitepress/**/*.{js,mjs,vue,css}\" \"scripts/**/*.mjs\"",
+    "lint:css": "stylelint \"docs/.vitepress/**/*.css\" --fix",
+    "style:check": "stylelint \"docs/.vitepress/**/*.css\"",
     "prepare": "husky"
   },
   "repository": {
@@ -27,17 +32,17 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@mdit/plugin-katex": "^0.25.2",
-    "eslint": "^10.2.1",
+    "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-vue": "^10.9.0",
+    "eslint-plugin-vue": "^10.9.1",
     "husky": "^9.1.7",
-    "katex": "^0.16.45",
+    "katex": "^0.16.47",
     "lint-staged": "^15.5.2",
     "prettier": "^3.8.3",
-    "stylelint": "^17.9.1",
+    "stylelint": "^17.12.0",
     "stylelint-config-standard": "^40.0.0",
     "vitepress": "^1.6.4",
-    "vue": "^3.5.33"
+    "vue": "^3.5.34"
   },
   "overrides": {
     "esbuild": "^0.25.0"

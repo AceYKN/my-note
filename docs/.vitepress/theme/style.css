@@ -3,7 +3,6 @@
  * 其余所有规则已迁移至 liquid-glass.css
  */
 
-
 /* --- 8. 数学公式 (KaTeX) - 修复横向溢出 --- */
 .katex {
   font-size: 1.1em !important;

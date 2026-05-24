@@ -1,5 +1,10 @@
 {
   "extends": "stylelint-config-standard",
+  "ignoreFiles": [
+    "docs/.vitepress/dist/**",
+    "docs/.vitepress/cache/**",
+    "docs/.vitepress/.temp/**"
+  ],
   "rules": {
     "selector-class-pattern": null,
     "custom-property-pattern": null

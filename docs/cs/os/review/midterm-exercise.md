@@ -71,14 +71,14 @@ order: 1
 
 - A) Ready
 - B) Blocked/Suspend
-- **C) Blocked** ✓
+- **C) Blocked** (正确)
 - D) Ready/Suspend
 
 ---
 
 **2.** Requested resources are granted to processes whenever possible with (___).
 
-- **A) Deadlock detection** ✓
+- **A) Deadlock detection** (正确)
 - B) Deadlock avoidance
 - C) Mutual exclusion
 - D) Preemption
@@ -87,7 +87,7 @@ order: 1
 
 **3.** In a three state Process Model, (___) is not a valid state transition.
 
-- **A) Block → Running** ✓
+- **A) Block -> Running** (正确)
 - B) Running → Block
 - C) Ready → Running
 - D) Running → Ready
@@ -97,7 +97,7 @@ order: 1
 **4.** The permanent blocking of a set of processes that either compete for system resources or communicate with each other is called: (___).
 
 - A) Starvation
-- **B) Deadlock** ✓
+- **B) Deadlock** (正确)
 - C) Prioritization
 - D) Mutual exclusion
 
@@ -105,7 +105,7 @@ order: 1
 
 **5.** Suppose the initial value of a semaphore associated with a resource is 4 and the current value is −2. If V is the number of available resources and W is the number of processes waiting for the resources, then V and W are (___) respectively.
 
-- **A) 0, 2** ✓
+- **A) 0, 2** (正确)
 - B) 4, 0
 - C) 2, 0
 - D) −2, 0
@@ -117,7 +117,7 @@ order: 1
 - A) running → ready
 - B) running → blocking
 - C) ready → running
-- **D) blocking → ready** ✓
+- **D) blocking -> ready** (正确)
 
 ---
 
@@ -126,7 +126,7 @@ order: 1
 - A) 5
 - B) 2
 - C) 3
-- **D) 4** ✓
+- **D) 4** (正确)
 
 ---
 
@@ -135,7 +135,7 @@ order: 1
 - A) Printer
 - B) Tape drive
 - C) CPU
-- **D) Disk** ✓
+- **D) Disk** (正确)
 
 ---
 

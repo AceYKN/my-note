@@ -5,7 +5,7 @@
 
 ## 在线访问
 
-🔗 <https://aceykn.github.io/my-note/>
+<https://aceykn.github.io/my-note/>
 
 ## 本地开发
 

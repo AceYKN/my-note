@@ -63,7 +63,7 @@ export function useOutlineScrollSpy() {
     const outline = document.querySelector('.VPDocAsideOutline')
     if (!outline) return
     linkObserver.disconnect()
-    outline.querySelectorAll('a').forEach(a => {
+    outline.querySelectorAll('a').forEach((a) => {
       linkObserver.observe(a, { attributes: true, attributeFilter: ['class'] })
     })
   }
@@ -115,13 +115,13 @@ export function useOutlineScrollSpy() {
         return
       }
 
-      const headings = [...document.querySelectorAll('.vp-doc :where(h1,h2,h3,h4,h5,h6)')]
-        .filter(el => el.id)
+      const headings = [...document.querySelectorAll('.vp-doc :where(h1,h2,h3,h4,h5,h6)')].filter(
+        (el) => el.id
+      )
 
       if (!headings.length) return
 
-      const isBottom =
-        Math.abs(scrollY + window.innerHeight - document.body.offsetHeight) < 1
+      const isBottom = Math.abs(scrollY + window.innerHeight - document.body.offsetHeight) < 1
 
       if (isBottom) {
         activateLink('#' + headings[headings.length - 1].id)
@@ -180,7 +180,6 @@ export function useOutlineScrollSpy() {
     linkObserver?.disconnect()
   })
 }
-
 
 function throttle(fn, wait) {
   let timer = null

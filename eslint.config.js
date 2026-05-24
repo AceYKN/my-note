@@ -3,7 +3,14 @@ import vue from 'eslint-plugin-vue'
 import prettier from 'eslint-config-prettier'
 
 export default [
-  { ignores: ['docs/.vitepress/dist/**', 'docs/.vitepress/cache/**', 'node_modules/**'] },
+  {
+    ignores: [
+      'docs/.vitepress/dist/**',
+      'docs/.vitepress/cache/**',
+      'docs/.vitepress/.temp/**',
+      'node_modules/**'
+    ]
+  },
   js.configs.recommended,
   ...vue.configs['flat/recommended'],
   {
@@ -30,7 +37,8 @@ export default [
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
         MutationObserver: 'readonly',
-        IntersectionObserver: 'readonly'
+        IntersectionObserver: 'readonly',
+        getComputedStyle: 'readonly'
       }
     }
   },

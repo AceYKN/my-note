@@ -72,6 +72,17 @@ function parseFrontmatter(content) {
   return result
 }
 
+/** 去掉 frontmatter 后的 Markdown 正文 */
+function stripFrontmatter(content) {
+  return content.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '')
+}
+
+/** 空白草稿默认不进入导航；如需占位，可显式设置 sidebar: true */
+function isBlankDraft(content, fm) {
+  const explicitSidebar = fm.sidebar === 'true' || fm.sidebar === true
+  return stripFrontmatter(content).trim().length === 0 && !explicitSidebar
+}
+
 /** 获取目录的显示名称 */
 function getDirDisplayName(dirPath, dirName) {
   // 1. 尝试从 meta.json 读取
@@ -114,6 +125,10 @@ function getFileMeta(filePath) {
     return null
   }
 
+  if (isBlankDraft(content, fm)) {
+    return null
+  }
+
   // 标题：frontmatter → 第一个 # 标题 → 文件名
   let title = fm.title
   if (!title) {
@@ -122,7 +137,8 @@ function getFileMeta(filePath) {
   }
   if (!title) title = path.basename(filePath, '.md')
 
-  const order = fm.order ? parseInt(fm.order, 10) : 999
+  const parsedOrder = fm.order ? parseInt(fm.order, 10) : 999
+  const order = Number.isFinite(parsedOrder) ? parsedOrder : 999
 
   return { title, order }
 }
@@ -155,8 +171,7 @@ function collectFiles(dirPath, urlPrefix) {
   }
 
   items.sort((a, b) => a.order - b.order)
-  // eslint-disable-next-line no-unused-vars
-  return items.map(({ order: _order, ...rest }) => rest)
+  return items.map(({ text, link }) => ({ text, link }))
 }
 
 /** 扫描一个顶级目录，生成其侧边栏配置 */

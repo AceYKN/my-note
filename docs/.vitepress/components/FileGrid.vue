@@ -29,7 +29,6 @@ function href(link) {
           class="fg-card"
           v-bind="isExternal(item.link) ? { target: '_blank', rel: 'noopener' } : {}"
         >
-          <span class="fg-icon">{{ item.icon || '📄' }}</span>
           <span class="fg-name">{{ item.name }}</span>
           <span v-if="item.desc" class="fg-desc">{{ item.desc }}</span>
         </a>
@@ -80,11 +79,6 @@ function href(link) {
   transform: translateY(-2px);
   box-shadow: var(--lg-glass-shadow-elevated, 0 8px 32px rgba(0, 0, 0, 0.1));
   border-color: var(--lg-accent, #2a5fa0);
-}
-
-.fg-icon {
-  font-size: 1.3em;
-  line-height: 1;
 }
 
 .fg-name {

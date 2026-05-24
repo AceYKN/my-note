@@ -56,13 +56,15 @@ function parseTimeApiTaipeiEpochMs(data) {
     data.hour - 8,
     data.minute,
     data.seconds,
-    milliSeconds,
+    milliSeconds
   )
 }
 
 async function getTaipeiEpochFromNetwork() {
   try {
-    const worldTimeData = await fetchJsonWithTimeout('https://worldtimeapi.org/api/timezone/Asia/Taipei')
+    const worldTimeData = await fetchJsonWithTimeout(
+      'https://worldtimeapi.org/api/timezone/Asia/Taipei'
+    )
     if (typeof worldTimeData?.datetime === 'string') {
       const ms = Date.parse(worldTimeData.datetime)
       if (Number.isFinite(ms)) return ms
@@ -74,7 +76,9 @@ async function getTaipeiEpochFromNetwork() {
     // Fallback to secondary provider.
   }
 
-  const timeApiData = await fetchJsonWithTimeout('https://timeapi.io/api/Time/current/zone?timeZone=Asia/Taipei')
+  const timeApiData = await fetchJsonWithTimeout(
+    'https://timeapi.io/api/Time/current/zone?timeZone=Asia/Taipei'
+  )
   const parsedMs = parseTimeApiTaipeiEpochMs(timeApiData)
   if (parsedMs === null) {
     throw new Error('Invalid time response')
@@ -97,19 +101,19 @@ function updateTaipeiTime() {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
-    hour12: false,
+    hour12: false
   }).format(now)
 
   const datePart = new Intl.DateTimeFormat('zh-TW', {
     timeZone: 'Asia/Taipei',
     year: 'numeric',
     month: '2-digit',
-    day: '2-digit',
+    day: '2-digit'
   }).format(now)
 
   const weekdayPart = new Intl.DateTimeFormat('ja-JP', {
     timeZone: 'Asia/Taipei',
-    weekday: 'long',
+    weekday: 'long'
   }).format(now)
 
   currentDate.value = `${datePart} ${weekdayPart}`
