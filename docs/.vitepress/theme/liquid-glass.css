@@ -882,7 +882,13 @@ body {
   background: var(--lg-glass-bg-hover) !important;
 }
 
+/* Hide VitePress's native .indicator bar so only the custom ::before shows */
+.VPSidebarItem .indicator {
+  display: none !important;
+}
+
 .VPSidebarItem.is-active > .item .link {
+  position: relative !important;
   background: var(--lg-accent-soft) !important;
   color: var(--lg-accent) !important;
   font-weight: 600;

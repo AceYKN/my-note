@@ -44,6 +44,8 @@ const FALLBACK_DIR_NAMES = {
   note: 'ノート',
   notesbychap: '章節ノート',
   review: '復習',
+  review202505: '復習 2025',
+  testbank: '題庫',
   pastpapers: '過去問',
   HW: '宿題'
 }

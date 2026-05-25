@@ -27,7 +27,7 @@ Assume a disk with 200 tracks and that the disk request queue has random request
 
 磁头移动距离的计算公式是：
 
-$|当前磁道 - 下一个访问磁道|$
+$|\text{当前磁道} - \text{下一个访问磁道}|$
 
 总移动磁道数就是每一次移动距离之和。
 
@@ -337,7 +337,7 @@ $1736\mu s$
 
 比例为：
 
-$\frac{中断处理总时间}{一个扇区传输时间} \times 100\%$
+$\frac{\text{中断处理总时间}}{\text{一个扇区传输时间}} \times 100\%$
 
 代入：
 

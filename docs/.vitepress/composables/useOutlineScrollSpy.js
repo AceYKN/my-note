@@ -16,6 +16,9 @@ export function useOutlineScrollSpy() {
   let scrollContainer = null
   let linkObserver = null
   let cleanupScrollSpy = null
+  let cleanupViewportListener = null
+
+  const mediumOutlineQuery = '(min-width: 960px) and (max-width: 1279px)'
 
   // ── Helpers ──────────────────────────────────────────────────────────────
 
@@ -70,9 +73,17 @@ export function useOutlineScrollSpy() {
 
   // ── 960–1279px only: custom scroll spy (VitePress built-in is disabled) ──
 
+  function isMediumOutlineViewport() {
+    return window.matchMedia(mediumOutlineQuery).matches
+  }
+
   /** Activates the correct TOC link based on current scroll position */
   function triggerScrollSpy() {
-    if (!window.matchMedia('(min-width: 960px) and (max-width: 1279px)').matches) return
+    if (!isMediumOutlineViewport()) {
+      cleanupScrollSpy?.()
+      cleanupScrollSpy = null
+      return
+    }
 
     const container = document.querySelector('.VPDocAsideOutline')
     const marker = document.querySelector('.VPDocAsideOutline .outline-marker')
@@ -156,12 +167,29 @@ export function useOutlineScrollSpy() {
     cleanupScrollSpy = () => window.removeEventListener('scroll', throttled)
   }
 
+  function setupResponsiveScrollSpy() {
+    if (!cleanupViewportListener) {
+      const mediaQuery = window.matchMedia(mediumOutlineQuery)
+      const onViewportChange = () => requestAnimationFrame(triggerScrollSpy)
+
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', onViewportChange)
+        cleanupViewportListener = () => mediaQuery.removeEventListener('change', onViewportChange)
+      } else {
+        mediaQuery.addListener(onViewportChange)
+        cleanupViewportListener = () => mediaQuery.removeListener(onViewportChange)
+      }
+    }
+
+    triggerScrollSpy()
+  }
+
   // ── Lifecycle ─────────────────────────────────────────────────────────────
 
   onMounted(() => {
     requestAnimationFrame(() => {
       setupContainerScroll()
-      triggerScrollSpy()
+      setupResponsiveScrollSpy()
     })
   })
 
@@ -171,12 +199,13 @@ export function useOutlineScrollSpy() {
       // Re-observe new links rendered for the new page
       attachLinkObserver()
       // Reset and re-run scroll spy so initial heading is highlighted
-      triggerScrollSpy()
+      setupResponsiveScrollSpy()
     })
   })
 
   onUnmounted(() => {
     cleanupScrollSpy?.()
+    cleanupViewportListener?.()
     linkObserver?.disconnect()
   })
 }
