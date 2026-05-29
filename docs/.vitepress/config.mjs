@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 import { katex } from '@mdit/plugin-katex'
 import { generateSidebar } from './sidebar.mjs'
 import { fileURLToPath } from 'node:url'
@@ -35,7 +36,7 @@ function sidebarWatcherPlugin() {
   }
 }
 
-export default defineConfig({
+const config = defineConfig({
   // ==========================================
   // 1. 核心部署配置 (解决样式不显示的关键)
   // ==========================================
@@ -164,7 +165,12 @@ export default defineConfig({
     }
   },
 
-  // 4. Markdown 配置 (支持 LaTeX 公式)
+  // 4. Markdown 配置 (支持 LaTeX 公式与 Mermaid 图表)
+  mermaid: {
+    securityLevel: 'loose',
+    startOnLoad: false
+  },
+
   markdown: {
     lineNumbers: true, // 开启代码行号
     config: (md) => {
@@ -322,3 +328,5 @@ export default defineConfig({
     return head
   }
 })
+
+export default withMermaid(config)
