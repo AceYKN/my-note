@@ -332,8 +332,16 @@
 
 /* 触控设备（手机/平板）DPR 通常为 2x-3x，SVG turbulence 噪点会被放大渲染
    导致深色背景上的和纸纹理视觉上过于明显、"脏"。
-   hover:none 精准匹配触控设备，移除两处噪点纹理，保留颜色光晕即可。 */
+   hover:none 精准匹配触控设备，移除两处噪点纹理，保留颜色光晕即可。
+
+   阶段一移动端节能优化：
+   1. 停止背景浮动动画（lg-flow / lg-aurora），降低背景 blur 值，消除 GPU 持续合成压力。
+   2. 将 --lg-backdrop* 变量降至低模糊值，覆盖全站所有使用变量的玻璃元素。
+   3. 显式覆盖使用硬编码 backdrop-filter 的关键元素（侧边栏）。
+   4. 停止卡片/侧边栏 shimmer 动画及进度条 shimmer 动画。
+*/
 @media (hover: none) {
+  /* ── 深色模式噪点纹理移除（原有逻辑） ── */
   .dark .lg-background {
     background-image: none;
   }
@@ -348,6 +356,75 @@
       rgb(32 76 148 / 5%) 100%
     );
     background-size: 400% 400%;
+  }
+
+  /* ── 停止背景动画，颜色光晕静止保留 ── */
+  .lg-background::before {
+    animation: none;
+    filter: blur(32px); /* 从 72px/92px 大幅降低，减少 GPU 模糊开销 */
+  }
+
+  .lg-background::after {
+    animation: none;
+  }
+
+  /* ── 降级 backdrop-filter 变量，所有使用变量的玻璃元素自动受益 ── */
+  :root {
+    --lg-backdrop: blur(8px) saturate(140%) brightness(110%);
+    --lg-backdrop-heavy: blur(12px) saturate(150%) brightness(112%);
+    --lg-backdrop-light: blur(6px) saturate(130%) brightness(106%);
+  }
+
+  .dark {
+    --lg-backdrop: blur(8px) saturate(120%) brightness(76%);
+    --lg-backdrop-heavy: blur(12px) saturate(130%) brightness(72%);
+    --lg-backdrop-light: blur(6px) saturate(115%) brightness(80%);
+  }
+
+  /* ── 显式覆盖使用硬编码 backdrop-filter 的元素 ── */
+  .VPSidebar {
+    backdrop-filter: blur(12px) saturate(150%) brightness(108%) !important;
+  }
+
+  .dark .VPSidebar {
+    backdrop-filter: blur(12px) saturate(130%) brightness(65%) !important;
+  }
+
+  /* ── 停止卡片及侧边栏 shimmer 动画 ── */
+  .VPFeature::after,
+  .VPSidebar::after {
+    animation: none;
+  }
+
+  /* ── 停止进度条 shimmer 动画，保留静态渐变色 ── */
+  .reading-progress-bar {
+    animation: none !important;
+    background-position: 0% 50% !important;
+  }
+}
+
+/* ==========================================================================
+   无障碍：尊重系统"减少动态效果"设置，适用于所有设备
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .lg-background::before,
+  .lg-background::after,
+  .VPFeature::after,
+  .VPSidebar::after {
+    animation: none !important;
+  }
+
+  .reading-progress-bar {
+    animation: none !important;
+  }
+
+  .VPDoc {
+    animation: none !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }
 
