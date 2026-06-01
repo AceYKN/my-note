@@ -260,6 +260,19 @@ const config = defineConfig({
       'script',
       {},
       "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-DMLQNKGTNZ');"
+    ],
+    // 防止暗黑模式和字体模式 FOUC 的内联脚本
+    [
+      'script',
+      {},
+      `
+      (function() {
+        try {
+          var fontMode = localStorage.getItem('font-mode') || 'classic';
+          document.documentElement.dataset.fontMode = fontMode;
+        } catch (e) {}
+      })();
+      `
     ]
   ],
 

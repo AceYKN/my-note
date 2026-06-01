@@ -1,33 +1,33 @@
-<script setup>
+﻿<script setup>
 import { useFontMode } from '../composables/useFontMode.js'
 
 const { mode } = useFontMode()
 </script>
 
 <template>
-  <div class="font-mode-bar" role="group" aria-label="書體風格選擇">
-    <span class="font-mode-label-outer">書體</span>
+  <div class="font-mode-bar" role="group" aria-label="字体风格切换">
+    <span class="font-mode-label-outer">字体</span>
     <div class="font-mode-track">
       <button
         class="font-mode-btn"
         :class="{ active: mode === 'classic' }"
-        title="古韻書體（思源宋體 + IBM Plex Serif）"
-        aria-label="切換至古韻書體"
+        title="古典字体（思源宋体 + IBM Plex Serif）"
+        aria-label="切换到古典字体"
         @click="mode = 'classic'"
       >
-        <span class="font-mode-glyph">雅</span>
-        <span class="font-mode-name">古韻</span>
+        <span class="font-mode-glyph">宋</span>
+        <span class="font-mode-name">古典</span>
       </button>
       <span class="font-mode-sep" aria-hidden="true"></span>
       <button
         class="font-mode-btn"
         :class="{ active: mode === 'modern' }"
-        title="時新書體（苹方 / Noto Sans）"
-        aria-label="切換至時新書體"
+        title="现代字体（黑体 / Noto Sans）"
+        aria-label="切换到现代字体"
         @click="mode = 'modern'"
       >
-        <span class="font-mode-glyph">今</span>
-        <span class="font-mode-name">時新</span>
+        <span class="font-mode-glyph">黑</span>
+        <span class="font-mode-name">现代</span>
       </button>
     </div>
   </div>
@@ -53,7 +53,7 @@ const { mode } = useFontMode()
   white-space: nowrap;
 }
 
-/* 分组容器：玻璃质感圆角矩形 */
+/* 轨道风格 */
 .font-mode-track {
   display: inline-flex;
   align-items: stretch;
@@ -64,7 +64,7 @@ const { mode } = useFontMode()
   backdrop-filter: blur(8px);
 }
 
-/* 中间分隔竖线 */
+/* 分隔线 */
 .font-mode-sep {
   width: 1px;
   background: var(--vp-c-divider);
@@ -100,14 +100,7 @@ const { mode } = useFontMode()
   font-weight: 500;
 }
 
-/* 大字：以不同衬线/无衬线预览当前模式字形 */
-.font-mode-glyph {
-  font-size: 15px;
-  line-height: 1;
-  opacity: 0.7;
-}
-
-/* 大字：以不同衬线/无衬线预览当前模式字形 */
+/* 按钮图标 */
 .font-mode-glyph {
   font-size: 15px;
   line-height: 1;
