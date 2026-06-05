@@ -93,7 +93,7 @@ const config = defineConfig({
     // 顶部导航栏
     nav: [
       { text: '數學', link: '/math/math' },
-      { text: '開発', link: '/code/cpp-start' },
+      { text: '開発', link: '/code/' },
       { text: '電腦', link: '/cs/' },
       { text: '言語', link: '/language/' }
     ],

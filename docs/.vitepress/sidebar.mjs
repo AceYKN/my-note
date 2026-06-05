@@ -34,6 +34,7 @@ const FALLBACK_DIR_NAMES = {
   db: '数据库系统',
   se: '软件工程',
   code: '编程入门',
+  vue: 'Vue.js 完整课程',
   // 语言
   language: '言語',
   deutsch: 'Deutsch',

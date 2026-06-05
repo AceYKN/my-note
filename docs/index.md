@@ -14,7 +14,7 @@ features:
       src: /math.svg
   - title: DEV
     details: C++ / Go / Vue.js / Frontend
-    link: /code/cpp-start
+    link: /code/
     icon:
       src: /dev.svg
   - title: CS
