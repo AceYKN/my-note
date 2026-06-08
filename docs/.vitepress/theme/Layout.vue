@@ -5,13 +5,16 @@ import LoadingProgress from '../components/LoadingProgress.vue'
 import BackToTop from '../components/BackToTop.vue'
 import Breadcrumb from '../components/Breadcrumb.vue'
 import FontModeToggle from '../components/FontModeToggle.vue'
+import ContinueLearning from '../components/ContinueLearning.vue'
 import { useScrollHideNav } from '../composables/useScrollHideNav'
 import { useOutlineScrollSpy } from '../composables/useOutlineScrollSpy'
+import { useLearningProgressTracker } from '../composables/useLearningProgressTracker'
 
 const { Layout } = DefaultTheme
 
 useScrollHideNav()
 useOutlineScrollSpy()
+useLearningProgressTracker()
 </script>
 
 <template>
@@ -22,6 +25,10 @@ useOutlineScrollSpy()
     <template #layout-top>
       <LoadingProgress />
       <ReadingProgress />
+    </template>
+
+    <template #home-features-before>
+      <ContinueLearning />
     </template>
 
     <template #doc-before>

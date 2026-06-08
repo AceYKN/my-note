@@ -11,6 +11,8 @@
   --lg-font-sans:
     'SF Pro Display', 'SF Pro Text', -apple-system, blinkmacsystemfont, 'Inter', 'Noto Serif TC',
     'Noto Serif SC', 'Noto Serif JP', 'PingFang TC', 'PingFang SC', sans-serif;
+  --lg-font-hand:
+    'LXGW WenKai TC', 'Klee One', 'Hiragino Mincho ProN', 'Noto Serif TC', 'Noto Serif JP', serif;
   --lg-font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 
   /* --- Glass Core --- */
@@ -1495,8 +1497,9 @@ body {
 }
 
 .VPHero .name {
+  font-family: 'Crimson Pro', 'IBM Plex Serif', Georgia, serif !important;
   font-weight: 800 !important;
-  letter-spacing: -0.04em !important;
+  letter-spacing: 0 !important;
   background: linear-gradient(
     135deg,
     var(--lg-iridescent-1),
@@ -1509,16 +1512,19 @@ body {
 
 .VPHero .text {
   color: var(--lg-text-secondary) !important;
-  font-family: 'Hiragino Mincho ProN', 'Yu Mincho', 'MS Mincho', serif !important;
-  font-weight: 300 !important;
-  letter-spacing: 0.18em !important;
-  font-style: italic !important;
+  font-family: var(--lg-font-hand) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  font-style: normal !important;
 }
 
 .VPHero .tagline {
   color: var(--lg-text-tertiary) !important;
+  font-family: 'IBM Plex Serif', 'Crimson Pro', Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
   margin-top: 20px !important;
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0 !important;
   line-height: 1.9 !important;
 }
 

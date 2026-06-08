@@ -92,9 +92,10 @@ onMounted(() => {
 
 /* Greeting segment */
 .stat-greeting-text {
-  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  font-family: var(--lg-font-hand, 'Noto Serif JP', 'Hiragino Mincho ProN', serif);
   font-size: 1.05em;
   font-weight: 700;
+  letter-spacing: 0;
   line-height: 1;
   color: var(--lg-accent, #7b8cff);
 }
@@ -109,9 +110,10 @@ onMounted(() => {
 
 /* Season segment */
 .stat-season-kanji {
-  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  font-family: var(--lg-font-hand, 'Noto Serif JP', 'Hiragino Mincho ProN', serif);
   font-size: 1.15em;
   font-weight: 700;
+  letter-spacing: 0;
   line-height: 1;
 }
 

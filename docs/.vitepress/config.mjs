@@ -235,7 +235,7 @@ const config = defineConfig({
       'link',
       {
         rel: 'stylesheet',
-        href: `https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:opsz,wght@14..32,400;14..32,600&family=Noto+Sans+TC:wght@400;600&family=Noto+Sans+SC:wght@400;600&family=${CJK_FONT_PRIMARY}:wght@400;600&family=${CJK_FONT_FALLBACK}:wght@400;600&display=swap`
+        href: `https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:opsz,wght@14..32,400;14..32,600&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;600&family=Noto+Sans+SC:wght@400;600&family=${CJK_FONT_PRIMARY}:wght@400;600&family=${CJK_FONT_FALLBACK}:wght@400;600&display=swap`
       }
     ],
     // Favicon

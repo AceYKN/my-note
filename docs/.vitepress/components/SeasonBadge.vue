@@ -49,7 +49,7 @@ onMounted(() => {
   padding: 5px 18px;
   border-radius: 999px;
   font-size: 0.82em;
-  font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  font-family: var(--lg-font-hand, 'Noto Serif JP', 'Hiragino Mincho ProN', serif);
   font-weight: 500;
   letter-spacing: 0.05em;
   background: var(--lg-glass-bg, rgba(255, 255, 255, 0.38));

@@ -5,29 +5,29 @@ const { mode } = useFontMode()
 </script>
 
 <template>
-  <div class="font-mode-bar" role="group" aria-label="字体风格切换">
-    <span class="font-mode-label-outer">字体</span>
+  <div class="font-mode-bar" role="group" aria-label="書体スタイル切替">
+    <span class="font-mode-label-outer">書体</span>
     <div class="font-mode-track">
       <button
         class="font-mode-btn"
         :class="{ active: mode === 'classic' }"
-        title="古典字体（思源宋体 + IBM Plex Serif）"
-        aria-label="切换到古典字体"
+        title="典雅書体（思源宋体 + IBM Plex Serif）"
+        aria-label="典雅書体に切り替え"
         @click="mode = 'classic'"
       >
-        <span class="font-mode-glyph">宋</span>
-        <span class="font-mode-name">古典</span>
+        <span class="font-mode-glyph">明</span>
+        <span class="font-mode-name">典雅</span>
       </button>
       <span class="font-mode-sep" aria-hidden="true"></span>
       <button
         class="font-mode-btn"
         :class="{ active: mode === 'modern' }"
-        title="现代字体（黑体 / Noto Sans）"
-        aria-label="切换到现代字体"
+        title="現代書体（黑体 / Noto Sans）"
+        aria-label="現代書体に切り替え"
         @click="mode = 'modern'"
       >
-        <span class="font-mode-glyph">黑</span>
-        <span class="font-mode-name">现代</span>
+        <span class="font-mode-glyph">角</span>
+        <span class="font-mode-name">現代</span>
       </button>
     </div>
   </div>

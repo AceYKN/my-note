@@ -13,6 +13,7 @@ import TaipeiTime from '../components/TaipeiTime.vue'
 import FontModeToggle from '../components/FontModeToggle.vue'
 import FileGrid from '../components/FileGrid.vue'
 import AutoIndex from '../components/AutoIndex.vue'
+import ContinueLearning from '../components/ContinueLearning.vue'
 
 export default {
   extends: DefaultTheme,
@@ -28,6 +29,7 @@ export default {
     app.component('FontModeToggle', FontModeToggle)
     app.component('FileGrid', FileGrid)
     app.component('AutoIndex', AutoIndex)
+    app.component('ContinueLearning', ContinueLearning)
 
     // View Transitions API — 页面切换过渡
     if (typeof document !== 'undefined' && 'startViewTransition' in document) {
