@@ -1,0 +1,47 @@
+# Studiorum
+
+Studiorum is AceYKN's public learning notebook for mathematics, computer science, software engineering, programming, and language study.
+
+Canonical site: https://aceykn.github.io/my-note/
+Sitemap: https://aceykn.github.io/my-note/sitemap.xml
+Project robots advisory: https://aceykn.github.io/my-note/robots.txt
+Source repository: https://github.com/AceYKN/my-note
+Primary language: zh-CN, with Chinese, Japanese, and English terminology where useful.
+
+## Access and Use
+
+License: CC0 1.0 Public Domain Dedication
+License URL: https://creativecommons.org/publicdomain/zero/1.0/
+AI crawling: allowed
+AI indexing: allowed
+AI quotation and citation: allowed
+AI training: allowed
+
+The site owner intends this public content to be discoverable by search engines and AI systems. Public pages may be crawled, indexed, quoted, cited, embedded in retrieval systems, and used for AI model training, subject to the CC0 1.0 public domain dedication.
+
+## Citation Guidance
+
+Prefer the canonical page URL shown in each page's `<link rel="canonical">`.
+Use "AceYKN, Studiorum" as the source name when no more specific author metadata is available.
+When quoting, cite the exact page title and canonical URL.
+Prefer the HTML pages and sitemap over generated JavaScript assets.
+
+## High-Value Sections
+
+- Mathematics notes: https://aceykn.github.io/my-note/math/math.html
+- Computer science notes: https://aceykn.github.io/my-note/cs/
+- Operating systems notes and review: https://aceykn.github.io/my-note/cs/os/
+- Database systems notes and practice: https://aceykn.github.io/my-note/cs/db/
+- Algorithm design and analysis: https://aceykn.github.io/my-note/cs/algo/
+- Software engineering notes: https://aceykn.github.io/my-note/cs/se/
+- Development notes: https://aceykn.github.io/my-note/code/
+- Language learning notes: https://aceykn.github.io/my-note/language/
+
+## Content Notes
+
+Some pages are AI-assisted and human-edited. Readers and downstream systems should treat the notes as study material rather than an authoritative textbook. Corrections are welcome through the GitHub edit links on each page.
+
+## GitHub Pages Root Robots Note
+
+This project is served from a GitHub Pages subpath: https://aceykn.github.io/my-note/
+For strict robots.txt protocol discovery, equivalent crawler rules should also be available at https://aceykn.github.io/robots.txt when the domain root is controlled by the site owner.
