@@ -17,6 +17,11 @@ export function useOutlineScrollSpy() {
   let linkObserver = null
   let cleanupScrollSpy = null
   let cleanupViewportListener = null
+  let outlineContainer = null
+  let outlineMarker = null
+  let nav = null
+  let headingEntries = []
+  let outlineLinks = new Map()
 
   const mediumOutlineQuery = '(min-width: 960px) and (max-width: 1279px)'
 
@@ -35,6 +40,46 @@ export function useOutlineScrollSpy() {
     } else if (linkTop > cBottom - 48) {
       scrollContainer.scrollBy({ top: linkTop - cBottom + 48, behavior: 'smooth' })
     }
+  }
+
+  function getElementTop(el) {
+    let top = 0
+    let node = el
+    while (node && node !== document.body) {
+      top += node.offsetTop
+      node = node.offsetParent
+    }
+    return top
+  }
+
+  function clearScrollSpyCache() {
+    outlineContainer = null
+    outlineMarker = null
+    nav = null
+    headingEntries = []
+    outlineLinks = new Map()
+  }
+
+  function refreshScrollSpyCache() {
+    outlineContainer = document.querySelector('.VPDocAsideOutline')
+    outlineMarker = outlineContainer?.querySelector('.outline-marker') ?? null
+    nav = document.querySelector('.VPNav')
+    headingEntries = []
+    outlineLinks = new Map()
+
+    if (!outlineContainer || !outlineMarker) return
+
+    headingEntries = [...document.querySelectorAll('.vp-doc :where(h1,h2,h3,h4,h5,h6)')]
+      .filter((el) => el.id)
+      .map((el) => ({
+        hash: '#' + el.id,
+        top: getElementTop(el)
+      }))
+
+    outlineContainer.querySelectorAll('a[href^="#"]').forEach((link) => {
+      const hash = link.getAttribute('href')
+      if (hash) outlineLinks.set(hash, link)
+    })
   }
 
   // ── Universal: auto-scroll .aside-container to keep active link visible ──
@@ -82,18 +127,23 @@ export function useOutlineScrollSpy() {
     if (!isMediumOutlineViewport()) {
       cleanupScrollSpy?.()
       cleanupScrollSpy = null
+      clearScrollSpyCache()
       return
     }
 
-    const container = document.querySelector('.VPDocAsideOutline')
-    const marker = document.querySelector('.VPDocAsideOutline .outline-marker')
-    if (!container || !marker) return
+    // Replace existing scroll listener with a fresh one for the current page.
+    if (cleanupScrollSpy) {
+      cleanupScrollSpy()
+      cleanupScrollSpy = null
+    }
+
+    refreshScrollSpyCache()
+    if (!outlineContainer || !outlineMarker) return
 
     // Read current active link from DOM to avoid stale closure reference
-    let prevLink = container.querySelector('a.active') || null
+    let prevLink = outlineContainer.querySelector('a.active') || null
 
     function getScrollOffset() {
-      const nav = document.querySelector('.VPNav')
       if (!nav) return 0
       const bot = nav.getBoundingClientRect().bottom
       return bot > 0 ? bot + 24 : 0
@@ -103,17 +153,17 @@ export function useOutlineScrollSpy() {
       if (prevLink) prevLink.classList.remove('active')
       if (!hash) {
         prevLink = null
-        marker.style.opacity = '0'
+        outlineMarker.style.opacity = '0'
         return
       }
-      const link = container.querySelector(`a[href="${hash}"]`)
+      const link = outlineLinks.get(hash)
       if (!link) {
-        marker.style.opacity = '0'
+        outlineMarker.style.opacity = '0'
         return
       }
       link.classList.add('active')
-      marker.style.top = link.offsetTop + 39 + 'px'
-      marker.style.opacity = '1'
+      outlineMarker.style.top = link.offsetTop + 39 + 'px'
+      outlineMarker.style.opacity = '1'
       prevLink = link
     }
 
@@ -126,37 +176,21 @@ export function useOutlineScrollSpy() {
         return
       }
 
-      const headings = [...document.querySelectorAll('.vp-doc :where(h1,h2,h3,h4,h5,h6)')].filter(
-        (el) => el.id
-      )
-
-      if (!headings.length) return
+      if (!headingEntries.length) return
 
       const isBottom = Math.abs(scrollY + window.innerHeight - document.body.offsetHeight) < 1
 
       if (isBottom) {
-        activateLink('#' + headings[headings.length - 1].id)
+        activateLink(headingEntries[headingEntries.length - 1].hash)
         return
       }
 
       let activeHash = null
-      for (const el of headings) {
-        let top = 0
-        let node = el
-        while (node && node !== document.body) {
-          top += node.offsetTop
-          node = node.offsetParent
-        }
-        if (top > scrollY + offset + 4) break
-        activeHash = '#' + el.id
+      for (const entry of headingEntries) {
+        if (entry.top > scrollY + offset + 4) break
+        activeHash = entry.hash
       }
       activateLink(activeHash)
-    }
-
-    // Replace existing scroll listener with a fresh one
-    if (cleanupScrollSpy) {
-      cleanupScrollSpy()
-      cleanupScrollSpy = null
     }
 
     const throttled = throttle(onScroll, 100)
