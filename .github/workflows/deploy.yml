@@ -67,7 +67,7 @@ jobs:
         run: npm run check
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           # 关键点：告诉 GitHub 构建好的网页在哪里
           # 因为你的源文件在 docs，VitePress 默认会输出到 docs/.vitepress/dist
