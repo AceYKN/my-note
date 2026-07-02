@@ -1,0 +1,39 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '09:00'
+      timezone: Asia/Taipei
+    open-pull-requests-limit: 10
+    groups:
+      vitepress-chain:
+        patterns:
+          - 'vitepress'
+          - 'vitepress-plugin-mermaid'
+          - 'vite'
+          - '@vitejs/*'
+      linting-tools:
+        patterns:
+          - 'eslint*'
+          - '@eslint/*'
+          - 'stylelint*'
+          - 'prettier'
+      minor-and-patch:
+        update-types:
+          - 'minor'
+          - 'patch'
+    ignore:
+      # vitepress 处于活跃开发中，主版本升级需人工评估
+      - dependency-name: 'vitepress'
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '09:00'
+      timezone: Asia/Taipei
