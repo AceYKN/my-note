@@ -21,10 +21,10 @@ env:
 permissions:
   contents: read
 
-# 只允许同时进行一次部署
+# 同一 PR 只保留最新检查；不同 PR 与主分支部署互不阻塞
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   # 安全审计
