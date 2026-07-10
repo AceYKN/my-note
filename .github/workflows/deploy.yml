@@ -6,6 +6,10 @@ on:
   push:
     branches: [main, master]
 
+  # 在 PR 中执行审计和构建，但不部署
+  pull_request:
+    branches: [main, master]
+
   # 允许你手动触发
   workflow_dispatch:
 
@@ -13,16 +17,14 @@ on:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
-# 设置权限
+# 默认只授予读取仓库内容的权限
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
-# 只允许同时进行一次部署
+# 同一 PR 只保留最新检查；不同 PR 与主分支部署互不阻塞
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   # 安全审计
@@ -75,6 +77,11 @@ jobs:
 
   # 部署工作
   deploy:
+    # PR 只验证审计与构建，实际部署仅由 push 或手动运行触发
+    if: github.event_name != 'pull_request'
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
