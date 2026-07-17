@@ -210,8 +210,8 @@ const sourcePath = new URL('../docs/.vitepress/composables/useOutlineScrollSpy.j
 const rawSource = await readFile(sourcePath, 'utf8')
 const transformedSource =
   rawSource
-    .replace("import { onMounted, onUnmounted } from 'vue'\n", '')
-    .replace("import { onContentUpdated } from 'vitepress'\n", '')
+    .replace(/import \{ onMounted, onUnmounted \} from 'vue'\r?\n/, '')
+    .replace(/import \{ onContentUpdated \} from 'vitepress'\r?\n/, '')
     .replace('export function useOutlineScrollSpy()', 'function useOutlineScrollSpy()') +
   '\nglobalThis.__exports = { useOutlineScrollSpy }\n'
 
