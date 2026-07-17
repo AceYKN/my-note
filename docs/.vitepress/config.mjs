@@ -346,6 +346,20 @@ const config = defineConfig({
 
   // 6. Head 配置 - 字体预加载和子集化
   head: [
+    [
+      'script',
+      {},
+      `(function () {
+        var prefix = '/my-note/'
+        var path = window.location.pathname
+        var relative = path.indexOf(prefix) === 0 ? path.slice(prefix.length) : ''
+        relative = relative.replace(/\\.html$/, '')
+        if (relative && relative.endsWith('/')) relative += 'index'
+        if (relative === 'index') relative = ''
+        var target = 'https://aceykn-blog.pages.dev/' + (relative ? 'notes/' + relative : '')
+        window.location.replace(target + window.location.search + window.location.hash)
+      })();`
+    ],
     // 预加载关键字体（仅加载拉丁字符集）
     [
       'link',

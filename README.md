@@ -1,11 +1,13 @@
 
 # my-note
 
-> AceYKN 的个人学习笔记，基于 [VitePress](https://vitepress.dev/) 构建。
+> 本仓库已停止维护，全部学习笔记已迁移至 [AceYKN/blog](https://github.com/AceYKN/blog)。
 
-## 在线访问
+## 新地址
 
-<https://aceykn.github.io/my-note/>
+<https://aceykn-blog.pages.dev/library>
+
+旧 GitHub Pages 页面会保留原路径并自动跳转到新站，例如 `/my-note/cs/os/note/chap2.html` 会跳转到 `/notes/cs/os/note/chap2`。
 
 ## 本地开发
 
